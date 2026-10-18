@@ -11,11 +11,13 @@ DeepLabV3+ R50, under one protocol (`docs/protocol.md`). Two experiments, both *
 | Experiment | Preset | Kaggle kernel (slug from title) | Results |
 |---|---|---|---|
 | main, 512px native patches | `main` | `abdur548/nwrd-canet-b4-vs-baselines` | `results/512px/final/` (+ `replicate/`) |
-| paper scale, 128px tiles | `128px` | `abdur548/nwrd-128px-canet-vs-unet` | `results/128px/final/` |
+| paper scale, 128px tiles | `128px` | `abdur548/nwrd-128px-canet-vs-unet` (title predates DeepLabV3+) | `results/128px/final/` |
 
-Verdicts (pre-registered rule): comparable to UNet and DeepLabV3+ at 512px; worse than UNet at
-128px. Efficiency: 10.4× fewer FLOPs than UNet; faster at 512px on every device; not faster than
-DeepLabV3+ R50 on a GPU.
+Both experiments train `canet_b4`, `unet` and `deeplabv3plus_r50` × seeds 42–44; the main one also
+has the `unet_tuned` control (seed 42). Verdicts (pre-registered rule): comparable to UNet and
+DeepLabV3+ at 512px; worse than both at 128px. Efficiency: 10.4× fewer FLOPs than UNet and faster
+than it at 512px on every device; DeepLabV3+ R50 is faster than CANet-B4 on every device at both
+scales.
 
 ## Flow
 
@@ -43,6 +45,11 @@ nwrd/ ── scripts/build_notebooks.py ──> notebooks/*.ipynb (embed nwrd/, 
 - Checkpoints load with `weights_only=True` everywhere.
 - A model trained on 128px tiles is never exported to the app (enforced in `nwrd/run.py`).
 - `--stage compare`/`export` alone never rewrites a results folder's `config.json` or `log.txt`.
+- The bench stage re-measures the whole table when a model is missing from `benchmark.json`, so
+  each table comes from one session.
+- Text crossing a process boundary is UTF-8: `python -m nwrd.run` reconfigures stdout (reports
+  contain ≈), and the Kaggle CLI runs with `PYTHONUTF8=1` (it saves the kernel log with the
+  locale's encoding, which on Windows left it empty).
 - The app predicts on native-resolution 512px patches with mirror padding, as the test set was
   scored (`nwrd/inference.py`); never resize a whole photograph to 512.
 
@@ -58,6 +65,11 @@ nwrd/ ── scripts/build_notebooks.py ──> notebooks/*.ipynb (embed nwrd/, 
   otherwise seeds from the OS. The published runs may have had unseeded augmentation.
 - Patch bootstrap in the analysis now uses the pipeline's scheme (multinomial); the photograph
   bootstrap, which the decision rule uses, is unchanged.
+- 2026-10-18, at the user's request: DeepLabV3+ R50 added to the 128px experiment (Kaggle
+  version 3, a `--resume` that restored the earlier runs unchanged); its runs used seeded
+  augmentation. Each model's results are also written on their own (`<model>/summary.md`,
+  `docs/results.md` §8). `docs/protocol.md` describes `deeplabv3plus_r50` as the standard smp
+  model standing in for the internship's "Custom DeepLabV3+", whose code was not preserved.
 
 ## External dependencies
 

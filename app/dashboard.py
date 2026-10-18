@@ -93,7 +93,7 @@ def page_overview() -> None:
         + card(
             '⚖️ How it compares',
             'Under one controlled protocol, CANet-B4 is comparable in accuracy to the NWRD '
-            "paper's UNet and to DeepLabV3+ R50 on 512px patches, and less accurate than UNet "
+            "paper's UNet and to DeepLabV3+ R50 on 512px patches, and less accurate than both "
             "at the paper's 128px scale. It needs about a tenth of UNet's computation. Details: "
             '<code>docs/results.md</code>.',
         ),

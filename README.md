@@ -14,16 +14,19 @@ interface, and a Streamlit dashboard, serve the trained model.
 |---|---|---|
 | Test IoU, CANet-B4 (ours) | 0.729 ± 0.013 | 0.704 ± 0.004 |
 | Test IoU, UNet (paper architecture, re-trained) | 0.747 ± 0.012 | 0.749 ± 0.009 |
-| Test IoU, DeepLabV3+ R50 | 0.739 ± 0.021 | – |
+| Test IoU, DeepLabV3+ R50 | 0.739 ± 0.021 | 0.732 ± 0.005 |
 | CANet-B4 − UNet, 95% CI (resampling test photographs) | −0.019 [−0.042, +0.019] | −0.045 [−0.081, −0.006] |
-| Verdict against UNet (pre-registered rule) | comparable | worse |
-| GFLOPs per input, CANet-B4 vs UNet | 36.9 vs 385.3 | 2.3 vs 24.1 |
+| CANet-B4 − DeepLabV3+ R50, 95% CI (resampling test photographs) | −0.011 [−0.024, +0.008] | −0.028 [−0.054, −0.003] |
+| Verdict against UNet / DeepLabV3+ R50 (pre-registered rule) | comparable / comparable | worse / worse |
+| GFLOPs per input, CANet-B4 / UNet / DeepLabV3+ R50 | 36.9 / 385.3 / 73.1 | 2.3 / 24.1 / 4.6 |
 
-CANet-B4 is not more accurate than the paper's UNet architecture: comparable at 512px and worse
-at the paper's 128px scale. It needs a tenth of UNet's computation, and at 512px runs 3.1× faster
-on a T4 GPU and 4.4× faster on a CPU. Both re-trained models far exceed the paper's published
-scores (F1 0.826–0.857 against 0.557 at the same scale), so that gain comes from the training and
-evaluation protocol, not from CANet-B4's architecture. Full results:
+CANet-B4 is not more accurate than either baseline: comparable to both at 512px and worse than
+both at the paper's 128px scale. It needs a tenth of UNet's computation, and at 512px runs 3.1×
+faster than UNet on a T4 GPU and 4.4× faster on a CPU; DeepLabV3+ R50, with twice CANet-B4's
+FLOPs, is faster still on every device. All three re-trained models far exceed the paper's
+published scores (F1 0.826–0.857 against 0.557 at the same scale), so that gain comes from the
+training and evaluation protocol, not from CANet-B4's architecture. Each model's results are also
+reported on their own ([`docs/results.md`](docs/results.md) §8). Full results:
 [`docs/results.md`](docs/results.md). Protocol: [`docs/protocol.md`](docs/protocol.md). The
 baseline paper, with its figures and a check of its claims:
 [`docs/paper_summary.md`](docs/paper_summary.md).
@@ -72,6 +75,7 @@ Each notebook embeds `nwrd/`; after changing the package, rebuild them with
 
 ```bash
 python -m nwrd.run --stage compare --out results/512px/final
+python -m nwrd.run --stage compare --out results/128px/final
 python scripts/analyse_results.py results/512px/final --replicate results/512px/replicate
 python scripts/analyse_results.py results/128px/final
 python scripts/compare_scales.py results/128px/final results/512px/final --out results/analysis/scales.md
@@ -94,7 +98,7 @@ documented in `app/backend/main.py`. The interface reads the API address from `V
 
 ```bash
 python -m pytest -m "not slow"     # unit, app and notebook tests, about a minute
-python -m pytest                   # all 75, with the end-to-end pipeline runs: about 4 minutes on a CPU
+python -m pytest                   # all 77, with the end-to-end pipeline runs: about 4 minutes on a CPU
 python -m ruff check . && python -m ruff format --check .
 ```
 

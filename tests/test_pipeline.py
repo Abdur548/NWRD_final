@@ -2,6 +2,8 @@
 
 import json
 import os
+import subprocess
+import sys
 
 import numpy as np
 import pytest
@@ -9,6 +11,8 @@ import torch
 
 from nwrd.compare import source_photo
 from nwrd.run import main
+
+from .conftest import ROOT
 
 pytestmark = pytest.mark.slow
 
@@ -90,9 +94,16 @@ def test_full_pipeline(patches_256, tmp_path):
 
     # Re-running is a no-op that re-aggregates.
     assert main(args) == 0
-    # Re-aggregating alone never rewrites what the run recorded.
+    # Re-aggregating alone never rewrites what the run recorded. From the command line it must
+    # also survive a stdout that cannot encode the report's ≈, as a redirected one on Windows.
     config, log = _read(out / 'config.json'), _read(out / 'log.txt')
-    assert main(['--stage', 'compare', '--out', str(out)]) == 0
+    cli = subprocess.run(
+        [sys.executable, '-m', 'nwrd.run', '--stage', 'compare', '--out', str(out)],
+        cwd=ROOT,
+        capture_output=True,
+        env={**os.environ, 'PYTHONIOENCODING': 'cp1252'},
+    )
+    assert cli.returncode == 0, cli.stderr.decode(errors='replace')
     assert _read(out / 'config.json') == config and _read(out / 'log.txt') == log
 
 

@@ -33,7 +33,8 @@ import time
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DATASET = 'abdur548/nwrd-patched'
 # Kaggle derives each kernel's slug from its title, so the title decides where it lives:
-# renaming one moves the kernel, and --resume / --status would look in the wrong place.
+# renaming one moves the kernel, and --resume / --status would look in the wrong place. That is
+# why the 128px title still reads "CANet vs UNet" although DeepLabV3+ was added to that run.
 EXPERIMENTS = {
     'main': {'notebook': 'nwrd_experiments.ipynb', 'title': 'NWRD CANet-B4 vs baselines'},
     '128px': {'notebook': 'nwrd_128px.ipynb', 'title': 'NWRD 128px CANet vs UNet'},
@@ -80,8 +81,17 @@ def output_dir(exp: dict, user: str, version) -> str:
 
 
 def kaggle(*args: str, check: bool = True) -> str:
-    """Runs the kaggle CLI through the current interpreter, so no PATH setup is needed."""
-    p = subprocess.run([sys.executable, '-m', 'kaggle', *args], capture_output=True, text=True)
+    """Runs the kaggle CLI through the current interpreter, so no PATH setup is needed.
+
+    In UTF-8 mode: the CLI saves the kernel log with the locale's encoding, and on Windows
+    (cp1252) the log's non-ASCII characters made that fail, leaving an empty file."""
+    p = subprocess.run(
+        [sys.executable, '-m', 'kaggle', *args],
+        capture_output=True,
+        encoding='utf-8',
+        errors='replace',
+        env={**os.environ, 'PYTHONUTF8': '1'},
+    )
     out = (p.stdout or '') + (p.stderr or '')
     if check and p.returncode != 0:
         raise SystemExit(f'kaggle {" ".join(args)} failed:\n{out.strip()}')

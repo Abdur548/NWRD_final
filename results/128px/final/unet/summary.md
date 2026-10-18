@@ -15,4 +15,4 @@ Test split: 3840 patches, 722 with rust. Threshold chosen per run on validation;
 
 ## Efficiency (Tesla T4, 128x128 input)
 
-31.04M parameters, 24.08 GFLOPs; latency_ms_bs1_fp32 7.3, latency_ms_bs1_fp16 3.7, throughput_img_s_bs8_fp16 468.0, peak_mem_MB_bs8_fp16 288.6, throughput_img_s_bs64_fp16 529.8, peak_mem_MB_bs64_fp16 1540.0; CPU latency bs1 162 ms.
+31.04M parameters, 24.08 GFLOPs; latency_ms_bs1_fp32 7.2, latency_ms_bs1_fp16 3.6, throughput_img_s_bs8_fp16 474.0, peak_mem_MB_bs8_fp16 441.5, throughput_img_s_bs64_fp16 524.3, peak_mem_MB_bs64_fp16 1540.0; CPU latency bs1 156 ms.

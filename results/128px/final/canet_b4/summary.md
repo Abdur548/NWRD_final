@@ -11,8 +11,9 @@ Test split: 3840 patches, 722 with rust. Threshold chosen per run on validation;
 
 ## Against CANet-B4 (CANet-B4 minus baseline, pre-registered rule)
 
+- vs `deeplabv3plus_r50`: ΔIoU -0.0279, 95% CI [-0.0544, -0.0026] resampling test photographs; CANet-B4 higher on 0 of 3 seeds: CANet-B4 **is worse than** `deeplabv3plus_r50`.
 - vs `unet`: ΔIoU -0.0454, 95% CI [-0.0809, -0.0056] resampling test photographs; CANet-B4 higher on 0 of 3 seeds: CANet-B4 **is worse than** `unet`.
 
 ## Efficiency (Tesla T4, 128x128 input)
 
-29.39M parameters, 2.31 GFLOPs; latency_ms_bs1_fp32 23.8, latency_ms_bs1_fp16 25.4, throughput_img_s_bs8_fp16 298.7, peak_mem_MB_bs8_fp16 204.8, throughput_img_s_bs64_fp16 864.9, peak_mem_MB_bs64_fp16 646.9; CPU latency bs1 72 ms.
+29.39M parameters, 2.31 GFLOPs; latency_ms_bs1_fp32 22.6, latency_ms_bs1_fp16 24.2, throughput_img_s_bs8_fp16 308.6, peak_mem_MB_bs8_fp16 262.2, throughput_img_s_bs64_fp16 868.5, peak_mem_MB_bs64_fp16 646.3; CPU latency bs1 67 ms.

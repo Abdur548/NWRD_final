@@ -1,6 +1,6 @@
 # Experimental protocol: CANet-B4 against the NWRD paper's baselines
 
-*Final, 2026-10-17.* This document states what was compared and how, so that every number in
+*Final, 2026-10-18.* This document states what was compared and how, so that every number in
 [`results.md`](results.md) can be checked and the experiments repeated. The baseline paper is
 summarised, with its figures and a check of its claims, in [`paper_summary.md`](paper_summary.md).
 
@@ -34,7 +34,7 @@ internship's (§7).
 | Experiment | Input | Models | Results |
 |---|---|---|---|
 | `main` | 512×512 patches at native resolution | `canet_b4`, `unet`, `deeplabv3plus_r50` (3 seeds each), `unet_tuned` (seed 42) | `results/512px/final/` |
-| `128px` | The paper's scale: each patch halved (Lanczos) and cut into 2×2 tiles of 128×128 | `canet_b4`, `unet` (3 seeds each) | `results/128px/final/` |
+| `128px` | The paper's scale: each patch halved (Lanczos) and cut into 2×2 tiles of 128×128 | `canet_b4`, `unet`, `deeplabv3plus_r50` (3 seeds each) | `results/128px/final/` |
 
 The settings of both are in `nwrd/config.py` (`Config` and `PRESETS`); `config.json` in each
 results folder records what the runs actually used.
@@ -103,7 +103,7 @@ flowchart LR
 | | NWRD paper: UNet | DeepLabV3+ R50 | **CANet-B4** |
 |---|---|---|---|
 | Parameters | 31.0 M | 26.7 M | 29.4 M |
-| GFLOPs at 512² / 128² | 385.3 / 24.1 | 73.1 / – | 36.9 / 2.3 |
+| GFLOPs at 512² / 128² | 385.3 / 24.1 | 73.1 / 4.6 | 36.9 / 2.3 |
 | Deepest feature stride | 1/16 | 1/16 (dilated) | 1/32 |
 | Context | Depth only | ASPP | CAM: dilated chain + three pooled flows, gated |
 | Skip connections | 4, including full resolution | 1, at 1/4 | 1, at 1/4 |
@@ -170,9 +170,9 @@ and annotator. The primary interval is therefore a **paired bootstrap that resam
 photographs** (5,000 resamples, the same draws for both models and every seed) of the
 seed-averaged difference in pooled test IoU. A bootstrap over patches and a paired t-test over
 seeds are reported beside it. In the final results the photograph interval is 1.3× and 2.4× as
-wide as the patch interval against UNet (512px and 128px), and slightly narrower against
-DeepLabV3+ R50: resampling photographs is not just a wider band but a different, more honest
-estimate.
+wide as the patch interval against UNet (512px and 128px), and against DeepLabV3+ R50 slightly
+narrower at 512px but 1.8× as wide at 128px: resampling photographs is not just a wider band but
+a different, more honest estimate.
 
 **Decision rule, fixed before the results were seen:**
 
@@ -230,14 +230,16 @@ Two corrections were made to this pipeline itself during the work:
 - **Unseeded augmentation** (2026-10-17): albumentations 2 seeds its transforms from the
   operating system, not from the global seed, so augmentation was not reproducible from a run's
   seed. Training now seeds it from (seed, epoch, worker). This does not change the protocol, but
-  the published runs may have used unseeded augmentation (`results/README.md`).
+  the published runs may have used unseeded augmentation (`results/README.md`). The exception is
+  `deeplabv3plus_r50` at 128px, trained after the fix (2026-10-18).
 
 ---
 
 ## 8. Threats to validity
 
 1. **Test set size.** Every test number rests on 10 photographs, and the checkpoint and threshold
-   are chosen on 5. Every model scores 0.07–0.11 IoU lower on test than on validation.
+   are chosen on 5. Every compared model scores 0.07–0.11 IoU lower on test than on validation
+   (the `unet_tuned` control, 0.18).
 2. **Run-to-run noise.** The same seed run in two Kaggle sessions differed by up to 0.028 test IoU
    for CANet-B4 (`results.md` §7). Differences of that size between single runs mean nothing; the
    rule therefore uses three seeds and a bootstrap.
@@ -268,13 +270,14 @@ python scripts/run_on_kaggle.py --experiment 128px --watch  # the 128px experime
 python scripts/run_on_kaggle.py --resume --watch            # continue after a time-budget stop
 ```
 
-The main experiment needs about 30 GPU-hours (several Kaggle sessions), the 128px one 6–9.
+The main experiment needs about 30 GPU-hours (several Kaggle sessions), the 128px one about 9.
 Locally, with a GPU and
 the dataset: `python -m nwrd.run --preset main --data-root <wheat_rust_patches> --out runs`. The
 reports are rebuilt from the saved results without a GPU:
 
 ```bash
 python -m nwrd.run --stage compare --out results/512px/final
+python -m nwrd.run --stage compare --out results/128px/final
 python scripts/analyse_results.py results/512px/final --replicate results/512px/replicate
 python scripts/analyse_results.py results/128px/final
 python scripts/compare_scales.py results/128px/final results/512px/final --out results/analysis/scales.md

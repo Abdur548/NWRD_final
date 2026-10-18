@@ -1,8 +1,8 @@
 # Results: CANet-B4 against the NWRD paper's UNet and DeepLabV3+ R50
 
-*Final, 2026-10-17.* Three seeds per model at both scales, under the protocol in
-[`protocol.md`](protocol.md). Every number here comes from a file in `results/` (Appendix).
-CANet-B4 is "ours" throughout; it is reported as measured, including where it loses.
+*Final, 2026-10-18.* CANet-B4, UNet and DeepLabV3+ R50, three seeds each at both scales, under
+the protocol in [`protocol.md`](protocol.md). Every number here comes from a file in `results/`
+(Appendix). CANet-B4 is "ours" throughout; it is reported as measured, including where it loses.
 
 ---
 
@@ -12,23 +12,26 @@ CANet-B4 is "ours" throughout; it is reported as measured, including where it lo
 |---|---|---|
 | Test IoU, CANet-B4 | 0.729 ± 0.013 | 0.704 ± 0.004 |
 | Test IoU, UNet (paper architecture, re-trained) | 0.747 ± 0.012 | 0.749 ± 0.009 |
-| Test IoU, DeepLabV3+ R50 | 0.739 ± 0.021 | – |
+| Test IoU, DeepLabV3+ R50 | 0.739 ± 0.021 | 0.732 ± 0.005 |
 | CANet-B4 − UNet, 95% CI (resampling photographs) | −0.019 [−0.042, +0.019] | −0.045 [−0.081, −0.006] |
+| CANet-B4 − DeepLabV3+ R50, 95% CI (resampling photographs) | −0.011 [−0.024, +0.008] | −0.028 [−0.054, −0.003] |
 | Pre-registered verdict against UNet | **comparable** | **worse** |
-| Pre-registered verdict against DeepLabV3+ R50 | **comparable** (−0.011 [−0.024, +0.008]) | – |
-| GFLOPs per input, CANet-B4 vs UNet | 36.9 vs 385.3 (10.4× fewer) | 2.3 vs 24.1 (10.4× fewer) |
+| Pre-registered verdict against DeepLabV3+ R50 | **comparable** | **worse** |
+| GFLOPs per input, CANet-B4 / UNet / DeepLabV3+ R50 | 36.9 / 385.3 / 73.1 | 2.3 / 24.1 / 4.6 |
 
-1. **Accuracy.** CANet-B4 does not segment rust more accurately than the paper's UNet
-   architecture. At 512px the difference is within test-set noise (*comparable*), although
-   CANet-B4 is lower on all three seeds against both baselines. At the paper's 128px scale it is
-   significantly worse (photograph CI below 0; seed-level t-test p = 0.030).
-2. **Efficiency.** CANet-B4 needs a tenth of UNet's computation at any input size. At 512px that
-   makes it faster on every device measured. At 128px it is faster only when batched and on the
-   CPU. It is not faster than DeepLabV3+ R50 on a GPU (§6).
+1. **Accuracy.** CANet-B4 does not segment rust more accurately than either baseline. At 512px
+   the differences are within test-set noise (*comparable*), although CANet-B4 is lower on all
+   three seeds against both. At the paper's 128px scale it is significantly worse than both
+   (photograph CIs below 0; seed-level t-test p = 0.030 against UNet, 0.013 against DeepLabV3+).
+2. **Efficiency.** CANet-B4 needs a tenth of UNet's computation and half of DeepLabV3+ R50's at
+   any input size. Against UNet that makes it faster on every device at 512px, but at 128px only
+   when batched and on the CPU. DeepLabV3+ R50 is faster than CANet-B4 on every device at both
+   scales (§6).
 3. **The published baseline.** CANet-B4 far exceeds the paper's published figures (F1 0.826 vs
-   0.557 at the paper's scale), but so does the paper's own UNet when re-trained under this
-   protocol (F1 0.857). The gain over the published numbers therefore comes from the training and
-   evaluation protocol, not from CANet-B4's architecture (§4).
+   0.557 at the paper's scale), but so do the paper's UNet architecture and DeepLabV3+ R50 when
+   re-trained under this protocol (F1 0.857 and 0.845). The gain over the published numbers
+   therefore comes from the training and evaluation protocol, not from CANet-B4's architecture
+   (§4).
 
 ---
 
@@ -69,15 +72,26 @@ field of view. Test split: the same 10 photographs, 3,840 tiles, 722 with rust, 
 |---|---|---|---|---|---|---|---|---|
 | **CANet-B4 (ours)** | 3 | 0.704 ± 0.004 | 0.826 ± 0.003 | 0.817 ± 0.019 | 0.837 ± 0.013 | 0.684 ± 0.008 | 0.778 ± 0.008 | 0.701, 0.702, 0.709 |
 | UNet (paper architecture) | 3 | **0.749** ± 0.009 | **0.857** ± 0.006 | **0.850** ± 0.012 | **0.863** ± 0.006 | **0.731** ± 0.010 | **0.798** ± 0.003 | 0.758, 0.752, 0.739 |
+| DeepLabV3+ R50 | 3 | 0.732 ± 0.005 | 0.845 ± 0.003 | 0.844 ± 0.014 | 0.846 ± 0.010 | 0.718 ± 0.007 | 0.789 ± 0.006 | 0.735, 0.726, 0.735 |
 
-CANet-B4 − UNet: ΔIoU −0.045, 95% CI [−0.081, −0.006] resampling test photographs (p 0.028),
-[−0.061, −0.030] resampling tiles; seed-level t-test p 0.030; CANet-B4 lower on all 3 seeds and
-on 7 of the 10 photographs. **Verdict: worse.**
+| CANet-B4 minus | ΔIoU | 95% CI, photographs (p) | 95% CI, tiles | ΔDice (95% CI, photographs) | Seed t-test p | CANet-B4 higher | Verdict |
+|---|---|---|---|---|---|---|---|
+| UNet | −0.045 | [−0.081, −0.006] (0.028) | [−0.061, −0.030] | −0.030 [−0.056, −0.004] | 0.030 | 0 of 3 seeds | worse |
+| DeepLabV3+ R50 | −0.028 | [−0.054, −0.003] (0.033) | [−0.043, −0.014] | −0.019 [−0.035, −0.002] | 0.013 | 0 of 3 seeds | worse |
 
-**Effect of scale.** Going from 512px to 128px costs CANet-B4 0.024 IoU and leaves UNet unchanged
-(0.747 → 0.749). At 128px CANet-B4's deepest feature map is 4×4, so two of its three context flows
-pool the whole map and its context module can add little ([`protocol.md`](protocol.md) §2.1). The
-architecture is being run below the scale it was designed for.
+- **Weighting photographs equally**, CANet-B4 is still last: mean per-photograph IoU 0.717
+  (CANet-B4), 0.748 (UNet), 0.750 (DeepLabV3+). CANet-B4 is better than UNet on 3 of the 10 test
+  photographs, and than DeepLabV3+ on 1.
+- **Without threshold tuning** (fixed 0.5), every model loses 0.014–0.020 IoU and the ranking is
+  unchanged.
+- **DeepLabV3+ R50 was added later** (2026-10-18): same protocol, data and settings, but its
+  augmentation was seeded, unlike the earlier runs (`results/README.md`).
+
+**Effect of scale.** Going from 512px to 128px costs CANet-B4 0.024 IoU and DeepLabV3+ R50 0.007
+(well within its seed spread at 512px), and leaves UNet unchanged (0.747 → 0.749). At 128px
+CANet-B4's deepest feature map is 4×4, so two of its three context flows pool the whole map and its
+context module can add little ([`protocol.md`](protocol.md) §2.1). The architecture is being run
+below the scale it was designed for.
 
 ---
 
@@ -91,11 +105,13 @@ RMSprop at lr 1e-6, 500 epochs, focal loss) and metric averaging all differ from
 | NWRD paper: UNet + APF (Table 3) | full test set | 0.506 | 0.624 | 0.557 | – |
 | CANet-B4, 128px | all test tiles | 0.817 | 0.837 | 0.826 | 0.704 |
 | UNet re-trained here, 128px | all test tiles | 0.850 | 0.863 | 0.857 | 0.749 |
+| DeepLabV3+ R50, 128px | all test tiles | 0.844 | 0.846 | 0.845 | 0.732 |
 | NWRD paper: UNet + APF (Table 4) | background-only patches removed | 0.593 | 0.552 | 0.564 | 0.438 |
 | CANet-B4, 128px | rust tiles only | 0.918 | 0.837 | 0.875 | 0.778 |
 | UNet re-trained here, 128px | rust tiles only | 0.914 | 0.863 | 0.888 | 0.798 |
+| DeepLabV3+ R50, 128px | rust tiles only | 0.921 | 0.846 | 0.882 | 0.789 |
 
-Both re-trained models far exceed the published figures at the paper's own scale. Because the
+All three re-trained models far exceed the published figures at the paper's own scale. Because the
 paper's architecture, trained from scratch under our protocol, does as well as or better than
 CANet-B4, **the gain over the published numbers is not due to CANet-B4's architecture**. It comes
 from differences in training and evaluation that this study cannot separate: optimiser and
@@ -131,8 +147,8 @@ figure is `results/analysis/512px/lesion_size.png`:
 
 ![Accuracy by lesion size, 512px](../results/analysis/512px/lesion_size.png)
 
-At 128px UNet matches or beats CANet-B4 in every bin, and false alarms are equal (6.8% vs 7.0%;
-`results/analysis/128px/`).
+At 128px both baselines match or beat CANet-B4's IoU in every bin. False alarms on rust-free tiles
+are 6.8% for CANet-B4, 7.0% for UNet and 4.8% for DeepLabV3+ R50 (`results/analysis/128px/`).
 
 ### 5.2 By test photograph
 
@@ -149,7 +165,7 @@ is why the confidence intervals resample photographs.
 | Best epoch (seeds 42, 43, 44) | 12, 9, 23 | 28, 30, 30 | 17, 12, 16 |
 | Validation IoU at 0.5: best → final epoch | 0.79–0.83 → 0.72–0.76 | 0.81–0.82 → 0.80–0.82 | 0.81–0.82 → 0.76–0.79 |
 | Val-selected threshold (seeds) | 0.76, 0.76, 0.86 | 0.76, 0.68, 0.66 | 0.69, 0.81, 0.60 |
-| Training time (min/epoch, T4) | 3.2 | 6.6 | 2.2 |
+| Training time (min/epoch, T4) | 3.2 | 6.6 | 2.1 |
 
 The pretrained models peak early and then overfit; model selection on validation keeps their best
 epoch. UNet, trained from scratch, is still improving at epoch 30. Validation IoU is flat near
@@ -162,7 +178,8 @@ every chosen threshold: it changes by at most 0.017 within ±0.10 of it.
 ## 6. Efficiency
 
 Measured on one Tesla T4 (PyTorch 2.10, random weights, median of 100 timed runs) and Kaggle's
-2-thread CPU (median of 10); FLOPs count a multiply-add as 2.
+2-thread CPU (median of 10); FLOPs count a multiply-add as 2. Each table was measured in a single
+session, every model in it together.
 
 ### 6.1 At 512px
 
@@ -170,7 +187,7 @@ Measured on one Tesla T4 (PyTorch 2.10, random weights, median of 100 timed runs
 |---|---|---|---|---|---|---|---|---|
 | **CANet-B4** | 29.4 | **36.9** | 30.6 | 26.3 | 72.6 | **744** | 725 | 3.2 |
 | UNet | 31.0 | 385.3 | 94.9 | 40.1 | 28.0 | 1,874 | 3,157 | 6.6 |
-| DeepLabV3+ R50 | 26.7 | 73.1 | **27.3** | **10.8** | **95.4** | 835 | **579** | **2.2** |
+| DeepLabV3+ R50 | 26.7 | 73.1 | **27.3** | **10.8** | **95.4** | 835 | **579** | **2.1** |
 
 - **Against UNet, CANet-B4 is cheaper on every measure:** 10.4× fewer FLOPs, 3.1× lower fp32
   latency, 2.6× the fp16 throughput, 2.5× less memory, 4.4× faster on the CPU, and training epochs
@@ -188,13 +205,17 @@ Measured on one Tesla T4 (PyTorch 2.10, random weights, median of 100 timed runs
 
 | Model | GFLOPs | T4 fp32, bs 1 (ms) | T4 fp16, bs 1 (ms) | fp16 throughput, bs 8 / bs 64 (img/s) | Peak memory, bs 64 (MB) | CPU, bs 1 (ms) | Train (min/epoch) |
 |---|---|---|---|---|---|---|---|
-| **CANet-B4** | **2.3** | 23.8 | 25.4 | 299 / **865** | **647** | **72** | 3.1 |
-| UNet | 24.1 | **7.3** | **3.7** | **468** / 530 | 1,540 | 162 | **1.7** |
+| **CANet-B4** | **2.3** | 22.6 | 24.2 | 309 / 869 | **646** | 67 | 3.1 |
+| UNet | 24.1 | 7.2 | **3.6** | 474 / 524 | 1,540 | 156 | 1.7 |
+| DeepLabV3+ R50 | 4.6 | **6.3** | 7.3 | **987** / **1,323** | 802 | **57** | **1.2** |
 
 At this size the GPU is dominated by per-layer overhead, not arithmetic. CANet-B4 is about 30
-blocks deep, so on single tiles it is 6.8× slower than UNet in fp16, and it trains 1.8× slower per
-epoch at batch 8. Only at batch 64 does its lower FLOP count win (1.6× the throughput, 2.4× less
-memory). On the CPU it is 2.3× faster.
+blocks deep, so on single tiles it is 6.7× slower than UNet in fp16, and it trains 1.8× slower per
+epoch at batch 8. Only at batch 64 does its lower FLOP count beat UNet (1.7× the throughput, 2.4×
+less memory); on the CPU it is 2.3× faster than UNet. DeepLabV3+ R50 is faster than CANet-B4 on
+every measure: 3.6× lower fp32 latency, 3.2× the fp16 throughput at batch 8 and 1.5× at batch 64,
+1.2× faster on the CPU, and epochs 2.7× shorter. Beyond FLOPs, CANet-B4's one advantage at this
+scale is the smallest memory footprint at batch 64.
 
 ### 6.3 Per photograph
 
@@ -204,10 +225,14 @@ For one 4608×3456 photograph (61 native 512px patches, or 243 tiles of 128px at
 |---|---|---|---|---|
 | 512px | CANet-B4 | 2.24 | 0.84 | 44.0 |
 | 512px | UNet | 23.41 | 2.17 | 191.8 |
-| 128px | CANet-B4 | 0.56 | 0.28 | 17.4 |
-| 128px | UNet | 5.85 | 0.46 | 39.5 |
+| 512px | DeepLabV3+ R50 | 4.44 | 0.64 | 35.2 |
+| 128px | CANet-B4 | 0.56 | 0.28 | 16.3 |
+| 128px | UNet | 5.85 | 0.46 | 38.0 |
+| 128px | DeepLabV3+ R50 | 1.11 | 0.18 | 13.9 |
 
 ![Accuracy against cost, 512px](../results/analysis/512px/accuracy_vs_cost.png)
+
+![Accuracy against cost, 128px](../results/analysis/128px/accuracy_vs_cost.png)
 
 ---
 
@@ -223,7 +248,7 @@ sessions. Test IoU for identical seeds:
 | CANet-B4, seed 43 | 0.716 | 0.744 | **0.028** |
 | UNet, seed 42 | 0.731 | 0.737 | 0.005 |
 | DeepLabV3+ R50, seed 42 | 0.729 | 0.719 | 0.010 |
-| UNet lr 1e-3, seed 42 | 0.658 | 0.617 | 0.042 |
+| UNet lr 1e-3, seed 42 | 0.658 | 0.616 | 0.042 |
 
 A seed does not pin a result down: GPU nondeterminism and, in these runs, unseeded augmentation
 (`results/README.md`) move test IoU by up to 0.028 for CANet-B4. That is larger than its 0.019 gap
@@ -232,7 +257,97 @@ information, and the verdicts rest on three seeds and the photograph bootstrap.
 
 ---
 
-## 8. What can be claimed
+## 8. Results by model
+
+Sections 2–6 set the models side by side. Here each model's results are gathered on their own,
+at both scales. Every seed and metric of one model at one scale is in
+`results/<scale>/final/<model>/summary.md`, linked in each table.
+
+### 8.1 CANet-B4 (ours)
+
+EfficientNet-B4 encoder (ImageNet-pretrained), CAM context module and asymmetric decoder;
+29.4 M parameters ([`protocol.md`](protocol.md) §2).
+
+| | 512px | 128px |
+|---|---|---|
+| Test IoU (seeds 42, 43, 44) | 0.729 ± 0.013 (0.718, 0.744, 0.724) | 0.704 ± 0.004 (0.701, 0.702, 0.709) |
+| Dice / precision / recall | 0.843 / 0.840 / 0.846 | 0.826 / 0.817 / 0.837 |
+| Best epoch (seeds) | 12, 9, 23 | 13, 11, 10 |
+| Val-selected threshold (seeds) | 0.76, 0.76, 0.86 | 0.75, 0.65, 0.75 |
+| GFLOPs; T4 fp16, bs 1; CPU, bs 1 | 36.9; 26.3 ms; 725 ms | 2.3; 24.2 ms; 67 ms |
+| Training (min/epoch) | 3.2 | 3.1 |
+| Every seed and metric | [`512px/final/canet_b4/summary.md`](../results/512px/final/canet_b4/summary.md) | [`128px/final/canet_b4/summary.md`](../results/128px/final/canet_b4/summary.md) |
+
+At 512px it has the highest precision and the lowest recall of the three models: it is the most
+conservative, and it under-segments the large lesions that hold most rust pixels (§5.1). It peaks
+early and then overfits (§5.3). Halving the scale costs it 0.024 IoU, the most of the three (§3).
+It needs the fewest FLOPs at both scales, but is not the fastest model at either (§6).
+
+### 8.2 UNet (the NWRD paper's architecture)
+
+Four encoder and four decoder blocks, trained from scratch under this protocol; 31.0 M parameters.
+
+| | 512px | 128px |
+|---|---|---|
+| Test IoU (seeds 42, 43, 44) | 0.747 ± 0.012 (0.737, 0.746, 0.760) | 0.749 ± 0.009 (0.758, 0.752, 0.739) |
+| Dice / precision / recall | 0.855 / 0.835 / 0.877 | 0.857 / 0.850 / 0.863 |
+| CANet-B4 against it | comparable: ΔIoU −0.019 [−0.042, +0.019] | worse: ΔIoU −0.045 [−0.081, −0.006] |
+| Best epoch (seeds) | 28, 30, 30 | 23, 21, 21 |
+| Val-selected threshold (seeds) | 0.76, 0.68, 0.66 | 0.60, 0.69, 0.66 |
+| GFLOPs; T4 fp16, bs 1; CPU, bs 1 | 385.3; 40.1 ms; 3,157 ms | 24.1; 3.6 ms; 156 ms |
+| Training (min/epoch) | 6.6 | 1.7 |
+| Every seed and metric | [`512px/final/unet/summary.md`](../results/512px/final/unet/summary.md) | [`128px/final/unet/summary.md`](../results/128px/final/unet/summary.md) |
+
+The highest test IoU at both scales, and unchanged by the change of scale (0.747 → 0.749). At
+512px its best epochs are the last ones, so the shared 30-epoch schedule may under-train it
+(§10). Its cost profile is the opposite of CANet-B4's: 10.4× the FLOPs and the slowest model at
+512px, yet at 128px the fastest at batch 1 in fp16 (§6).
+
+### 8.3 DeepLabV3+ R50
+
+The standard DeepLabV3+ of segmentation-models-pytorch 0.5.0 with an ImageNet-pretrained
+ResNet-50; 26.7 M parameters. It stands in for the internship's "Custom DeepLabV3+", whose code
+was not preserved ([`protocol.md`](protocol.md) §1).
+
+| | 512px | 128px |
+|---|---|---|
+| Test IoU (seeds 42, 43, 44) | 0.739 ± 0.021 (0.719, 0.760, 0.738) | 0.732 ± 0.005 (0.735, 0.726, 0.735) |
+| Dice / precision / recall | 0.850 / 0.834 / 0.869 | 0.845 / 0.844 / 0.846 |
+| CANet-B4 against it | comparable: ΔIoU −0.011 [−0.024, +0.008] | worse: ΔIoU −0.028 [−0.054, −0.003] |
+| Best epoch (seeds) | 17, 12, 16 | 8, 10, 16 |
+| Val-selected threshold (seeds) | 0.69, 0.81, 0.60 | 0.68, 0.72, 0.72 |
+| GFLOPs; T4 fp16, bs 1; CPU, bs 1 | 73.1; 10.8 ms; 579 ms | 4.6; 7.3 ms; 57 ms |
+| Training (min/epoch) | 2.1 | 1.2 |
+| Every seed and metric | [`512px/final/deeplabv3plus_r50/summary.md`](../results/512px/final/deeplabv3plus_r50/summary.md) | [`128px/final/deeplabv3plus_r50/summary.md`](../results/128px/final/deeplabv3plus_r50/summary.md) |
+
+Second in test IoU at both scales. Although it needs twice CANet-B4's FLOPs, it is the fastest
+model on every measure at both scales, except fp16 latency at batch 1 at 128px, where UNet is
+faster, and the quickest to train (§6). Its 128px runs were trained last, with seeded
+augmentation (§3).
+
+### 8.4 UNet with lr 1e-3 (control)
+
+Not a baseline: the `unet` architecture with its own learning rate (1e-3), run once at 512px to
+check that the shared learning rate does not handicap a network trained from scratch. It was not
+run at 128px.
+
+| | 512px, seed 42 |
+|---|---|
+| Test IoU | 0.616 |
+| Dice / precision / recall | 0.763 / 0.685 / 0.861 |
+| Validation IoU | 0.798 (`unet`: 0.820) |
+| Best epoch; val-selected threshold | 22; 0.50 |
+| Training (min/epoch) | 7.0 |
+| Every metric | [`512px/final/unet_tuned/summary.md`](../results/512px/final/unet_tuned/summary.md) |
+
+Its validation IoU stayed below `unet`'s in every session, and from epoch 23 it predicted no rust
+at all, so `unet` is the baseline (§2). CANet-B4 is better than it by 0.102 IoU (95% CI
+[+0.006, +0.189], resampling photographs), but with one seed the rule's condition of winning on 2
+of 3 seeds cannot be met, so its formal verdict is *comparable*.
+
+---
+
+## 9. What can be claimed
 
 Supported by these results:
 
@@ -241,12 +356,13 @@ Supported by these results:
   ΔIoU −0.019, 95% CI [−0.042, +0.019] resampling test photographs) and to DeepLabV3+ R50
   (0.739 ± 0.021)."*
 - *"At the paper's own 128px scale, CANet-B4 is less accurate than the paper's UNet architecture
-  (0.704 ± 0.004 vs 0.749 ± 0.009; ΔIoU −0.045, 95% CI [−0.081, −0.006])."*
+  (0.704 ± 0.004 vs 0.749 ± 0.009; ΔIoU −0.045, 95% CI [−0.081, −0.006]) and than DeepLabV3+ R50
+  (0.732 ± 0.005; ΔIoU −0.028, 95% CI [−0.054, −0.003])."*
 - *"CANet-B4 needs 10.4× fewer FLOPs than the paper's UNet at any input size. At 512px it runs 3.1×
   faster on a T4 GPU (fp32, batch 1) and 4.4× faster on a CPU, with 2.5× less GPU memory."*
-- *"Both CANet-B4 and the paper's re-trained UNet exceed the paper's published scores by a wide
-  margin, so that improvement comes from the training and evaluation protocol rather than from
-  CANet-B4's architecture."*
+- *"CANet-B4, the paper's re-trained UNet and DeepLabV3+ R50 all exceed the paper's published
+  scores by a wide margin, so that improvement comes from the training and evaluation protocol
+  rather than from CANet-B4's architecture."*
 
 Not supported, and not claimed:
 
@@ -257,12 +373,12 @@ Not supported, and not claimed:
 
 ---
 
-## 9. Limitations
+## 10. Limitations
 
 1. **Ten test photographs, five for validation.** They bound the precision of every estimate.
-2. **One shared schedule.** The pretrained models peak between epochs 9 and 23 and then overfit,
-   while the from-scratch UNet is still improving at epoch 30. A longer schedule would more likely
-   help UNet than CANet-B4.
+2. **One shared schedule.** The pretrained models peak between epochs 8 and 23 and then overfit,
+   while the from-scratch UNet is still improving at epoch 30 at 512px (its best epochs are 21–23
+   at 128px). A longer schedule would more likely help UNet than CANet-B4.
 3. **Pretraining is folded into "architecture",** and the same-encoder ablation that would
    separate encoder from context module was not trained.
 4. **APF and the paper's own test set are not reproduced.**
@@ -280,6 +396,7 @@ Not supported, and not claimed:
 | Numbers | Source |
 |---|---|
 | §1–3 accuracy, significance and verdicts | `results/512px/final/comparison.json` and `results/128px/final/comparison.json` (`summary`, `significance`) |
+| §8 results by model | `results/<scale>/final/<model>/summary.md`, written with `comparison.json` from the same files |
 | Per-photograph, lesion size, false alarms, training, thresholds | `results/analysis/512px/analysis.json`, `results/analysis/128px/analysis.json` (`scripts/analyse_results.py`) |
 | Effect of scale, per-photograph cost | `results/analysis/scales.md` (`scripts/compare_scales.py`) |
 | Efficiency | `results/512px/final/benchmark.json`, `results/128px/final/benchmark.json`; training time from each run's `history.json` |

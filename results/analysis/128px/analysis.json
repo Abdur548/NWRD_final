@@ -25,6 +25,11 @@
    42,
    43,
    44
+  ],
+  "deeplabv3plus_r50": [
+   42,
+   43,
+   44
   ]
  },
  "headline": {
@@ -64,6 +69,25 @@
     23,
     21,
     21
+   ]
+  },
+  "deeplabv3plus_r50": {
+   "val_IoU": 0.8243314832334976,
+   "test": {
+    "IoU": 0.7319804896973822,
+    "Dice": 0.8452460312824467,
+    "Precision": 0.8444561816542661,
+    "Recall": 0.8462498517716295,
+    "Specificity": 0.986291920454835,
+    "Accuracy": 0.9749918142954509
+   },
+   "test_IoU@0.5": 0.7176927867752116,
+   "test_rust_patches_IoU": 0.7890136503020448,
+   "threshold": 0.7066666666666667,
+   "best_epoch": [
+    8,
+    10,
+    16
    ]
   }
  },
@@ -151,6 +175,48 @@
     "IoU": 0.762257468431074,
     "Dice": 0.8650851289436275
    }
+  },
+  "deeplabv3plus_r50": {
+   "91": {
+    "IoU": 0.5394899875506977,
+    "Dice": 0.6993478377686979
+   },
+   "92": {
+    "IoU": 0.7874155866358065,
+    "Dice": 0.8810655749900999
+   },
+   "93": {
+    "IoU": 0.5691027305114903,
+    "Dice": 0.724603352248578
+   },
+   "94": {
+    "IoU": 0.8434165294864435,
+    "Dice": 0.9147667118729949
+   },
+   "95": {
+    "IoU": 0.7798702428117946,
+    "Dice": 0.875561214801909
+   },
+   "96": {
+    "IoU": 0.8390123202034335,
+    "Dice": 0.9124214360533386
+   },
+   "97": {
+    "IoU": 0.8850978602012275,
+    "Dice": 0.9390100986006353
+   },
+   "98": {
+    "IoU": 0.6656659251661258,
+    "Dice": 0.7992503524264599
+   },
+   "99": {
+    "IoU": 0.8409252683996739,
+    "Dice": 0.9135161296161077
+   },
+   "100": {
+    "IoU": 0.746987860620727,
+    "Dice": 0.8550858999313166
+   }
   }
  },
  "image_rust_fraction": {
@@ -177,6 +243,12 @@
    "Dice": 0.8519966938994183,
    "Precision": 0.8572325589700288,
    "Recall": 0.8682461244735293
+  },
+  "deeplabv3plus_r50": {
+   "IoU": 0.749698431158742,
+   "Dice": 0.8514628608310136,
+   "Precision": 0.8698650009599327,
+   "Recall": 0.8545884275556375
   }
  },
  "significance": {
@@ -206,6 +278,33 @@
    },
    "images_won_by_canet": 3,
    "images": 10
+  },
+  "deeplabv3plus_r50": {
+   "paired_seeds": [
+    42,
+    43,
+    44
+   ],
+   "image_bootstrap": {
+    "delta": -0.027857238255648748,
+    "ci95": [
+     -0.055117860309610286,
+     -0.0029080552862509436
+    ],
+    "p_two_sided": 0.0316,
+    "units": 10
+   },
+   "patch_bootstrap": {
+    "delta": -0.027857238255648748,
+    "ci95": [
+     -0.04233450928672658,
+     -0.01388894409367104
+    ],
+    "p_two_sided": 0.0,
+    "units": 3840
+   },
+   "images_won_by_canet": 1,
+   "images": 10
   }
  },
  "lesion_bins": {
@@ -227,6 +326,14 @@
     "Recall": 0.0,
     "FP rate": 0.006999937672887239,
     "false_alarm_patches": 0.07002351935001068
+   },
+   "deeplabv3plus_r50": {
+    "IoU": 0.0,
+    "Dice": 0.0,
+    "Precision": 0.0,
+    "Recall": 0.0,
+    "FP rate": 0.008313126611944091,
+    "false_alarm_patches": 0.04768013683985461
    }
   },
   "< 1%": {
@@ -245,6 +352,13 @@
     "Precision": 0.06454600364300316,
     "Recall": 0.3756872327428222,
     "FP rate": 0.02790800883609838
+   },
+   "deeplabv3plus_r50": {
+    "IoU": 0.09346476584499297,
+    "Dice": 0.169909962952292,
+    "Precision": 0.12579165375946968,
+    "Recall": 0.28924862553451425,
+    "FP rate": 0.01139218414189617
    }
   },
   "1\u20135%": {
@@ -263,6 +377,13 @@
     "Precision": 0.40754136770740823,
     "Recall": 0.49308011950959857,
     "FP rate": 0.021476752155250134
+   },
+   "deeplabv3plus_r50": {
+    "IoU": 0.3195469608041638,
+    "Dice": 0.4835157075144146,
+    "Precision": 0.5066360494817773,
+    "Recall": 0.4655265176230869,
+    "FP rate": 0.013622864288376668
    }
   },
   "5\u201320%": {
@@ -281,6 +402,13 @@
     "Precision": 0.7053384283130452,
     "Recall": 0.7114302715568538,
     "FP rate": 0.03880661911393953
+   },
+   "deeplabv3plus_r50": {
+    "IoU": 0.5420481375000055,
+    "Dice": 0.7028239086323071,
+    "Precision": 0.7242871455896701,
+    "Recall": 0.6828022616410068,
+    "FP rate": 0.033912594726761926
    }
   },
   "> 20%": {
@@ -299,6 +427,13 @@
     "Precision": 0.9349270858136872,
     "Recall": 0.8749513997808344,
     "FP rate": 0.09865352427805252
+   },
+   "deeplabv3plus_r50": {
+    "IoU": 0.812016749993174,
+    "Dice": 0.8962493199627425,
+    "Precision": 0.9373033710517361,
+    "Recall": 0.8586930729782921,
+    "FP rate": 0.0930720004553754
    }
   }
  },
@@ -384,6 +519,47 @@
     ],
     "min_per_epoch": 1.7561137764983707
    }
+  ],
+  "deeplabv3plus_r50": [
+   {
+    "seed": 42,
+    "epochs": 30,
+    "best_epoch": 8,
+    "best_val_IoU@0.5": 0.8098345537304572,
+    "final_val_IoU@0.5": 0.7162678726388833,
+    "collapsed_epochs": 0,
+    "lr_restarts_after_epoch": [
+     5,
+     15
+    ],
+    "min_per_epoch": 1.1655114599068959
+   },
+   {
+    "seed": 43,
+    "epochs": 30,
+    "best_epoch": 10,
+    "best_val_IoU@0.5": 0.8315645535820033,
+    "final_val_IoU@0.5": 0.7805530514601753,
+    "collapsed_epochs": 0,
+    "lr_restarts_after_epoch": [
+     5,
+     15
+    ],
+    "min_per_epoch": 1.1594755523734621
+   },
+   {
+    "seed": 44,
+    "epochs": 30,
+    "best_epoch": 16,
+    "best_val_IoU@0.5": 0.8167404599071612,
+    "final_val_IoU@0.5": 0.7750325723406776,
+    "collapsed_epochs": 0,
+    "lr_restarts_after_epoch": [
+     5,
+     15
+    ],
+    "min_per_epoch": 1.1574458555380502
+   }
   ]
  },
  "threshold_sweep": {
@@ -432,6 +608,29 @@
     "val_IoU_at_0.5": 0.8124755877347147,
     "min_val_IoU_within_0.10": 0.8112119988732668
    }
+  ],
+  "deeplabv3plus_r50": [
+   {
+    "seed": 42,
+    "best_threshold": 0.68,
+    "best_val_IoU": 0.8131475191206942,
+    "val_IoU_at_0.5": 0.8098345537304572,
+    "min_val_IoU_within_0.10": 0.8112812339493211
+   },
+   {
+    "seed": 43,
+    "best_threshold": 0.72,
+    "best_val_IoU": 0.836545616953247,
+    "val_IoU_at_0.5": 0.8315645535820033,
+    "min_val_IoU_within_0.10": 0.8333528216824438
+   },
+   {
+    "seed": 44,
+    "best_threshold": 0.72,
+    "best_val_IoU": 0.8233013136265516,
+    "val_IoU_at_0.5": 0.8167404599071612,
+    "min_val_IoU_within_0.10": 0.8215313464371171
+   }
   ]
  },
  "efficiency": {
@@ -449,13 +648,13 @@
     "GFLOPs": 2.31293408,
     "input": "128x128",
     "GMACs": 1.15646704,
-    "gpu_latency_ms_bs1_fp32": 23.816109998733737,
-    "gpu_latency_ms_bs1_fp16": 25.353960001666564,
-    "gpu_throughput_img_s_bs8_fp16": 298.7210705401814,
-    "gpu_peak_mem_MB_bs8_fp16": 204.77978515625,
-    "gpu_throughput_img_s_bs64_fp16": 864.9491506219596,
-    "gpu_peak_mem_MB_bs64_fp16": 646.92236328125,
-    "cpu_latency_ms_bs1_fp32": 71.71969299815828
+    "gpu_latency_ms_bs1_fp32": 22.60042799935036,
+    "gpu_latency_ms_bs1_fp16": 24.21299599973281,
+    "gpu_throughput_img_s_bs8_fp16": 308.55152875341776,
+    "gpu_peak_mem_MB_bs8_fp16": 262.15673828125,
+    "gpu_throughput_img_s_bs64_fp16": 868.5207268076464,
+    "gpu_peak_mem_MB_bs64_fp16": 646.29736328125,
+    "cpu_latency_ms_bs1_fp32": 67.03737899988482
    },
    "unet": {
     "model": "unet",
@@ -464,28 +663,28 @@
     "GFLOPs": 24.083693568,
     "input": "128x128",
     "GMACs": 12.041846784,
-    "gpu_latency_ms_bs1_fp32": 7.321422999666538,
-    "gpu_latency_ms_bs1_fp16": 3.715825001563644,
-    "gpu_throughput_img_s_bs8_fp16": 467.9814957468172,
-    "gpu_peak_mem_MB_bs8_fp16": 288.55908203125,
-    "gpu_throughput_img_s_bs64_fp16": 529.8381193056722,
+    "gpu_latency_ms_bs1_fp32": 7.184290999248333,
+    "gpu_latency_ms_bs1_fp16": 3.638928999862401,
+    "gpu_throughput_img_s_bs8_fp16": 473.97582416218717,
+    "gpu_peak_mem_MB_bs8_fp16": 441.53173828125,
+    "gpu_throughput_img_s_bs64_fp16": 524.3208521169929,
     "gpu_peak_mem_MB_bs64_fp16": 1540.03173828125,
-    "cpu_latency_ms_bs1_fp32": 162.39961099927314
+    "cpu_latency_ms_bs1_fp32": 156.36704100052157
    },
-   "canet_b4_twopass": {
-    "model": "canet_b4_twopass",
-    "description": "CANet, original two-pass forward",
-    "params_M": 29.392209,
-    "GFLOPs": 3.297977728,
+   "deeplabv3plus_r50": {
+    "model": "deeplabv3plus_r50",
+    "description": "DeepLabV3+, ResNet-50 encoder (baseline)",
+    "params_M": 26.677585,
+    "GFLOPs": 4.571136,
     "input": "128x128",
-    "GMACs": 1.648988864,
-    "gpu_latency_ms_bs1_fp32": 46.219248997658724,
-    "gpu_latency_ms_bs1_fp16": 47.46590200011269,
-    "gpu_throughput_img_s_bs8_fp16": 163.47835177473368,
-    "gpu_peak_mem_MB_bs8_fp16": 202.29541015625,
-    "gpu_throughput_img_s_bs64_fp16": 492.3310401525409,
-    "gpu_peak_mem_MB_bs64_fp16": 438.17041015625,
-    "cpu_latency_ms_bs1_fp32": 127.67575100224349
+    "GMACs": 2.285568,
+    "gpu_latency_ms_bs1_fp32": 6.271723000281781,
+    "gpu_latency_ms_bs1_fp16": 7.314382000004116,
+    "gpu_throughput_img_s_bs8_fp16": 987.3500708926804,
+    "gpu_peak_mem_MB_bs8_fp16": 200.4873046875,
+    "gpu_throughput_img_s_bs64_fp16": 1322.6667971764302,
+    "gpu_peak_mem_MB_bs64_fp16": 802.421875,
+    "cpu_latency_ms_bs1_fp32": 57.076127999607706
    }
   }
  },

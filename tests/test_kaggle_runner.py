@@ -76,6 +76,20 @@ def test_status_is_parsed_not_guessed(text, state):
     assert k.parse_status(text) == state
 
 
+def test_cli_runs_in_utf8_mode(tmp_path, monkeypatch):
+    # The CLI saves the kernel log with a bare open(path, 'w'); in a cp1252 locale the log's
+    # non-ASCII characters raised UnicodeEncodeError and left the file empty. Do the same write
+    # in the CLI's place, with the arguments kaggle() gives the CLI.
+    log = tmp_path / 'kernel.log'
+    script = f"import sys; open({str(log)!r}, 'w').write('≈ ±'); print(sys.flags.utf8_mode, '±')"
+    real_run = k.subprocess.run
+    monkeypatch.setattr(
+        k.subprocess, 'run', lambda cmd, **kw: real_run([sys.executable, '-c', script], **kw)
+    )
+    assert k.kaggle('kernels', 'output') == '1 ±'
+    assert log.read_text(encoding='utf-8') == '≈ ±'
+
+
 def test_downloads_exclude_weights_unless_asked():
     import re
 

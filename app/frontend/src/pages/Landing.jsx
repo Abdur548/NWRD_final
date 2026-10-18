@@ -59,8 +59,8 @@ const Landing = () => {
           CANet-B4 was compared with the NWRD paper&apos;s UNet and with DeepLabV3+ R50 under one
           protocol: the same data split by photograph, training schedule and threshold rule, three
           seeds each. On 512px patches its accuracy is comparable to both baselines, and at the
-          paper&apos;s 128px scale it is less accurate than UNet. Its advantage is efficiency: about
-          a tenth of UNet&apos;s computation. The full comparison is in{' '}
+          paper&apos;s 128px scale it is less accurate than both. Its advantage over UNet is
+          efficiency: about a tenth of the computation. The full comparison is in{' '}
           <code className="text-sm">docs/results.md</code>.
         </p>
       </section>

@@ -235,4 +235,6 @@ def _run(cfg: Config, preset: str, stages: tuple, log, t_session: float, recordi
 
 
 if __name__ == '__main__':
+    # The reports contain ≈, which a redirected stdout on Windows (cp1252) cannot encode.
+    sys.stdout.reconfigure(encoding='utf-8')
     sys.exit(main())

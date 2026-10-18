@@ -1,9 +1,11 @@
 {
+  "preset": "128px",
   "data_root": "/tmp/nwrd_tiles_128px_x0.5",
   "out_dir": "/kaggle/working/runs",
   "models": [
     "canet_b4",
-    "unet"
+    "unet",
+    "deeplabv3plus_r50"
   ],
   "seeds": [
     42,
@@ -35,6 +37,12 @@
   "thr_lo": 0.05,
   "thr_hi": 0.95,
   "thr_step": 0.01,
+  "bench_models": [],
+  "bench_batches": [
+    8,
+    64
+  ],
+  "bench_quick": false,
   "time_budget_hours": 11.0,
   "limit": 0
 }

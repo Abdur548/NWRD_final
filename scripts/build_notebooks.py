@@ -45,13 +45,13 @@ benchmarked; the comparison is written to `runs/comparison.md`.
 Rough cost on a T4: 1.5–2.5 GPU-hours per run, 4 models × 3 seeds, so plan on two or three
 sessions (Kaggle's weekly quota is about 30 GPU-hours). Runs go seed by seed, so a paired
 comparison exists as soon as the first seed finishes; the `unet_tuned` control runs last.""",
-    '128px': """# NWRD at the paper's scale: CANet-B4 vs UNet on 128×128 patches
+    '128px': """# NWRD at the paper's scale: CANet-B4 vs baselines on 128×128 patches
 
 The NWRD paper (Anwar et al., Sensors 2023) trained its UNet on **128×128 patches of photographs
-halved in size** with a Lanczos filter (§3.4.1–3.4.2). This notebook trains CANet-B4 and the
-paper's UNet architecture at that scale, so accuracy and efficiency are measured where the paper
-measured them; the main notebook (`nwrd_experiments.ipynb`) uses 512×512 native-resolution
-patches.
+halved in size** with a Lanczos filter (§3.4.1–3.4.2). This notebook trains CANet-B4, the paper's
+UNet architecture and DeepLabV3+ R50 at that scale, so accuracy and efficiency are measured where
+the paper measured them; the main notebook (`nwrd_experiments.ipynb`) uses 512×512
+native-resolution patches.
 
 **The data.** `abdur548/nwrd-patched` pads each photograph and cuts it, at native resolution,
 into 512×512 patches. Each patch is halved (Lanczos) and cut 2×2 into 128×128 tiles, so a tile
@@ -64,7 +64,8 @@ chosen on validation, 3 seeds, photograph-level bootstrap. Only the input scale 
 
 {setup}
 
-Rough cost on a T4: 2–3 GPU-hours per seed for the two models, so 6–9 GPU-hours in all.""",
+Rough cost on a T4: about 3 GPU-hours per seed for the three models, so about 9 GPU-hours in
+all.""",
 }
 
 OUTRO = {
