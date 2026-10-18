@@ -99,6 +99,16 @@ def _environment() -> str:
     )
 
 
+def _benchmarked(out_dir: str, models: list[str]) -> bool:
+    """Whether out_dir/benchmark.json already has a row for every model."""
+    path = os.path.join(out_dir, 'benchmark.json')
+    if not os.path.exists(path):
+        return False
+    with open(path) as f:
+        done = {r['model'] for r in json.load(f)['results']}
+    return set(models) <= done
+
+
 def main(argv=None) -> int:
     t_session = time.time()  # the time budget counts from here, across all runs
     a = parse_args(argv)
@@ -178,11 +188,14 @@ def _run(cfg: Config, preset: str, stages: tuple, log, t_session: float, recordi
 
             evaluate_run(cfg, model, run_dir, log=log)
 
-    if 'bench' in stages and not os.path.exists(os.path.join(cfg.out_dir, 'benchmark.json')):
+    bench_models = cfg.bench_models or cfg.models
+    if 'bench' in stages and not _benchmarked(cfg.out_dir, bench_models):
         from .benchmark import run_benchmarks
 
+        # Every row of the table is measured in one session on one device, so a model added
+        # later re-measures them all rather than mixing sessions.
         run_benchmarks(
-            cfg.bench_models or cfg.models,
+            bench_models,
             os.path.join(cfg.out_dir, 'benchmark.json'),
             size=cfg.img_size,
             quick=cfg.bench_quick,

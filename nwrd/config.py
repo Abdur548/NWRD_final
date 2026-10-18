@@ -74,7 +74,7 @@ class Config:
 PRESETS = {
     'main': {},
     '128px': {
-        'models': ['canet_b4', 'unet'],
+        'models': ['canet_b4', 'unet', 'deeplabv3plus_r50'],
         'img_size': 128,
         'tile_size': 128,
         'tile_scale': 0.5,

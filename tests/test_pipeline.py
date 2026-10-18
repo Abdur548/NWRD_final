@@ -172,7 +172,8 @@ def test_full_pipeline_on_tiles(patches_512, tmp_path):
     assert {source_photo(f) for f in files} == {'5', '6'}
     assert json.loads(_read(out / 'tiling.json'))['tile'] == 128
     config = json.loads(_read(out / 'config.json'))
-    assert config['preset'] == '128px' and config['models'] == ['canet_b4', 'unet']
+    assert config['preset'] == '128px'
+    assert config['models'] == ['canet_b4', 'unet', 'deeplabv3plus_r50']
     assert config['tile_size'] == 128 and config['bench_batches'] == [8, 64]
     bench = json.loads(_read(out / 'benchmark.json'))['results']
     assert {r['input'] for r in bench} == {'128x128'}
