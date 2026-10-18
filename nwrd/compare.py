@@ -1,6 +1,7 @@
 """Aggregates the finished runs of one experiment into its comparison report.
 
-Outputs in <out_dir>/: comparison.md, comparison.json and figures/training_curves.png. Every
+Outputs in <out_dir>/: comparison.md, comparison.json, figures/training_curves.png and a
+summary.md per model (<out_dir>/<model>/summary.md). Every
 number is computed from files the pipeline saves per run (metrics.json, history.json,
 test_counts.npz), so a report can be rebuilt without checkpoints or images.
 """
@@ -355,6 +356,72 @@ def write_markdown(path: str, summary: dict, tests: dict, bench, test_info: dict
         f.write('\n'.join(L) + '\n')
 
 
+def write_model_summaries(out_dir: str, runs: dict, summary: dict, tests: dict, bench) -> None:
+    """Writes <out_dir>/<model>/summary.md: one model's runs, seed by seed, its mean ± std, its
+    comparison with CANet-B4 and its efficiency, so each model's results stand on their own."""
+    rows = {r['model']: r for r in bench['results']} if bench else {}
+    keys = ('IoU', 'Dice', 'Precision', 'Recall')
+    head = (
+        '| Seed | Test IoU | Dice | Precision | Recall | IoU @0.5 | IoU, rust patches | Val IoU '
+        '| Threshold | Best epoch | Train min/epoch |'
+    )
+    for model, seeds in runs.items():
+        any_m = next(iter(seeds.values()))['metrics']
+        L = [
+            f'# {model}: {MODELS.get(model, model)}',
+            '',
+            f'Test split: {any_m["test_images"]} patches, {any_m["test_rust_images"]} with rust. '
+            'Threshold chosen per run on validation; metrics pooled over all test pixels.',
+            '',
+            head,
+            '|---|' + '---|' * 10,
+        ]
+        for s in sorted(seeds):
+            m, h = seeds[s]['metrics'], seeds[s]['history']['history']
+            t = m['test@thr']
+            L.append(
+                f'| {s} | '
+                + ' | '.join(f'{t[k]:.4f}' for k in keys)
+                + f' | {m["test@0.5"]["IoU"]:.4f} | {m["test_rust_patches@thr"]["IoU"]:.4f} | '
+                f'{m["val@thr"]["IoU"]:.4f} | {m["threshold"]:.2f} | {m["best_epoch"]} | '
+                f'{np.mean(h["epoch_seconds"]) / 60:.1f} |'
+            )
+        r = summary[model]
+        means = [r['test@thr'][k] for k in keys] + [
+            r['test@0.5']['IoU'],
+            r['test_rust_patches@thr']['IoU'],
+            r['val@thr']['IoU'],
+        ]
+        L.append(
+            '| **mean ± std** | '
+            + ' | '.join(_fmt(*v, r['n']) for v in means)
+            + f' | {r["threshold"][0]:.2f} | – | {r["train_min_per_epoch"][0]:.1f} |'
+        )
+        pairs = [(base, t) for base, t in tests.items() if model in (OURS, base)]
+        if pairs:
+            L += ['', '## Against CANet-B4 (CANet-B4 minus baseline, pre-registered rule)', '']
+            for base, t in pairs:
+                b = t['bootstrap_photo']['IoU']
+                L.append(
+                    f'- vs `{base}`: ΔIoU {b["delta"]:+.4f}, 95% CI [{b["ci95"][0]:+.4f}, '
+                    f'{b["ci95"][1]:+.4f}] resampling test photographs; CANet-B4 higher on '
+                    f'{t["canet_wins"]} of {len(t["seeds"])} seeds: CANet-B4 '
+                    f'**{VERDICTS[t["verdict"]]}** `{base}`.'
+                )
+        if model in rows:
+            e = rows[model]
+            gpu = ', '.join(f'{k[4:]} {v:.1f}' for k, v in e.items() if k.startswith('gpu_'))
+            L += [
+                '',
+                f'## Efficiency ({bench["env"]["device"]}, {e["input"]} input)',
+                '',
+                f'{e["params_M"]:.2f}M parameters, {e["GFLOPs"]:.2f} GFLOPs; {gpu}; CPU latency '
+                f'bs1 {e["cpu_latency_ms_bs1_fp32"]:.0f} ms.',
+            ]
+        with open(os.path.join(out_dir, model, 'summary.md'), 'w', encoding='utf-8') as f:
+            f.write('\n'.join(L) + '\n')
+
+
 def plot_figures(runs: dict, fig_dir: str) -> None:
     """Validation loss and IoU per epoch: mean over seeds, band from min to max."""
     import matplotlib
@@ -406,6 +473,7 @@ def compare(out_dir: str, log=print) -> dict | None:
     plot_figures(runs, os.path.join(out_dir, 'figures'))
     md_path = os.path.join(out_dir, 'comparison.md')
     write_markdown(md_path, summary, tests, bench, any_run, tiling)
+    write_model_summaries(out_dir, runs, summary, tests, bench)
     with open(os.path.join(out_dir, 'comparison.json'), 'w') as f:
         json.dump({'summary': summary, 'significance': tests, 'benchmark': bench}, f, indent=2)
     with open(md_path, encoding='utf-8') as f:

@@ -17,9 +17,17 @@ ResNet-50 encoder?
 |---|---|---|---|
 | `canet_b4` | **Ours** | EfficientNet-B4 | ImageNet |
 | `unet` | The NWRD paper's architecture (4 encoder / 4 decoder blocks), re-trained under this protocol | Plain conv blocks, 64→1024 channels | None |
-| `deeplabv3plus_r50` | Second baseline: the strongest earlier in-house model | ResNet-50 | ImageNet |
+| `deeplabv3plus_r50` | Second baseline: a standard DeepLabV3+ (segmentation-models-pytorch), standing in for the internship's "Custom DeepLabV3+" | ResNet-50 | ImageNet |
 | `unet_tuned` | Control: `unet` with its own learning rate (1e-3), in case the shared rate under-trains a from-scratch network | As `unet` | None |
 | `deeplabv3plus_b4` | Same-encoder ablation; defined but not trained (GPU budget) | EfficientNet-B4 | ImageNet |
+
+**On the DeepLabV3+ baseline.** The project's earlier internship work reported a "Custom
+DeepLabV3+" with a ResNet-50 encoder (trained on 224px patches resized to 512, with 5–10% of the
+background patches). Its code was not preserved: neither the repository's history nor the
+project files hold it, and the report does not say what was customised. `deeplabv3plus_r50` is
+therefore the standard DeepLabV3+ R50 of segmentation-models-pytorch 0.5.0, trained under this
+protocol like every other model. Its results are this study's, not a reproduction of the
+internship's (§7).
 
 **Two experiments** use the same protocol and differ only in input scale:
 

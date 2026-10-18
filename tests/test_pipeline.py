@@ -75,6 +75,8 @@ def test_full_pipeline(patches_256, tmp_path):
     md = _read(out / 'comparison.md')
     assert 'paper-architecture baseline' in md and 'Against the NWRD paper' in md
     assert '| Verdict |' in md
+    for model in ('canet_b4', 'unet', 'unet_tuned'):  # each model's results stand alone
+        assert '| **mean ± std** |' in _read(out / model / 'summary.md')
 
     exp = json.loads(_read(out / 'export' / 'results.json'))
     assert set(exp['final_metrics']) >= {'IoU', 'F1 / Dice'} and exp['split'] == 'test'
