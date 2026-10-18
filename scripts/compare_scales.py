@@ -4,8 +4,9 @@
     python scripts/compare_scales.py results/128px/final results/512px/final \
         --out results/analysis/scales.md
 
-Writes markdown: CANet-B4 vs the paper's UNet at the paper's scale (photograph-level bootstrap and
-the pre-registered verdict, as recorded in comparison.json), the paper's published numbers beside
+Writes markdown: CANet-B4 vs the paper's UNet and DeepLabV3+ R50 at the paper's scale
+(photograph-level bootstrap and the pre-registered verdict, as recorded in comparison.json), the
+paper's published numbers beside
 the matching test sets, how each model changes between scales, and efficiency per input and per
 photograph. Reads only files the pipeline writes.
 """
@@ -19,7 +20,8 @@ import numpy as np
 
 from nwrd.compare import OURS, PAPER, VERDICTS, mean_std
 
-BASE = 'unet'
+BASES = ('unet', 'deeplabv3plus_r50')  # in the order they are reported
+NAMES = {'unet': "the paper's UNet", 'deeplabv3plus_r50': 'DeepLabV3+ R50'}
 KEYS = ('Precision', 'Recall', 'Dice', 'IoU')
 # Most NWRD photographs are 4608×3456; a few are 6016×4000 (paper §3.2).
 PHOTO = (4608, 3456)
@@ -57,7 +59,7 @@ def per_photo(size: int, scale: float) -> float:
 
 
 def report(r128: dict, r512: dict) -> str:
-    models = [m for m in (OURS, BASE) if m in r128['seeds']]
+    models = [m for m in (OURS, *BASES) if m in r128['seeds']]
     L = []
     t = r128['tiling']
     if t:
@@ -84,17 +86,19 @@ def report(r128: dict, r512: dict) -> str:
         ]
         per_seed = ', '.join(f'{s}: {runs[s]["test@thr"]["IoU"]:.3f}' for s in sorted(runs))
         L.append(f'| {m} | {len(runs)} | ' + ' | '.join(cols) + f' | {per_seed} |')
-    sig = r128['comp']['significance'].get(BASE)
-    if sig:
+    for base in BASES:
+        sig = r128['comp']['significance'].get(base)
+        if not sig:
+            continue
         b, tt, n = sig['bootstrap_photo']['IoU'], sig['seed_ttest'], len(sig['seeds'])
         L += [
             '',
-            f'CANet − UNet: ΔIoU {b["delta"]:+.4f}, 95% CI [{b["ci95"][0]:+.4f}, '
+            f'CANet − {NAMES[base]}: ΔIoU {b["delta"]:+.4f}, 95% CI [{b["ci95"][0]:+.4f}, '
             f'{b["ci95"][1]:+.4f}] resampling test photographs (p {b["p_two_sided"]:.3f}); '
             f'CANet higher on {sig["canet_wins"]} of {n} seeds'
             + (f'; seed-level t-test p {tt["p"]:.3f}.' if tt else '.'),
-            f'Pre-registered decision rule at 128px: CANet-B4 **{VERDICTS[sig["verdict"]]}** the '
-            "paper's UNet" + ('' if n >= 3 else f' (interim: {n} of 3 seeds)') + '.',
+            f'Pre-registered decision rule at 128px: CANet-B4 **{VERDICTS[sig["verdict"]]}** '
+            f'{NAMES[base]}' + ('' if n >= 3 else f' (interim: {n} of 3 seeds)') + '.',
         ]
 
     L += [
