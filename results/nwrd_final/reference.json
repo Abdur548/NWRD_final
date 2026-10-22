@@ -1,0 +1,16 @@
+{
+ "source": "NWRD_final commit 61bf2fb (E:/NWRD/NWRD_final), the earlier study of the same models on other photographs",
+ "train_rust_pixel_share": {
+  "value": 0.0977,
+  "from": "results/512px/final/_cache/mask_stats_train.json: rust pixels over all pixels of its 8,160 training patches, padding included"
+ },
+ "pos_weight": {
+  "512px": 3.654,
+  "128px": 2.781,
+  "from": "results/<scale>/final/<model>/seed*/history.json, 'data' -> 'pos_weight'"
+ },
+ "same_seed_two_sessions_test_iou_difference": {
+  "canet_b4": 0.028,
+  "from": "results/512px/final/canet_b4/seed43/metrics.json (0.7435) against results/512px/replicate/canet_b4/seed43/metrics.json (0.7160), test@thr IoU"
+ }
+}

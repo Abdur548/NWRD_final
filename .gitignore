@@ -1,0 +1,25 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.ruff_cache/
+.venv/
+venv/
+build/
+dist/
+
+# Model weights never enter git
+*.pt
+*.pth
+
+# The release itself (scripts/fetch_data.py) and raw run outputs; results/ holds the curated files
+data/raw/
+runs/
+runs_kaggle/
+
+# Editors and OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db

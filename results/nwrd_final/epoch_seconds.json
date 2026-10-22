@@ -1,0 +1,45 @@
+{
+ "source": "NWRD_final commit 61bf2fb, results/<scale>/final/<model>/seed{42,43,44}/history.json: mean seconds per epoch on a Tesla T4 (Kaggle), and the windows each epoch trained on and validated",
+ "scales": {
+  "512px": {
+   "canet_b4": {
+    "epoch_seconds": 193.7,
+    "train_windows": 3709,
+    "val_windows": 480,
+    "seeds": 3
+   },
+   "unet": {
+    "epoch_seconds": 395.0,
+    "train_windows": 3709,
+    "val_windows": 480,
+    "seeds": 3
+   },
+   "deeplabv3plus_r50": {
+    "epoch_seconds": 128.9,
+    "train_windows": 3709,
+    "val_windows": 480,
+    "seeds": 3
+   }
+  },
+  "128px": {
+   "canet_b4": {
+    "epoch_seconds": 185.4,
+    "train_windows": 12079,
+    "val_windows": 1920,
+    "seeds": 3
+   },
+   "unet": {
+    "epoch_seconds": 104.1,
+    "train_windows": 12079,
+    "val_windows": 1920,
+    "seeds": 3
+   },
+   "deeplabv3plus_r50": {
+    "epoch_seconds": 69.6,
+    "train_windows": 12079,
+    "val_windows": 1920,
+    "seeds": 3
+   }
+  }
+ }
+}

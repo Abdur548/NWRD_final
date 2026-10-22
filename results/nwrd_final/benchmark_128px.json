@@ -1,0 +1,55 @@
+{
+  "env": {
+    "device": "Tesla T4",
+    "cpu": "x86_64",
+    "cpu_threads": 2,
+    "torch": "2.10.0+cu128"
+  },
+  "results": [
+    {
+      "model": "canet_b4",
+      "description": "CANet, EfficientNet-B4 encoder (ours)",
+      "params_M": 29.392209,
+      "GFLOPs": 2.31293408,
+      "input": "128x128",
+      "GMACs": 1.15646704,
+      "gpu_latency_ms_bs1_fp32": 22.60042799935036,
+      "gpu_latency_ms_bs1_fp16": 24.21299599973281,
+      "gpu_throughput_img_s_bs8_fp16": 308.55152875341776,
+      "gpu_peak_mem_MB_bs8_fp16": 262.15673828125,
+      "gpu_throughput_img_s_bs64_fp16": 868.5207268076464,
+      "gpu_peak_mem_MB_bs64_fp16": 646.29736328125,
+      "cpu_latency_ms_bs1_fp32": 67.03737899988482
+    },
+    {
+      "model": "unet",
+      "description": "UNet, 4 encoder / 4 decoder blocks, from scratch (NWRD paper baseline)",
+      "params_M": 31.037633,
+      "GFLOPs": 24.083693568,
+      "input": "128x128",
+      "GMACs": 12.041846784,
+      "gpu_latency_ms_bs1_fp32": 7.184290999248333,
+      "gpu_latency_ms_bs1_fp16": 3.638928999862401,
+      "gpu_throughput_img_s_bs8_fp16": 473.97582416218717,
+      "gpu_peak_mem_MB_bs8_fp16": 441.53173828125,
+      "gpu_throughput_img_s_bs64_fp16": 524.3208521169929,
+      "gpu_peak_mem_MB_bs64_fp16": 1540.03173828125,
+      "cpu_latency_ms_bs1_fp32": 156.36704100052157
+    },
+    {
+      "model": "deeplabv3plus_r50",
+      "description": "DeepLabV3+, ResNet-50 encoder (baseline)",
+      "params_M": 26.677585,
+      "GFLOPs": 4.571136,
+      "input": "128x128",
+      "GMACs": 2.285568,
+      "gpu_latency_ms_bs1_fp32": 6.271723000281781,
+      "gpu_latency_ms_bs1_fp16": 7.314382000004116,
+      "gpu_throughput_img_s_bs8_fp16": 987.3500708926804,
+      "gpu_peak_mem_MB_bs8_fp16": 200.4873046875,
+      "gpu_throughput_img_s_bs64_fp16": 1322.6667971764302,
+      "gpu_peak_mem_MB_bs64_fp16": 802.421875,
+      "cpu_latency_ms_bs1_fp32": 57.076127999607706
+    }
+  ]
+}

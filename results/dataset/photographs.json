@@ -1,0 +1,7620 @@
+[
+ {
+  "id": "2",
+  "folder": "train",
+  "make": "NIKON CORPORATION",
+  "camera": "NIKON D3200",
+  "orientation": 1,
+  "taken": "2022:03:04 09:56:35",
+  "paper_split": "val",
+  "split": "val",
+  "bytes": 6615038,
+  "pixel_md5": "825a92a53a284249fd1b2e0c23ee6cc9",
+  "photo_wh": [
+   6016,
+   4000
+  ],
+  "mask_wh": [
+   6016,
+   4000
+  ],
+  "mask_mode": "L",
+  "mask_values": [
+   0,
+   255
+  ],
+  "rust_px": 28217,
+  "pixels": 24064000,
+  "rust_share": 0.0011725814494680852,
+  "contrast": 31.707393646240234,
+  "windows": {
+   "512px": {
+    "grid": [
+     8,
+     12
+    ],
+    "windows": 96,
+    "rust_windows": 5,
+    "overlap": [
+     14,
+     12
+    ],
+    "padding": [
+     96,
+     128
+    ]
+   },
+   "128px": {
+    "grid": [
+     16,
+     24
+    ],
+    "windows": 384,
+    "rust_windows": 6,
+    "overlap": [
+     4,
+     3
+    ],
+    "padding": [
+     48,
+     64
+    ]
+   }
+  },
+  "paper": {
+   "half_wh": [
+    3008,
+    2000
+   ],
+   "patches": 345,
+   "rust_patches": 5,
+   "dropped_px": [
+    64,
+    80
+   ],
+   "gp32": 5369
+  }
+ },
+ {
+  "id": "3",
+  "folder": "train",
+  "make": "NIKON CORPORATION",
+  "camera": "NIKON D3200",
+  "orientation": 1,
+  "taken": "2022:03:04 11:08:36",
+  "paper_split": "train",
+  "split": "train",
+  "bytes": 7702174,
+  "pixel_md5": "b88269016b89f69bb1cc956b042953ff",
+  "photo_wh": [
+   6016,
+   4000
+  ],
+  "mask_wh": [
+   6016,
+   4000
+  ],
+  "mask_mode": "L",
+  "mask_values": [
+   0,
+   255
+  ],
+  "rust_px": 116132,
+  "pixels": 24064000,
+  "rust_share": 0.004825964095744681,
+  "contrast": 28.47632598876953,
+  "windows": {
+   "512px": {
+    "grid": [
+     8,
+     12
+    ],
+    "windows": 96,
+    "rust_windows": 6,
+    "overlap": [
+     14,
+     12
+    ],
+    "padding": [
+     96,
+     128
+    ]
+   },
+   "128px": {
+    "grid": [
+     16,
+     24
+    ],
+    "windows": 384,
+    "rust_windows": 12,
+    "overlap": [
+     4,
+     3
+    ],
+    "padding": [
+     48,
+     64
+    ]
+   }
+  },
+  "paper": {
+   "half_wh": [
+    3008,
+    2000
+   ],
+   "patches": 345,
+   "rust_patches": 11,
+   "dropped_px": [
+    64,
+    80
+   ],
+   "gp32": 5369
+  }
+ },
+ {
+  "id": "5",
+  "folder": "train",
+  "make": "NIKON CORPORATION",
+  "camera": "NIKON D3200",
+  "orientation": 1,
+  "taken": "2022:03:04 09:56:12",
+  "paper_split": "train",
+  "split": "train",
+  "bytes": 6731411,
+  "pixel_md5": "953f0bcf395603cc1aa654743dce86d0",
+  "photo_wh": [
+   6016,
+   4000
+  ],
+  "mask_wh": [
+   6016,
+   4000
+  ],
+  "mask_mode": "L",
+  "mask_values": [
+   0,
+   255
+  ],
+  "rust_px": 42647,
+  "pixels": 24064000,
+  "rust_share": 0.0017722323803191489,
+  "contrast": 27.099523544311523,
+  "windows": {
+   "512px": {
+    "grid": [
+     8,
+     12
+    ],
+    "windows": 96,
+    "rust_windows": 16,
+    "overlap": [
+     14,
+     12
+    ],
+    "padding": [
+     96,
+     128
+    ]
+   },
+   "128px": {
+    "grid": [
+     16,
+     24
+    ],
+    "windows": 384,
+    "rust_windows": 24,
+    "overlap": [
+     4,
+     3
+    ],
+    "padding": [
+     48,
+     64
+    ]
+   }
+  },
+  "paper": {
+   "half_wh": [
+    3008,
+    2000
+   ],
+   "patches": 345,
+   "rust_patches": 22,
+   "dropped_px": [
+    64,
+    80
+   ],
+   "gp32": 5369
+  }
+ },
+ {
+  "id": "7",
+  "folder": "train",
+  "make": "NIKON CORPORATION",
+  "camera": "NIKON D3200",
+  "orientation": 1,
+  "taken": "2022:03:04 09:58:22",
+  "paper_split": "train",
+  "split": "train",
+  "bytes": 6104866,
+  "pixel_md5": "0ad9f5c6d4a467b03cb6c9ab17668f96",
+  "photo_wh": [
+   6016,
+   4000
+  ],
+  "mask_wh": [
+   6016,
+   4000
+  ],
+  "mask_mode": "L",
+  "mask_values": [
+   0,
+   255
+  ],
+  "rust_px": 54585,
+  "pixels": 24064000,
+  "rust_share": 0.002268326130319149,
+  "contrast": 41.068416595458984,
+  "windows": {
+   "512px": {
+    "grid": [
+     8,
+     12
+    ],
+    "windows": 96,
+    "rust_windows": 7,
+    "overlap": [
+     14,
+     12
+    ],
+    "padding": [
+     96,
+     128
+    ]
+   },
+   "128px": {
+    "grid": [
+     16,
+     24
+    ],
+    "windows": 384,
+    "rust_windows": 12,
+    "overlap": [
+     4,
+     3
+    ],
+    "padding": [
+     48,
+     64
+    ]
+   }
+  },
+  "paper": {
+   "half_wh": [
+    3008,
+    2000
+   ],
+   "patches": 345,
+   "rust_patches": 11,
+   "dropped_px": [
+    64,
+    80
+   ],
+   "gp32": 5369
+  }
+ },
+ {
+  "id": "9",
+  "folder": "train",
+  "make": "NIKON CORPORATION",
+  "camera": "NIKON D3200",
+  "orientation": 1,
+  "taken": "2022:03:04 09:59:12",
+  "paper_split": "train",
+  "split": "train",
+  "bytes": 7586002,
+  "pixel_md5": "beda65824689dd81b95f32598a66b784",
+  "photo_wh": [
+   6016,
+   4000
+  ],
+  "mask_wh": [
+   6016,
+   4000
+  ],
+  "mask_mode": "L",
+  "mask_values": [
+   0,
+   255
+  ],
+  "rust_px": 92498,
+  "pixels": 24064000,
+  "rust_share": 0.0038438331117021276,
+  "contrast": 33.43567657470703,
+  "windows": {
+   "512px": {
+    "grid": [
+     8,
+     12
+    ],
+    "windows": 96,
+    "rust_windows": 14,
+    "overlap": [
+     14,
+     12
+    ],
+    "padding": [
+     96,
+     128
+    ]
+   },
+   "128px": {
+    "grid": [
+     16,
+     24
+    ],
+    "windows": 384,
+    "rust_windows": 25,
+    "overlap": [
+     4,
+     3
+    ],
+    "padding": [
+     48,
+     64
+    ]
+   }
+  },
+  "paper": {
+   "half_wh": [
+    3008,
+    2000
+   ],
+   "patches": 345,
+   "rust_patches": 20,
+   "dropped_px": [
+    64,
+    80
+   ],
+   "gp32": 5369
+  }
+ },
+ {
+  "id": "10",
+  "folder": "train",
+  "make": "NIKON CORPORATION",
+  "camera": "NIKON D3200",
+  "orientation": 1,
+  "taken": "2022:03:04 10:00:01",
+  "paper_split": "train",
+  "split": "train",
+  "bytes": 6946041,
+  "pixel_md5": "f0fd1fb2ee3f624d1e2db05814f59ffe",
+  "photo_wh": [
+   6016,
+   4000
+  ],
+  "mask_wh": [
+   6016,
+   4000
+  ],
+  "mask_mode": "L",
+  "mask_values": [
+   0,
+   255
+  ],
+  "rust_px": 97191,
+  "pixels": 24064000,
+  "rust_share": 0.004038854720744681,
+  "contrast": 40.061866760253906,
+  "windows": {
+   "512px": {
+    "grid": [
+     8,
+     12
+    ],
+    "windows": 96,
+    "rust_windows": 11,
+    "overlap": [
+     14,
+     12
+    ],
+    "padding": [
+     96,
+     128
+    ]
+   },
+   "128px": {
+    "grid": [
+     16,
+     24
+    ],
+    "windows": 384,
+    "rust_windows": 20,
+    "overlap": [
+     4,
+     3
+    ],
+    "padding": [
+     48,
+     64
+    ]
+   }
+  },
+  "paper": {
+   "half_wh": [
+    3008,
+    2000
+   ],
+   "patches": 345,
+   "rust_patches": 19,
+   "dropped_px": [
+    64,
+    80
+   ],
+   "gp32": 5369
+  }
+ },
+ {
+  "id": "11",
+  "folder": "train",
+  "make": "NIKON CORPORATION",
+  "camera": "NIKON D3200",
+  "orientation": 1,
+  "taken": "2022:03:04 10:01:13",
+  "paper_split": "train",
+  "split": "train",
+  "bytes": 7218585,
+  "pixel_md5": "c04724d1039bc2063a192a94d399edb7",
+  "photo_wh": [
+   6016,
+   4000
+  ],
+  "mask_wh": [
+   6016,
+   4000
+  ],
+  "mask_mode": "L",
+  "mask_values": [
+   0,
+   255
+  ],
+  "rust_px": 31693,
+  "pixels": 24064000,
+  "rust_share": 0.0013170295877659574,
+  "contrast": 48.477901458740234,
+  "windows": {
+   "512px": {
+    "grid": [
+     8,
+     12
+    ],
+    "windows": 96,
+    "rust_windows": 8,
+    "overlap": [
+     14,
+     12
+    ],
+    "padding": [
+     96,
+     128
+    ]
+   },
+   "128px": {
+    "grid": [
+     16,
+     24
+    ],
+    "windows": 384,
+    "rust_windows": 6,
+    "overlap": [
+     4,
+     3
+    ],
+    "padding": [
+     48,
+     64
+    ]
+   }
+  },
+  "paper": {
+   "half_wh": [
+    3008,
+    2000
+   ],
+   "patches": 345,
+   "rust_patches": 5,
+   "dropped_px": [
+    64,
+    80
+   ],
+   "gp32": 5369
+  }
+ },
+ {
+  "id": "12",
+  "folder": "train",
+  "make": "NIKON CORPORATION",
+  "camera": "NIKON D3200",
+  "orientation": 1,
+  "taken": "2022:03:04 10:01:41",
+  "paper_split": "train",
+  "split": "train",
+  "bytes": 7649224,
+  "pixel_md5": "13e896eec665fe2164ae6ac628d9cca3",
+  "photo_wh": [
+   6016,
+   4000
+  ],
+  "mask_wh": [
+   6016,
+   4000
+  ],
+  "mask_mode": "L",
+  "mask_values": [
+   0,
+   255
+  ],
+  "rust_px": 9131,
+  "pixels": 24064000,
+  "rust_share": 0.00037944647606382977,
+  "contrast": 47.811431884765625,
+  "windows": {
+   "512px": {
+    "grid": [
+     8,
+     12
+    ],
+    "windows": 96,
+    "rust_windows": 3,
+    "overlap": [
+     14,
+     12
+    ],
+    "padding": [
+     96,
+     128
+    ]
+   },
+   "128px": {
+    "grid": [
+     16,
+     24
+    ],
+    "windows": 384,
+    "rust_windows": 3,
+    "overlap": [
+     4,
+     3
+    ],
+    "padding": [
+     48,
+     64
+    ]
+   }
+  },
+  "paper": {
+   "half_wh": [
+    3008,
+    2000
+   ],
+   "patches": 345,
+   "rust_patches": 2,
+   "dropped_px": [
+    64,
+    80
+   ],
+   "gp32": 5369
+  }
+ },
+ {
+  "id": "13",
+  "folder": "train",
+  "make": "NIKON CORPORATION",
+  "camera": "NIKON D3200",
+  "orientation": 1,
+  "taken": "2022:03:04 09:56:27",
+  "paper_split": "train",
+  "split": "train",
+  "bytes": 6928129,
+  "pixel_md5": "8cf79d19a78fb6c5d3da78d39311f6de",
+  "photo_wh": [
+   6016,
+   4000
+  ],
+  "mask_wh": [
+   6016,
+   4000
+  ],
+  "mask_mode": "L",
+  "mask_values": [
+   0,
+   255
+  ],
+  "rust_px": 20000,
+  "pixels": 24064000,
+  "rust_share": 0.0008311170212765958,
+  "contrast": 34.396339416503906,
+  "windows": {
+   "512px": {
+    "grid": [
+     8,
+     12
+    ],
+    "windows": 96,
+    "rust_windows": 6,
+    "overlap": [
+     14,
+     12
+    ],
+    "padding": [
+     96,
+     128
+    ]
+   },
+   "128px": {
+    "grid": [
+     16,
+     24
+    ],
+    "windows": 384,
+    "rust_windows": 11,
+    "overlap": [
+     4,
+     3
+    ],
+    "padding": [
+     48,
+     64
+    ]
+   }
+  },
+  "paper": {
+   "half_wh": [
+    3008,
+    2000
+   ],
+   "patches": 345,
+   "rust_patches": 11,
+   "dropped_px": [
+    64,
+    80
+   ],
+   "gp32": 5369
+  }
+ },
+ {
+  "id": "14",
+  "folder": "train",
+  "make": "NIKON CORPORATION",
+  "camera": "NIKON D3200",
+  "orientation": 1,
+  "taken": "2022:03:04 10:16:21",
+  "paper_split": "train",
+  "split": "train",
+  "bytes": 6329738,
+  "pixel_md5": "55f8cde34751f535bdfaf641db71f3e7",
+  "photo_wh": [
+   6016,
+   4000
+  ],
+  "mask_wh": [
+   6016,
+   4000
+  ],
+  "mask_mode": "L",
+  "mask_values": [
+   0,
+   255
+  ],
+  "rust_px": 62034,
+  "pixels": 24064000,
+  "rust_share": 0.002577875664893617,
+  "contrast": 43.986793518066406,
+  "windows": {
+   "512px": {
+    "grid": [
+     8,
+     12
+    ],
+    "windows": 96,
+    "rust_windows": 5,
+    "overlap": [
+     14,
+     12
+    ],
+    "padding": [
+     96,
+     128
+    ]
+   },
+   "128px": {
+    "grid": [
+     16,
+     24
+    ],
+    "windows": 384,
+    "rust_windows": 10,
+    "overlap": [
+     4,
+     3
+    ],
+    "padding": [
+     48,
+     64
+    ]
+   }
+  },
+  "paper": {
+   "half_wh": [
+    3008,
+    2000
+   ],
+   "patches": 345,
+   "rust_patches": 8,
+   "dropped_px": [
+    64,
+    80
+   ],
+   "gp32": 5369
+  }
+ },
+ {
+  "id": "15",
+  "folder": "train",
+  "make": "NIKON CORPORATION",
+  "camera": "NIKON D3200",
+  "orientation": 1,
+  "taken": "2022:03:04 10:08:52",
+  "paper_split": "train",
+  "split": "train",
+  "bytes": 7399326,
+  "pixel_md5": "e155d82cc4c1f2ab29cfa14fc45ce546",
+  "photo_wh": [
+   6016,
+   4000
+  ],
+  "mask_wh": [
+   6016,
+   4000
+  ],
+  "mask_mode": "L",
+  "mask_values": [
+   0,
+   255
+  ],
+  "rust_px": 25371,
+  "pixels": 24064000,
+  "rust_share": 0.0010543134973404254,
+  "contrast": 39.94697189331055,
+  "windows": {
+   "512px": {
+    "grid": [
+     8,
+     12
+    ],
+    "windows": 96,
+    "rust_windows": 6,
+    "overlap": [
+     14,
+     12
+    ],
+    "padding": [
+     96,
+     128
+    ]
+   },
+   "128px": {
+    "grid": [
+     16,
+     24
+    ],
+    "windows": 384,
+    "rust_windows": 5,
+    "overlap": [
+     4,
+     3
+    ],
+    "padding": [
+     48,
+     64
+    ]
+   }
+  },
+  "paper": {
+   "half_wh": [
+    3008,
+    2000
+   ],
+   "patches": 345,
+   "rust_patches": 5,
+   "dropped_px": [
+    64,
+    80
+   ],
+   "gp32": 5369
+  }
+ },
+ {
+  "id": "19",
+  "folder": "train",
+  "make": "NIKON CORPORATION",
+  "camera": "NIKON D3200",
+  "orientation": 1,
+  "taken": "2022:03:04 09:55:05",
+  "paper_split": "train",
+  "split": "train",
+  "bytes": 7554806,
+  "pixel_md5": "d8149ee8c92e054b2f912915570125e5",
+  "photo_wh": [
+   6016,
+   4000
+  ],
+  "mask_wh": [
+   6016,
+   4000
+  ],
+  "mask_mode": "L",
+  "mask_values": [
+   0,
+   255
+  ],
+  "rust_px": 719154,
+  "pixels": 24064000,
+  "rust_share": 0.029885056515957447,
+  "contrast": 34.38388442993164,
+  "windows": {
+   "512px": {
+    "grid": [
+     8,
+     12
+    ],
+    "windows": 96,
+    "rust_windows": 58,
+    "overlap": [
+     14,
+     12
+    ],
+    "padding": [
+     96,
+     128
+    ]
+   },
+   "128px": {
+    "grid": [
+     16,
+     24
+    ],
+    "windows": 384,
+    "rust_windows": 146,
+    "overlap": [
+     4,
+     3
+    ],
+    "padding": [
+     48,
+     64
+    ]
+   }
+  },
+  "paper": {
+   "half_wh": [
+    3008,
+    2000
+   ],
+   "patches": 345,
+   "rust_patches": 136,
+   "dropped_px": [
+    64,
+    80
+   ],
+   "gp32": 5369
+  }
+ },
+ {
+  "id": "21",
+  "folder": "train",
+  "make": "NIKON CORPORATION",
+  "camera": "NIKON D3200",
+  "orientation": 1,
+  "taken": "2022:03:04 09:56:05",
+  "paper_split": "train",
+  "split": "train",
+  "bytes": 6431028,
+  "pixel_md5": "60bae73c861e06c8dd86e3efb662df5f",
+  "photo_wh": [
+   6016,
+   4000
+  ],
+  "mask_wh": [
+   6016,
+   4000
+  ],
+  "mask_mode": "L",
+  "mask_values": [
+   0,
+   255
+  ],
+  "rust_px": 53959,
+  "pixels": 24064000,
+  "rust_share": 0.0022423121675531916,
+  "contrast": 23.753721237182617,
+  "windows": {
+   "512px": {
+    "grid": [
+     8,
+     12
+    ],
+    "windows": 96,
+    "rust_windows": 15,
+    "overlap": [
+     14,
+     12
+    ],
+    "padding": [
+     96,
+     128
+    ]
+   },
+   "128px": {
+    "grid": [
+     16,
+     24
+    ],
+    "windows": 384,
+    "rust_windows": 23,
+    "overlap": [
+     4,
+     3
+    ],
+    "padding": [
+     48,
+     64
+    ]
+   }
+  },
+  "paper": {
+   "half_wh": [
+    3008,
+    2000
+   ],
+   "patches": 345,
+   "rust_patches": 20,
+   "dropped_px": [
+    64,
+    80
+   ],
+   "gp32": 5369
+  }
+ },
+ {
+  "id": "22",
+  "folder": "train",
+  "make": "NIKON CORPORATION",
+  "camera": "NIKON D3200",
+  "orientation": 1,
+  "taken": "2022:03:04 09:58:37",
+  "paper_split": "train",
+  "split": "train",
+  "bytes": 6423913,
+  "pixel_md5": "8db48cc7c60d74ff0cbbf54efd924f83",
+  "photo_wh": [
+   6016,
+   4000
+  ],
+  "mask_wh": [
+   6016,
+   4000
+  ],
+  "mask_mode": "L",
+  "mask_values": [
+   0,
+   255
+  ],
+  "rust_px": 7520,
+  "pixels": 24064000,
+  "rust_share": 0.0003125,
+  "contrast": 36.08454132080078,
+  "windows": {
+   "512px": {
+    "grid": [
+     8,
+     12
+    ],
+    "windows": 96,
+    "rust_windows": 2,
+    "overlap": [
+     14,
+     12
+    ],
+    "padding": [
+     96,
+     128
+    ]
+   },
+   "128px": {
+    "grid": [
+     16,
+     24
+    ],
+    "windows": 384,
+    "rust_windows": 3,
+    "overlap": [
+     4,
+     3
+    ],
+    "padding": [
+     48,
+     64
+    ]
+   }
+  },
+  "paper": {
+   "half_wh": [
+    3008,
+    2000
+   ],
+   "patches": 345,
+   "rust_patches": 3,
+   "dropped_px": [
+    64,
+    80
+   ],
+   "gp32": 5369
+  }
+ },
+ {
+  "id": "24",
+  "folder": "train",
+  "make": "NIKON CORPORATION",
+  "camera": "NIKON D3200",
+  "orientation": 1,
+  "taken": "2022:03:04 09:55:27",
+  "paper_split": "train",
+  "split": "train",
+  "bytes": 7181269,
+  "pixel_md5": "b6c5d27df15e9b34e1e845367c1f0bc5",
+  "photo_wh": [
+   6016,
+   4000
+  ],
+  "mask_wh": [
+   6016,
+   4000
+  ],
+  "mask_mode": "L",
+  "mask_values": [
+   0,
+   255
+  ],
+  "rust_px": 666469,
+  "pixels": 24064000,
+  "rust_share": 0.027695686502659574,
+  "contrast": 36.66596221923828,
+  "windows": {
+   "512px": {
+    "grid": [
+     8,
+     12
+    ],
+    "windows": 96,
+    "rust_windows": 59,
+    "overlap": [
+     14,
+     12
+    ],
+    "padding": [
+     96,
+     128
+    ]
+   },
+   "128px": {
+    "grid": [
+     16,
+     24
+    ],
+    "windows": 384,
+    "rust_windows": 132,
+    "overlap": [
+     4,
+     3
+    ],
+    "padding": [
+     48,
+     64
+    ]
+   }
+  },
+  "paper": {
+   "half_wh": [
+    3008,
+    2000
+   ],
+   "patches": 345,
+   "rust_patches": 122,
+   "dropped_px": [
+    64,
+    80
+   ],
+   "gp32": 5369
+  }
+ },
+ {
+  "id": "25",
+  "folder": "test",
+  "make": "NIKON CORPORATION",
+  "camera": "NIKON D3200",
+  "orientation": 1,
+  "taken": "2022:03:04 10:15:54",
+  "paper_split": "test",
+  "split": "test",
+  "bytes": 6951453,
+  "pixel_md5": "d0adad6ea5d64f123942aff4011703c7",
+  "photo_wh": [
+   6016,
+   4000
+  ],
+  "mask_wh": [
+   6016,
+   4000
+  ],
+  "mask_mode": "L",
+  "mask_values": [
+   0,
+   255
+  ],
+  "rust_px": 76201,
+  "pixels": 24064000,
+  "rust_share": 0.0031665974069148934,
+  "contrast": 31.35052490234375,
+  "windows": {
+   "512px": {
+    "grid": [
+     8,
+     12
+    ],
+    "windows": 96,
+    "rust_windows": 15,
+    "overlap": [
+     14,
+     12
+    ],
+    "padding": [
+     96,
+     128
+    ]
+   },
+   "128px": {
+    "grid": [
+     16,
+     24
+    ],
+    "windows": 384,
+    "rust_windows": 27,
+    "overlap": [
+     4,
+     3
+    ],
+    "padding": [
+     48,
+     64
+    ]
+   }
+  },
+  "paper": {
+   "half_wh": [
+    3008,
+    2000
+   ],
+   "patches": 345,
+   "rust_patches": 28,
+   "dropped_px": [
+    64,
+    80
+   ],
+   "gp32": 5369
+  }
+ },
+ {
+  "id": "26",
+  "folder": "train",
+  "make": "NIKON CORPORATION",
+  "camera": "NIKON D3200",
+  "orientation": 1,
+  "taken": "2022:03:04 10:07:12",
+  "paper_split": "train",
+  "split": "train",
+  "bytes": 7599003,
+  "pixel_md5": "28021ccc3d497b9f4141cc4091390497",
+  "photo_wh": [
+   6016,
+   4000
+  ],
+  "mask_wh": [
+   6016,
+   4000
+  ],
+  "mask_mode": "L",
+  "mask_values": [
+   0,
+   255
+  ],
+  "rust_px": 49109,
+  "pixels": 24064000,
+  "rust_share": 0.002040766289893617,
+  "contrast": 20.145442962646484,
+  "windows": {
+   "512px": {
+    "grid": [
+     8,
+     12
+    ],
+    "windows": 96,
+    "rust_windows": 12,
+    "overlap": [
+     14,
+     12
+    ],
+    "padding": [
+     96,
+     128
+    ]
+   },
+   "128px": {
+    "grid": [
+     16,
+     24
+    ],
+    "windows": 384,
+    "rust_windows": 16,
+    "overlap": [
+     4,
+     3
+    ],
+    "padding": [
+     48,
+     64
+    ]
+   }
+  },
+  "paper": {
+   "half_wh": [
+    3008,
+    2000
+   ],
+   "patches": 345,
+   "rust_patches": 12,
+   "dropped_px": [
+    64,
+    80
+   ],
+   "gp32": 5369
+  }
+ },
+ {
+  "id": "27",
+  "folder": "train",
+  "make": "NIKON CORPORATION",
+  "camera": "NIKON D3200",
+  "orientation": 1,
+  "taken": "2022:03:04 10:05:22",
+  "paper_split": "train",
+  "split": "train",
+  "bytes": 7264172,
+  "pixel_md5": "eb2a5ed9b608ac6af386469a18dde86a",
+  "photo_wh": [
+   6016,
+   4000
+  ],
+  "mask_wh": [
+   6016,
+   4000
+  ],
+  "mask_mode": "L",
+  "mask_values": [
+   0,
+   255
+  ],
+  "rust_px": 111703,
+  "pixels": 24064000,
+  "rust_share": 0.004641913231382979,
+  "contrast": 31.301223754882812,
+  "windows": {
+   "512px": {
+    "grid": [
+     8,
+     12
+    ],
+    "windows": 96,
+    "rust_windows": 19,
+    "overlap": [
+     14,
+     12
+    ],
+    "padding": [
+     96,
+     128
+    ]
+   },
+   "128px": {
+    "grid": [
+     16,
+     24
+    ],
+    "windows": 384,
+    "rust_windows": 26,
+    "overlap": [
+     4,
+     3
+    ],
+    "padding": [
+     48,
+     64
+    ]
+   }
+  },
+  "paper": {
+   "half_wh": [
+    3008,
+    2000
+   ],
+   "patches": 345,
+   "rust_patches": 28,
+   "dropped_px": [
+    64,
+    80
+   ],
+   "gp32": 5369
+  }
+ },
+ {
+  "id": "28",
+  "folder": "train",
+  "make": "NIKON CORPORATION",
+  "camera": "NIKON D3200",
+  "orientation": 1,
+  "taken": "2022:03:04 10:07:36",
+  "paper_split": "train",
+  "split": "train",
+  "bytes": 7274747,
+  "pixel_md5": "600771f930c1af2c76ffc798b11e0158",
+  "photo_wh": [
+   6016,
+   4000
+  ],
+  "mask_wh": [
+   6016,
+   4000
+  ],
+  "mask_mode": "L",
+  "mask_values": [
+   0,
+   255
+  ],
+  "rust_px": 137896,
+  "pixels": 24064000,
+  "rust_share": 0.005730385638297872,
+  "contrast": 37.05036163330078,
+  "windows": {
+   "512px": {
+    "grid": [
+     8,
+     12
+    ],
+    "windows": 96,
+    "rust_windows": 15,
+    "overlap": [
+     14,
+     12
+    ],
+    "padding": [
+     96,
+     128
+    ]
+   },
+   "128px": {
+    "grid": [
+     16,
+     24
+    ],
+    "windows": 384,
+    "rust_windows": 26,
+    "overlap": [
+     4,
+     3
+    ],
+    "padding": [
+     48,
+     64
+    ]
+   }
+  },
+  "paper": {
+   "half_wh": [
+    3008,
+    2000
+   ],
+   "patches": 345,
+   "rust_patches": 21,
+   "dropped_px": [
+    64,
+    80
+   ],
+   "gp32": 5369
+  }
+ },
+ {
+  "id": "29",
+  "folder": "test",
+  "make": "NIKON CORPORATION",
+  "camera": "NIKON D3200",
+  "orientation": 1,
+  "taken": "2022:03:04 10:07:57",
+  "paper_split": "test",
+  "split": "test",
+  "bytes": 7540972,
+  "pixel_md5": "b77d79ef65c47a84009013673f4d0157",
+  "photo_wh": [
+   6016,
+   4000
+  ],
+  "mask_wh": [
+   6016,
+   4000
+  ],
+  "mask_mode": "L",
+  "mask_values": [
+   0,
+   255
+  ],
+  "rust_px": 84451,
+  "pixels": 24064000,
+  "rust_share": 0.0035094331781914895,
+  "contrast": 28.5605525970459,
+  "windows": {
+   "512px": {
+    "grid": [
+     8,
+     12
+    ],
+    "windows": 96,
+    "rust_windows": 14,
+    "overlap": [
+     14,
+     12
+    ],
+    "padding": [
+     96,
+     128
+    ]
+   },
+   "128px": {
+    "grid": [
+     16,
+     24
+    ],
+    "windows": 384,
+    "rust_windows": 26,
+    "overlap": [
+     4,
+     3
+    ],
+    "padding": [
+     48,
+     64
+    ]
+   }
+  },
+  "paper": {
+   "half_wh": [
+    3008,
+    2000
+   ],
+   "patches": 345,
+   "rust_patches": 22,
+   "dropped_px": [
+    64,
+    80
+   ],
+   "gp32": 5369
+  }
+ },
+ {
+  "id": "30",
+  "folder": "train",
+  "make": "NIKON CORPORATION",
+  "camera": "NIKON D3200",
+  "orientation": 1,
+  "taken": "2022:03:04 10:16:14",
+  "paper_split": "val",
+  "split": "val",
+  "bytes": 6200337,
+  "pixel_md5": "05119d487cb90bf696b92c4c38b934ff",
+  "photo_wh": [
+   6016,
+   4000
+  ],
+  "mask_wh": [
+   6016,
+   4000
+  ],
+  "mask_mode": "L",
+  "mask_values": [
+   0,
+   255
+  ],
+  "rust_px": 63972,
+  "pixels": 24064000,
+  "rust_share": 0.002658410904255319,
+  "contrast": 32.392452239990234,
+  "windows": {
+   "512px": {
+    "grid": [
+     8,
+     12
+    ],
+    "windows": 96,
+    "rust_windows": 15,
+    "overlap": [
+     14,
+     12
+    ],
+    "padding": [
+     96,
+     128
+    ]
+   },
+   "128px": {
+    "grid": [
+     16,
+     24
+    ],
+    "windows": 384,
+    "rust_windows": 20,
+    "overlap": [
+     4,
+     3
+    ],
+    "padding": [
+     48,
+     64
+    ]
+   }
+  },
+  "paper": {
+   "half_wh": [
+    3008,
+    2000
+   ],
+   "patches": 345,
+   "rust_patches": 18,
+   "dropped_px": [
+    64,
+    80
+   ],
+   "gp32": 5369
+  }
+ },
+ {
+  "id": "31",
+  "folder": "train",
+  "make": "NIKON CORPORATION",
+  "camera": "NIKON D3200",
+  "orientation": 1,
+  "taken": "2022:03:04 10:08:29",
+  "paper_split": "train",
+  "split": "train",
+  "bytes": 6919495,
+  "pixel_md5": "8a2ad9ce5f2cd23a966e9219b1c920d5",
+  "photo_wh": [
+   6016,
+   4000
+  ],
+  "mask_wh": [
+   6016,
+   4000
+  ],
+  "mask_mode": "L",
+  "mask_values": [
+   0,
+   255
+  ],
+  "rust_px": 41970,
+  "pixels": 24064000,
+  "rust_share": 0.0017440990691489362,
+  "contrast": 26.946449279785156,
+  "windows": {
+   "512px": {
+    "grid": [
+     8,
+     12
+    ],
+    "windows": 96,
+    "rust_windows": 7,
+    "overlap": [
+     14,
+     12
+    ],
+    "padding": [
+     96,
+     128
+    ]
+   },
+   "128px": {
+    "grid": [
+     16,
+     24
+    ],
+    "windows": 384,
+    "rust_windows": 7,
+    "overlap": [
+     4,
+     3
+    ],
+    "padding": [
+     48,
+     64
+    ]
+   }
+  },
+  "paper": {
+   "half_wh": [
+    3008,
+    2000
+   ],
+   "patches": 345,
+   "rust_patches": 7,
+   "dropped_px": [
+    64,
+    80
+   ],
+   "gp32": 5369
+  }
+ },
+ {
+  "id": "32",
+  "folder": "train",
+  "make": "NIKON CORPORATION",
+  "camera": "NIKON D3200",
+  "orientation": 1,
+  "taken": "2022:03:04 10:08:52",
+  "paper_split": "train",
+  "split": "train",
+  "bytes": 7399326,
+  "pixel_md5": "e155d82cc4c1f2ab29cfa14fc45ce546",
+  "photo_wh": [
+   6016,
+   4000
+  ],
+  "mask_wh": [
+   6016,
+   4000
+  ],
+  "mask_mode": "L",
+  "mask_values": [
+   0,
+   255
+  ],
+  "rust_px": 40832,
+  "pixels": 24064000,
+  "rust_share": 0.0016968085106382979,
+  "contrast": 34.465240478515625,
+  "windows": {
+   "512px": {
+    "grid": [
+     8,
+     12
+    ],
+    "windows": 96,
+    "rust_windows": 6,
+    "overlap": [
+     14,
+     12
+    ],
+    "padding": [
+     96,
+     128
+    ]
+   },
+   "128px": {
+    "grid": [
+     16,
+     24
+    ],
+    "windows": 384,
+    "rust_windows": 7,
+    "overlap": [
+     4,
+     3
+    ],
+    "padding": [
+     48,
+     64
+    ]
+   }
+  },
+  "paper": {
+   "half_wh": [
+    3008,
+    2000
+   ],
+   "patches": 345,
+   "rust_patches": 6,
+   "dropped_px": [
+    64,
+    80
+   ],
+   "gp32": 5369
+  }
+ },
+ {
+  "id": "33",
+  "folder": "train",
+  "make": "NIKON CORPORATION",
+  "camera": "NIKON D3200",
+  "orientation": 1,
+  "taken": "2022:03:04 10:14:29",
+  "paper_split": "train",
+  "split": "train",
+  "bytes": 7706034,
+  "pixel_md5": "a95dfcfeeff3504edc223e77747a85ee",
+  "photo_wh": [
+   6016,
+   4000
+  ],
+  "mask_wh": [
+   6016,
+   4000
+  ],
+  "mask_mode": "L",
+  "mask_values": [
+   0,
+   255
+  ],
+  "rust_px": 464810,
+  "pixels": 24064000,
+  "rust_share": 0.019315575132978723,
+  "contrast": 25.901172637939453,
+  "windows": {
+   "512px": {
+    "grid": [
+     8,
+     12
+    ],
+    "windows": 96,
+    "rust_windows": 52,
+    "overlap": [
+     14,
+     12
+    ],
+    "padding": [
+     96,
+     128
+    ]
+   },
+   "128px": {
+    "grid": [
+     16,
+     24
+    ],
+    "windows": 384,
+    "rust_windows": 103,
+    "overlap": [
+     4,
+     3
+    ],
+    "padding": [
+     48,
+     64
+    ]
+   }
+  },
+  "paper": {
+   "half_wh": [
+    3008,
+    2000
+   ],
+   "patches": 345,
+   "rust_patches": 95,
+   "dropped_px": [
+    64,
+    80
+   ],
+   "gp32": 5369
+  }
+ },
+ {
+  "id": "57",
+  "folder": "train",
+  "make": "NIKON CORPORATION",
+  "camera": "NIKON D3200",
+  "orientation": 1,
+  "taken": "2022:03:04 09:55:56",
+  "paper_split": "train",
+  "split": "train",
+  "bytes": 6733781,
+  "pixel_md5": "31f512d42c9f44dc6ff772895b744bd9",
+  "photo_wh": [
+   6016,
+   4000
+  ],
+  "mask_wh": [
+   6016,
+   4000
+  ],
+  "mask_mode": "L",
+  "mask_values": [
+   0,
+   255
+  ],
+  "rust_px": 25883,
+  "pixels": 24064000,
+  "rust_share": 0.0010755900930851064,
+  "contrast": 20.750869750976562,
+  "windows": {
+   "512px": {
+    "grid": [
+     8,
+     12
+    ],
+    "windows": 96,
+    "rust_windows": 14,
+    "overlap": [
+     14,
+     12
+    ],
+    "padding": [
+     96,
+     128
+    ]
+   },
+   "128px": {
+    "grid": [
+     16,
+     24
+    ],
+    "windows": 384,
+    "rust_windows": 15,
+    "overlap": [
+     4,
+     3
+    ],
+    "padding": [
+     48,
+     64
+    ]
+   }
+  },
+  "paper": {
+   "half_wh": [
+    3008,
+    2000
+   ],
+   "patches": 345,
+   "rust_patches": 16,
+   "dropped_px": [
+    64,
+    80
+   ],
+   "gp32": 5369
+  }
+ },
+ {
+  "id": "58",
+  "folder": "train",
+  "make": "NIKON CORPORATION",
+  "camera": "NIKON D3200",
+  "orientation": 1,
+  "taken": "2022:03:11 09:54:10",
+  "paper_split": "train",
+  "split": "train",
+  "bytes": 6877585,
+  "pixel_md5": "67fb764a4e0fcc515176eaba8190d942",
+  "photo_wh": [
+   6016,
+   4000
+  ],
+  "mask_wh": [
+   6016,
+   4000
+  ],
+  "mask_mode": "L",
+  "mask_values": [
+   0,
+   255
+  ],
+  "rust_px": 200544,
+  "pixels": 24064000,
+  "rust_share": 0.00833377659574468,
+  "contrast": 38.72545623779297,
+  "windows": {
+   "512px": {
+    "grid": [
+     8,
+     12
+    ],
+    "windows": 96,
+    "rust_windows": 64,
+    "overlap": [
+     14,
+     12
+    ],
+    "padding": [
+     96,
+     128
+    ]
+   },
+   "128px": {
+    "grid": [
+     16,
+     24
+    ],
+    "windows": 384,
+    "rust_windows": 127,
+    "overlap": [
+     4,
+     3
+    ],
+    "padding": [
+     48,
+     64
+    ]
+   }
+  },
+  "paper": {
+   "half_wh": [
+    3008,
+    2000
+   ],
+   "patches": 345,
+   "rust_patches": 116,
+   "dropped_px": [
+    64,
+    80
+   ],
+   "gp32": 5369
+  }
+ },
+ {
+  "id": "60",
+  "folder": "train",
+  "make": "NIKON CORPORATION",
+  "camera": "NIKON D3200",
+  "orientation": 1,
+  "taken": "2022:03:11 09:54:37",
+  "paper_split": "train",
+  "split": "train",
+  "bytes": 6322926,
+  "pixel_md5": "a78d4b04d629cf0f327af8f143b152d9",
+  "photo_wh": [
+   6016,
+   4000
+  ],
+  "mask_wh": [
+   6016,
+   4000
+  ],
+  "mask_mode": "L",
+  "mask_values": [
+   0,
+   255
+  ],
+  "rust_px": 89221,
+  "pixels": 24064000,
+  "rust_share": 0.0037076545877659573,
+  "contrast": 38.72367858886719,
+  "windows": {
+   "512px": {
+    "grid": [
+     8,
+     12
+    ],
+    "windows": 96,
+    "rust_windows": 18,
+    "overlap": [
+     14,
+     12
+    ],
+    "padding": [
+     96,
+     128
+    ]
+   },
+   "128px": {
+    "grid": [
+     16,
+     24
+    ],
+    "windows": 384,
+    "rust_windows": 30,
+    "overlap": [
+     4,
+     3
+    ],
+    "padding": [
+     48,
+     64
+    ]
+   }
+  },
+  "paper": {
+   "half_wh": [
+    3008,
+    2000
+   ],
+   "patches": 345,
+   "rust_patches": 26,
+   "dropped_px": [
+    64,
+    80
+   ],
+   "gp32": 5369
+  }
+ },
+ {
+  "id": "61",
+  "folder": "train",
+  "make": "NIKON CORPORATION",
+  "camera": "NIKON D3200",
+  "orientation": 1,
+  "taken": "2022:03:11 09:54:50",
+  "paper_split": "train",
+  "split": "train",
+  "bytes": 6898132,
+  "pixel_md5": "40d353c6fbe8150c8cfc54a544c1f7cd",
+  "photo_wh": [
+   6016,
+   4000
+  ],
+  "mask_wh": [
+   6016,
+   4000
+  ],
+  "mask_mode": "L",
+  "mask_values": [
+   0,
+   255
+  ],
+  "rust_px": 88890,
+  "pixels": 24064000,
+  "rust_share": 0.00369389960106383,
+  "contrast": 36.621002197265625,
+  "windows": {
+   "512px": {
+    "grid": [
+     8,
+     12
+    ],
+    "windows": 96,
+    "rust_windows": 29,
+    "overlap": [
+     14,
+     12
+    ],
+    "padding": [
+     96,
+     128
+    ]
+   },
+   "128px": {
+    "grid": [
+     16,
+     24
+    ],
+    "windows": 384,
+    "rust_windows": 45,
+    "overlap": [
+     4,
+     3
+    ],
+    "padding": [
+     48,
+     64
+    ]
+   }
+  },
+  "paper": {
+   "half_wh": [
+    3008,
+    2000
+   ],
+   "patches": 345,
+   "rust_patches": 49,
+   "dropped_px": [
+    64,
+    80
+   ],
+   "gp32": 5369
+  }
+ },
+ {
+  "id": "62",
+  "folder": "test",
+  "make": "NIKON CORPORATION",
+  "camera": "NIKON D3200",
+  "orientation": 1,
+  "taken": "2022:03:11 09:55:05",
+  "paper_split": "test",
+  "split": "test",
+  "bytes": 6709481,
+  "pixel_md5": "31f7015495f6d25222d5b9183610f070",
+  "photo_wh": [
+   6016,
+   4000
+  ],
+  "mask_wh": [
+   6016,
+   4000
+  ],
+  "mask_mode": "L",
+  "mask_values": [
+   0,
+   255
+  ],
+  "rust_px": 250232,
+  "pixels": 24064000,
+  "rust_share": 0.010398603723404256,
+  "contrast": 37.616416931152344,
+  "windows": {
+   "512px": {
+    "grid": [
+     8,
+     12
+    ],
+    "windows": 96,
+    "rust_windows": 55,
+    "overlap": [
+     14,
+     12
+    ],
+    "padding": [
+     96,
+     128
+    ]
+   },
+   "128px": {
+    "grid": [
+     16,
+     24
+    ],
+    "windows": 384,
+    "rust_windows": 110,
+    "overlap": [
+     4,
+     3
+    ],
+    "padding": [
+     48,
+     64
+    ]
+   }
+  },
+  "paper": {
+   "half_wh": [
+    3008,
+    2000
+   ],
+   "patches": 345,
+   "rust_patches": 95,
+   "dropped_px": [
+    64,
+    80
+   ],
+   "gp32": 5369
+  }
+ },
+ {
+  "id": "63",
+  "folder": "test",
+  "make": "NIKON CORPORATION",
+  "camera": "NIKON D3200",
+  "orientation": 1,
+  "taken": "2022:03:11 09:55:20",
+  "paper_split": "test",
+  "split": "test",
+  "bytes": 7456761,
+  "pixel_md5": "20001319423987160922147187a77b83",
+  "photo_wh": [
+   6016,
+   4000
+  ],
+  "mask_wh": [
+   6016,
+   4000
+  ],
+  "mask_mode": "L",
+  "mask_values": [
+   0,
+   255
+  ],
+  "rust_px": 297508,
+  "pixels": 24064000,
+  "rust_share": 0.012363198138297872,
+  "contrast": 37.38507843017578,
+  "windows": {
+   "512px": {
+    "grid": [
+     8,
+     12
+    ],
+    "windows": 96,
+    "rust_windows": 54,
+    "overlap": [
+     14,
+     12
+    ],
+    "padding": [
+     96,
+     128
+    ]
+   },
+   "128px": {
+    "grid": [
+     16,
+     24
+    ],
+    "windows": 384,
+    "rust_windows": 114,
+    "overlap": [
+     4,
+     3
+    ],
+    "padding": [
+     48,
+     64
+    ]
+   }
+  },
+  "paper": {
+   "half_wh": [
+    3008,
+    2000
+   ],
+   "patches": 345,
+   "rust_patches": 97,
+   "dropped_px": [
+    64,
+    80
+   ],
+   "gp32": 5369
+  }
+ },
+ {
+  "id": "64",
+  "folder": "train",
+  "make": "NIKON CORPORATION",
+  "camera": "NIKON D3200",
+  "orientation": 1,
+  "taken": "2022:03:11 09:55:24",
+  "paper_split": "train",
+  "split": "train",
+  "bytes": 7403875,
+  "pixel_md5": "fe48dc0acc5195f481bcf639da9c1c96",
+  "photo_wh": [
+   6016,
+   4000
+  ],
+  "mask_wh": [
+   6016,
+   4000
+  ],
+  "mask_mode": "L",
+  "mask_values": [
+   0,
+   255
+  ],
+  "rust_px": 307969,
+  "pixels": 24064000,
+  "rust_share": 0.012797913896276596,
+  "contrast": 37.82585144042969,
+  "windows": {
+   "512px": {
+    "grid": [
+     8,
+     12
+    ],
+    "windows": 96,
+    "rust_windows": 49,
+    "overlap": [
+     14,
+     12
+    ],
+    "padding": [
+     96,
+     128
+    ]
+   },
+   "128px": {
+    "grid": [
+     16,
+     24
+    ],
+    "windows": 384,
+    "rust_windows": 91,
+    "overlap": [
+     4,
+     3
+    ],
+    "padding": [
+     48,
+     64
+    ]
+   }
+  },
+  "paper": {
+   "half_wh": [
+    3008,
+    2000
+   ],
+   "patches": 345,
+   "rust_patches": 80,
+   "dropped_px": [
+    64,
+    80
+   ],
+   "gp32": 5369
+  }
+ },
+ {
+  "id": "67",
+  "folder": "test",
+  "make": "HUAWEI",
+  "camera": "PAR-LX1M",
+  "orientation": 1,
+  "taken": "2022:03:11 10:43:42",
+  "paper_split": "test",
+  "split": "test",
+  "bytes": 2855227,
+  "pixel_md5": "7bc08256fe8ed4a2c331507617f753d3",
+  "photo_wh": [
+   3456,
+   4608
+  ],
+  "mask_wh": [
+   3456,
+   4608
+  ],
+  "mask_mode": "L",
+  "mask_values": [
+   0,
+   255
+  ],
+  "rust_px": 121305,
+  "pixels": 15925248,
+  "rust_share": 0.007617149823977623,
+  "contrast": 26.134521484375,
+  "windows": {
+   "512px": {
+    "grid": [
+     9,
+     7
+    ],
+    "windows": 63,
+    "rust_windows": 11,
+    "overlap": [
+     0,
+     22
+    ],
+    "padding": [
+     0,
+     128
+    ]
+   },
+   "128px": {
+    "grid": [
+     18,
+     14
+    ],
+    "windows": 252,
+    "rust_windows": 23,
+    "overlap": [
+     0,
+     5
+    ],
+    "padding": [
+     0,
+     64
+    ]
+   }
+  },
+  "paper": {
+   "half_wh": [
+    1728,
+    2304
+   ],
+   "patches": 234,
+   "rust_patches": 23,
+   "dropped_px": [
+    64,
+    0
+   ],
+   "gp32": 3519
+  }
+ },
+ {
+  "id": "69",
+  "folder": "train",
+  "make": "HUAWEI",
+  "camera": "PAR-LX1M",
+  "orientation": 1,
+  "taken": "2022:03:11 10:44:36",
+  "paper_split": "train",
+  "split": "train",
+  "bytes": 6145465,
+  "pixel_md5": "cbe8dd6bb964e26bf58bb08bcb5510d8",
+  "photo_wh": [
+   3456,
+   4608
+  ],
+  "mask_wh": [
+   3456,
+   4608
+  ],
+  "mask_mode": "L",
+  "mask_values": [
+   0,
+   255
+  ],
+  "rust_px": 43545,
+  "pixels": 15925248,
+  "rust_share": 0.0027343373239776233,
+  "contrast": 27.397329330444336,
+  "windows": {
+   "512px": {
+    "grid": [
+     9,
+     7
+    ],
+    "windows": 63,
+    "rust_windows": 10,
+    "overlap": [
+     0,
+     22
+    ],
+    "padding": [
+     0,
+     128
+    ]
+   },
+   "128px": {
+    "grid": [
+     18,
+     14
+    ],
+    "windows": 252,
+    "rust_windows": 12,
+    "overlap": [
+     0,
+     5
+    ],
+    "padding": [
+     0,
+     64
+    ]
+   }
+  },
+  "paper": {
+   "half_wh": [
+    1728,
+    2304
+   ],
+   "patches": 234,
+   "rust_patches": 11,
+   "dropped_px": [
+    64,
+    0
+   ],
+   "gp32": 3519
+  }
+ },
+ {
+  "id": "71",
+  "folder": "train",
+  "make": "HUAWEI",
+  "camera": "PAR-LX1M",
+  "orientation": 1,
+  "taken": "2022:03:11 10:45:09",
+  "paper_split": "train",
+  "split": "train",
+  "bytes": 5902392,
+  "pixel_md5": "54e90e90b9c79bc29f89a70f06fb7293",
+  "photo_wh": [
+   4608,
+   3456
+  ],
+  "mask_wh": [
+   4608,
+   3456
+  ],
+  "mask_mode": "L",
+  "mask_values": [
+   0,
+   255
+  ],
+  "rust_px": 28212,
+  "pixels": 15925248,
+  "rust_share": 0.0017715265721450616,
+  "contrast": 23.049232482910156,
+  "windows": {
+   "512px": {
+    "grid": [
+     7,
+     9
+    ],
+    "windows": 63,
+    "rust_windows": 9,
+    "overlap": [
+     22,
+     0
+    ],
+    "padding": [
+     128,
+     0
+    ]
+   },
+   "128px": {
+    "grid": [
+     14,
+     18
+    ],
+    "windows": 252,
+    "rust_windows": 13,
+    "overlap": [
+     5,
+     0
+    ],
+    "padding": [
+     64,
+     0
+    ]
+   }
+  },
+  "paper": {
+   "half_wh": [
+    2304,
+    1728
+   ],
+   "patches": 234,
+   "rust_patches": 18,
+   "dropped_px": [
+    0,
+    64
+   ],
+   "gp32": 3519
+  }
+ },
+ {
+  "id": "72",
+  "folder": "train",
+  "make": "HUAWEI",
+  "camera": "PAR-LX1M",
+  "orientation": 1,
+  "taken": "2022:03:11 10:45:16",
+  "paper_split": "val",
+  "split": "val",
+  "bytes": 6355832,
+  "pixel_md5": "979bf2970cd8d42650aee1412c47d92b",
+  "photo_wh": [
+   4608,
+   3456
+  ],
+  "mask_wh": [
+   4608,
+   3456
+  ],
+  "mask_mode": "L",
+  "mask_values": [
+   0,
+   255
+  ],
+  "rust_px": 34732,
+  "pixels": 15925248,
+  "rust_share": 0.0021809393486368314,
+  "contrast": 18.66713523864746,
+  "windows": {
+   "512px": {
+    "grid": [
+     7,
+     9
+    ],
+    "windows": 63,
+    "rust_windows": 12,
+    "overlap": [
+     22,
+     0
+    ],
+    "padding": [
+     128,
+     0
+    ]
+   },
+   "128px": {
+    "grid": [
+     14,
+     18
+    ],
+    "windows": 252,
+    "rust_windows": 21,
+    "overlap": [
+     5,
+     0
+    ],
+    "padding": [
+     64,
+     0
+    ]
+   }
+  },
+  "paper": {
+   "half_wh": [
+    2304,
+    1728
+   ],
+   "patches": 234,
+   "rust_patches": 16,
+   "dropped_px": [
+    0,
+    64
+   ],
+   "gp32": 3519
+  }
+ },
+ {
+  "id": "73",
+  "folder": "train",
+  "make": "HUAWEI",
+  "camera": "PAR-LX1M",
+  "orientation": 1,
+  "taken": "2022:03:11 10:47:15",
+  "paper_split": "train",
+  "split": "train",
+  "bytes": 7063729,
+  "pixel_md5": "644431b3b0962ec09d88f54a3aa55ce9",
+  "photo_wh": [
+   4608,
+   3456
+  ],
+  "mask_wh": [
+   4608,
+   3456
+  ],
+  "mask_mode": "L",
+  "mask_values": [
+   0,
+   255
+  ],
+  "rust_px": 12682,
+  "pixels": 15925248,
+  "rust_share": 0.0007963455262988683,
+  "contrast": 7.655433654785156,
+  "windows": {
+   "512px": {
+    "grid": [
+     7,
+     9
+    ],
+    "windows": 63,
+    "rust_windows": 14,
+    "overlap": [
+     22,
+     0
+    ],
+    "padding": [
+     128,
+     0
+    ]
+   },
+   "128px": {
+    "grid": [
+     14,
+     18
+    ],
+    "windows": 252,
+    "rust_windows": 13,
+    "overlap": [
+     5,
+     0
+    ],
+    "padding": [
+     64,
+     0
+    ]
+   }
+  },
+  "paper": {
+   "half_wh": [
+    2304,
+    1728
+   ],
+   "patches": 234,
+   "rust_patches": 11,
+   "dropped_px": [
+    0,
+    64
+   ],
+   "gp32": 3519
+  }
+ },
+ {
+  "id": "74",
+  "folder": "train",
+  "make": "HUAWEI",
+  "camera": "PAR-LX1M",
+  "orientation": 1,
+  "taken": "2022:03:11 10:47:19",
+  "paper_split": "train",
+  "split": "train",
+  "bytes": 6948707,
+  "pixel_md5": "b08c6000cc73b9bb7471806ac669749b",
+  "photo_wh": [
+   4608,
+   3456
+  ],
+  "mask_wh": [
+   4608,
+   3456
+  ],
+  "mask_mode": "L",
+  "mask_values": [
+   0,
+   255
+  ],
+  "rust_px": 13098,
+  "pixels": 15925248,
+  "rust_share": 0.0008224675684799383,
+  "contrast": 8.595134735107422,
+  "windows": {
+   "512px": {
+    "grid": [
+     7,
+     9
+    ],
+    "windows": 63,
+    "rust_windows": 17,
+    "overlap": [
+     22,
+     0
+    ],
+    "padding": [
+     128,
+     0
+    ]
+   },
+   "128px": {
+    "grid": [
+     14,
+     18
+    ],
+    "windows": 252,
+    "rust_windows": 14,
+    "overlap": [
+     5,
+     0
+    ],
+    "padding": [
+     64,
+     0
+    ]
+   }
+  },
+  "paper": {
+   "half_wh": [
+    2304,
+    1728
+   ],
+   "patches": 234,
+   "rust_patches": 11,
+   "dropped_px": [
+    0,
+    64
+   ],
+   "gp32": 3519
+  }
+ },
+ {
+  "id": "75",
+  "folder": "train",
+  "make": "HUAWEI",
+  "camera": "PAR-LX1M",
+  "orientation": 1,
+  "taken": "2022:03:11 10:47:33",
+  "paper_split": "train",
+  "split": "train",
+  "bytes": 5799662,
+  "pixel_md5": "00307b18467b5ca10152e479a7262af2",
+  "photo_wh": [
+   4608,
+   3456
+  ],
+  "mask_wh": [
+   4608,
+   3456
+  ],
+  "mask_mode": "L",
+  "mask_values": [
+   0,
+   255
+  ],
+  "rust_px": 15715,
+  "pixels": 15925248,
+  "rust_share": 0.0009867978194122943,
+  "contrast": 10.847920417785645,
+  "windows": {
+   "512px": {
+    "grid": [
+     7,
+     9
+    ],
+    "windows": 63,
+    "rust_windows": 10,
+    "overlap": [
+     22,
+     0
+    ],
+    "padding": [
+     128,
+     0
+    ]
+   },
+   "128px": {
+    "grid": [
+     14,
+     18
+    ],
+    "windows": 252,
+    "rust_windows": 9,
+    "overlap": [
+     5,
+     0
+    ],
+    "padding": [
+     64,
+     0
+    ]
+   }
+  },
+  "paper": {
+   "half_wh": [
+    2304,
+    1728
+   ],
+   "patches": 234,
+   "rust_patches": 10,
+   "dropped_px": [
+    0,
+    64
+   ],
+   "gp32": 3519
+  }
+ },
+ {
+  "id": "76",
+  "folder": "train",
+  "make": "HUAWEI",
+  "camera": "PAR-LX1M",
+  "orientation": 1,
+  "taken": "2022:03:11 10:47:39",
+  "paper_split": "train",
+  "split": "train",
+  "bytes": 5582334,
+  "pixel_md5": "0ccaa7ad396937bef3457f950355c90a",
+  "photo_wh": [
+   4608,
+   3456
+  ],
+  "mask_wh": [
+   4608,
+   3456
+  ],
+  "mask_mode": "L",
+  "mask_values": [
+   0,
+   255
+  ],
+  "rust_px": 31905,
+  "pixels": 15925248,
+  "rust_share": 0.0020034224898726853,
+  "contrast": 12.536221504211426,
+  "windows": {
+   "512px": {
+    "grid": [
+     7,
+     9
+    ],
+    "windows": 63,
+    "rust_windows": 16,
+    "overlap": [
+     22,
+     0
+    ],
+    "padding": [
+     128,
+     0
+    ]
+   },
+   "128px": {
+    "grid": [
+     14,
+     18
+    ],
+    "windows": 252,
+    "rust_windows": 16,
+    "overlap": [
+     5,
+     0
+    ],
+    "padding": [
+     64,
+     0
+    ]
+   }
+  },
+  "paper": {
+   "half_wh": [
+    2304,
+    1728
+   ],
+   "patches": 234,
+   "rust_patches": 13,
+   "dropped_px": [
+    0,
+    64
+   ],
+   "gp32": 3519
+  }
+ },
+ {
+  "id": "77",
+  "folder": "test",
+  "make": "HUAWEI",
+  "camera": "PAR-LX1M",
+  "orientation": 1,
+  "taken": "2022:03:11 10:47:43",
+  "paper_split": "test",
+  "split": "test",
+  "bytes": 5607492,
+  "pixel_md5": "59dc3435a07d45244a0fbc78b67ebd53",
+  "photo_wh": [
+   4608,
+   3456
+  ],
+  "mask_wh": [
+   4608,
+   3456
+  ],
+  "mask_mode": "L",
+  "mask_values": [
+   0,
+   255
+  ],
+  "rust_px": 12793,
+  "pixels": 15925248,
+  "rust_share": 0.0008033155904385288,
+  "contrast": 26.40577507019043,
+  "windows": {
+   "512px": {
+    "grid": [
+     7,
+     9
+    ],
+    "windows": 63,
+    "rust_windows": 9,
+    "overlap": [
+     22,
+     0
+    ],
+    "padding": [
+     128,
+     0
+    ]
+   },
+   "128px": {
+    "grid": [
+     14,
+     18
+    ],
+    "windows": 252,
+    "rust_windows": 10,
+    "overlap": [
+     5,
+     0
+    ],
+    "padding": [
+     64,
+     0
+    ]
+   }
+  },
+  "paper": {
+   "half_wh": [
+    2304,
+    1728
+   ],
+   "patches": 234,
+   "rust_patches": 8,
+   "dropped_px": [
+    0,
+    64
+   ],
+   "gp32": 3519
+  }
+ },
+ {
+  "id": "78",
+  "folder": "train",
+  "make": "HUAWEI",
+  "camera": "PAR-LX1M",
+  "orientation": 1,
+  "taken": "2022:03:11 10:47:49",
+  "paper_split": "train",
+  "split": "train",
+  "bytes": 6694605,
+  "pixel_md5": "e4361bdd3ac374f2bd5d03ea455284c6",
+  "photo_wh": [
+   4608,
+   3456
+  ],
+  "mask_wh": [
+   4608,
+   3456
+  ],
+  "mask_mode": "L",
+  "mask_values": [
+   0,
+   255
+  ],
+  "rust_px": 16512,
+  "pixels": 15925248,
+  "rust_share": 0.0010368441358024692,
+  "contrast": 20.339147567749023,
+  "windows": {
+   "512px": {
+    "grid": [
+     7,
+     9
+    ],
+    "windows": 63,
+    "rust_windows": 15,
+    "overlap": [
+     22,
+     0
+    ],
+    "padding": [
+     128,
+     0
+    ]
+   },
+   "128px": {
+    "grid": [
+     14,
+     18
+    ],
+    "windows": 252,
+    "rust_windows": 22,
+    "overlap": [
+     5,
+     0
+    ],
+    "padding": [
+     64,
+     0
+    ]
+   }
+  },
+  "paper": {
+   "half_wh": [
+    2304,
+    1728
+   ],
+   "patches": 234,
+   "rust_patches": 19,
+   "dropped_px": [
+    0,
+    64
+   ],
+   "gp32": 3519
+  }
+ },
+ {
+  "id": "79",
+  "folder": "train",
+  "make": "HUAWEI",
+  "camera": "PAR-LX1M",
+  "orientation": 1,
+  "taken": "2022:03:11 10:47:59",
+  "paper_split": "train",
+  "split": "excluded (twin of 80)",
+  "bytes": 4702887,
+  "pixel_md5": "1421b7bee0a67032a7680afa1aa9de46",
+  "photo_wh": [
+   4608,
+   3456
+  ],
+  "mask_wh": [
+   4608,
+   3456
+  ],
+  "mask_mode": "L",
+  "mask_values": [
+   0,
+   255
+  ],
+  "rust_px": 32807,
+  "pixels": 15925248,
+  "rust_share": 0.002060062110178755,
+  "contrast": 17.666351318359375,
+  "windows": {
+   "512px": {
+    "grid": [
+     7,
+     9
+    ],
+    "windows": 63,
+    "rust_windows": 8,
+    "overlap": [
+     22,
+     0
+    ],
+    "padding": [
+     128,
+     0
+    ]
+   },
+   "128px": {
+    "grid": [
+     14,
+     18
+    ],
+    "windows": 252,
+    "rust_windows": 11,
+    "overlap": [
+     5,
+     0
+    ],
+    "padding": [
+     64,
+     0
+    ]
+   }
+  },
+  "paper": {
+   "half_wh": [
+    2304,
+    1728
+   ],
+   "patches": 234,
+   "rust_patches": 9,
+   "dropped_px": [
+    0,
+    64
+   ],
+   "gp32": 3519
+  }
+ },
+ {
+  "id": "80",
+  "folder": "test",
+  "make": "HUAWEI",
+  "camera": "PAR-LX1M",
+  "orientation": 1,
+  "taken": "2022:03:11 10:47:59",
+  "paper_split": "test",
+  "split": "test",
+  "bytes": 4702887,
+  "pixel_md5": "1421b7bee0a67032a7680afa1aa9de46",
+  "photo_wh": [
+   4608,
+   3456
+  ],
+  "mask_wh": [
+   4608,
+   3456
+  ],
+  "mask_mode": "L",
+  "mask_values": [
+   0,
+   255
+  ],
+  "rust_px": 40043,
+  "pixels": 15925248,
+  "rust_share": 0.002514434940039866,
+  "contrast": 16.434900283813477,
+  "windows": {
+   "512px": {
+    "grid": [
+     7,
+     9
+    ],
+    "windows": 63,
+    "rust_windows": 9,
+    "overlap": [
+     22,
+     0
+    ],
+    "padding": [
+     128,
+     0
+    ]
+   },
+   "128px": {
+    "grid": [
+     14,
+     18
+    ],
+    "windows": 252,
+    "rust_windows": 14,
+    "overlap": [
+     5,
+     0
+    ],
+    "padding": [
+     64,
+     0
+    ]
+   }
+  },
+  "paper": {
+   "half_wh": [
+    2304,
+    1728
+   ],
+   "patches": 234,
+   "rust_patches": 12,
+   "dropped_px": [
+    0,
+    64
+   ],
+   "gp32": 3519
+  }
+ },
+ {
+  "id": "81",
+  "folder": "train",
+  "make": "HUAWEI",
+  "camera": "PAR-LX1M",
+  "orientation": 1,
+  "taken": "2022:03:11 10:47:49",
+  "paper_split": "train",
+  "split": "train",
+  "bytes": 6694605,
+  "pixel_md5": "e4361bdd3ac374f2bd5d03ea455284c6",
+  "photo_wh": [
+   4608,
+   3456
+  ],
+  "mask_wh": [
+   4608,
+   3456
+  ],
+  "mask_mode": "L",
+  "mask_values": [
+   0,
+   255
+  ],
+  "rust_px": 15727,
+  "pixels": 15925248,
+  "rust_share": 0.000987551339859825,
+  "contrast": 20.419281005859375,
+  "windows": {
+   "512px": {
+    "grid": [
+     7,
+     9
+    ],
+    "windows": 63,
+    "rust_windows": 14,
+    "overlap": [
+     22,
+     0
+    ],
+    "padding": [
+     128,
+     0
+    ]
+   },
+   "128px": {
+    "grid": [
+     14,
+     18
+    ],
+    "windows": 252,
+    "rust_windows": 20,
+    "overlap": [
+     5,
+     0
+    ],
+    "padding": [
+     64,
+     0
+    ]
+   }
+  },
+  "paper": {
+   "half_wh": [
+    2304,
+    1728
+   ],
+   "patches": 234,
+   "rust_patches": 18,
+   "dropped_px": [
+    0,
+    64
+   ],
+   "gp32": 3519
+  }
+ },
+ {
+  "id": "83",
+  "folder": "train",
+  "make": "HUAWEI",
+  "camera": "PAR-LX1M",
+  "orientation": 1,
+  "taken": "2022:03:04 10:56:58",
+  "paper_split": "train",
+  "split": "train",
+  "bytes": 5828144,
+  "pixel_md5": "4bc54c8eec1e3dbcbd681958a0fb2c12",
+  "photo_wh": [
+   4608,
+   3456
+  ],
+  "mask_wh": [
+   4608,
+   3456
+  ],
+  "mask_mode": "L",
+  "mask_values": [
+   0,
+   255
+  ],
+  "rust_px": 9116,
+  "pixels": 15925248,
+  "rust_share": 0.0005724243666409465,
+  "contrast": 6.176265716552734,
+  "windows": {
+   "512px": {
+    "grid": [
+     7,
+     9
+    ],
+    "windows": 63,
+    "rust_windows": 15,
+    "overlap": [
+     22,
+     0
+    ],
+    "padding": [
+     128,
+     0
+    ]
+   },
+   "128px": {
+    "grid": [
+     14,
+     18
+    ],
+    "windows": 252,
+    "rust_windows": 14,
+    "overlap": [
+     5,
+     0
+    ],
+    "padding": [
+     64,
+     0
+    ]
+   }
+  },
+  "paper": {
+   "half_wh": [
+    2304,
+    1728
+   ],
+   "patches": 234,
+   "rust_patches": 8,
+   "dropped_px": [
+    0,
+    64
+   ],
+   "gp32": 3519
+  }
+ },
+ {
+  "id": "84",
+  "folder": "train",
+  "make": "HUAWEI",
+  "camera": "PAR-LX1M",
+  "orientation": 1,
+  "taken": "2022:03:04 10:56:12",
+  "paper_split": "train",
+  "split": "train",
+  "bytes": 7568909,
+  "pixel_md5": "32c53162d8895781acca474a5a75a6ae",
+  "photo_wh": [
+   3456,
+   4608
+  ],
+  "mask_wh": [
+   3456,
+   4608
+  ],
+  "mask_mode": "L",
+  "mask_values": [
+   0,
+   255
+  ],
+  "rust_px": 133455,
+  "pixels": 15925248,
+  "rust_share": 0.008380089277102624,
+  "contrast": 6.121391296386719,
+  "windows": {
+   "512px": {
+    "grid": [
+     9,
+     7
+    ],
+    "windows": 63,
+    "rust_windows": 10,
+    "overlap": [
+     0,
+     22
+    ],
+    "padding": [
+     0,
+     128
+    ]
+   },
+   "128px": {
+    "grid": [
+     18,
+     14
+    ],
+    "windows": 252,
+    "rust_windows": 15,
+    "overlap": [
+     0,
+     5
+    ],
+    "padding": [
+     0,
+     64
+    ]
+   }
+  },
+  "paper": {
+   "half_wh": [
+    1728,
+    2304
+   ],
+   "patches": 234,
+   "rust_patches": 16,
+   "dropped_px": [
+    64,
+    0
+   ],
+   "gp32": 3519
+  }
+ },
+ {
+  "id": "85",
+  "folder": "train",
+  "make": "HUAWEI",
+  "camera": "PAR-LX1M",
+  "orientation": 1,
+  "taken": "2022:03:11 11:21:09",
+  "paper_split": "train",
+  "split": "train",
+  "bytes": 7352778,
+  "pixel_md5": "4a5fb0d1592f9e067762d3575e4260d0",
+  "photo_wh": [
+   3456,
+   4608
+  ],
+  "mask_wh": [
+   3456,
+   4608
+  ],
+  "mask_mode": "L",
+  "mask_values": [
+   0,
+   255
+  ],
+  "rust_px": 129087,
+  "pixels": 15925248,
+  "rust_share": 0.008105807834201388,
+  "contrast": 15.119342803955078,
+  "windows": {
+   "512px": {
+    "grid": [
+     9,
+     7
+    ],
+    "windows": 63,
+    "rust_windows": 30,
+    "overlap": [
+     0,
+     22
+    ],
+    "padding": [
+     0,
+     128
+    ]
+   },
+   "128px": {
+    "grid": [
+     18,
+     14
+    ],
+    "windows": 252,
+    "rust_windows": 54,
+    "overlap": [
+     0,
+     5
+    ],
+    "padding": [
+     0,
+     64
+    ]
+   }
+  },
+  "paper": {
+   "half_wh": [
+    1728,
+    2304
+   ],
+   "patches": 234,
+   "rust_patches": 51,
+   "dropped_px": [
+    64,
+    0
+   ],
+   "gp32": 3519
+  }
+ },
+ {
+  "id": "86",
+  "folder": "train",
+  "make": "HUAWEI",
+  "camera": "PAR-LX1M",
+  "orientation": 1,
+  "taken": "2022:03:11 11:21:07",
+  "paper_split": "train",
+  "split": "excluded (twin of 89)",
+  "bytes": 6259674,
+  "pixel_md5": "fbca7895b002b93dea3435da5f03cdf0",
+  "photo_wh": [
+   3456,
+   4608
+  ],
+  "mask_wh": [
+   3456,
+   4608
+  ],
+  "mask_mode": "L",
+  "mask_values": [
+   0,
+   255
+  ],
+  "rust_px": 82065,
+  "pixels": 15925248,
+  "rust_share": 0.0051531379605516976,
+  "contrast": 17.82147979736328,
+  "windows": {
+   "512px": {
+    "grid": [
+     9,
+     7
+    ],
+    "windows": 63,
+    "rust_windows": 24,
+    "overlap": [
+     0,
+     22
+    ],
+    "padding": [
+     0,
+     128
+    ]
+   },
+   "128px": {
+    "grid": [
+     18,
+     14
+    ],
+    "windows": 252,
+    "rust_windows": 40,
+    "overlap": [
+     0,
+     5
+    ],
+    "padding": [
+     0,
+     64
+    ]
+   }
+  },
+  "paper": {
+   "half_wh": [
+    1728,
+    2304
+   ],
+   "patches": 234,
+   "rust_patches": 36,
+   "dropped_px": [
+    64,
+    0
+   ],
+   "gp32": 3519
+  }
+ },
+ {
+  "id": "87",
+  "folder": "train",
+  "make": "HUAWEI",
+  "camera": "PAR-LX1M",
+  "orientation": 1,
+  "taken": "2022:03:11 11:14:01",
+  "paper_split": "val",
+  "split": "val",
+  "bytes": 6492966,
+  "pixel_md5": "912be73d29b6f1b9eb2ad6917abdc14e",
+  "photo_wh": [
+   3456,
+   4608
+  ],
+  "mask_wh": [
+   3456,
+   4608
+  ],
+  "mask_mode": "L",
+  "mask_values": [
+   0,
+   255
+  ],
+  "rust_px": 36705,
+  "pixels": 15925248,
+  "rust_share": 0.002304830668885031,
+  "contrast": 20.34383773803711,
+  "windows": {
+   "512px": {
+    "grid": [
+     9,
+     7
+    ],
+    "windows": 63,
+    "rust_windows": 17,
+    "overlap": [
+     0,
+     22
+    ],
+    "padding": [
+     0,
+     128
+    ]
+   },
+   "128px": {
+    "grid": [
+     18,
+     14
+    ],
+    "windows": 252,
+    "rust_windows": 22,
+    "overlap": [
+     0,
+     5
+    ],
+    "padding": [
+     0,
+     64
+    ]
+   }
+  },
+  "paper": {
+   "half_wh": [
+    1728,
+    2304
+   ],
+   "patches": 234,
+   "rust_patches": 22,
+   "dropped_px": [
+    64,
+    0
+   ],
+   "gp32": 3519
+  }
+ },
+ {
+  "id": "88",
+  "folder": "train",
+  "make": "HUAWEI",
+  "camera": "PAR-LX1M",
+  "orientation": 1,
+  "taken": "2022:03:11 11:13:57",
+  "paper_split": "train",
+  "split": "train",
+  "bytes": 6550103,
+  "pixel_md5": "4c821bb7bd98bd01782941f06db7d0df",
+  "photo_wh": [
+   3456,
+   4608
+  ],
+  "mask_wh": [
+   3456,
+   4608
+  ],
+  "mask_mode": "L",
+  "mask_values": [
+   0,
+   255
+  ],
+  "rust_px": 33101,
+  "pixels": 15925248,
+  "rust_share": 0.0020785233611432612,
+  "contrast": 16.53334617614746,
+  "windows": {
+   "512px": {
+    "grid": [
+     9,
+     7
+    ],
+    "windows": 63,
+    "rust_windows": 20,
+    "overlap": [
+     0,
+     22
+    ],
+    "padding": [
+     0,
+     128
+    ]
+   },
+   "128px": {
+    "grid": [
+     18,
+     14
+    ],
+    "windows": 252,
+    "rust_windows": 29,
+    "overlap": [
+     0,
+     5
+    ],
+    "padding": [
+     0,
+     64
+    ]
+   }
+  },
+  "paper": {
+   "half_wh": [
+    1728,
+    2304
+   ],
+   "patches": 234,
+   "rust_patches": 25,
+   "dropped_px": [
+    64,
+    0
+   ],
+   "gp32": 3519
+  }
+ },
+ {
+  "id": "89",
+  "folder": "test",
+  "make": "HUAWEI",
+  "camera": "PAR-LX1M",
+  "orientation": 1,
+  "taken": "2022:03:11 11:21:07",
+  "paper_split": "test",
+  "split": "test",
+  "bytes": 6259674,
+  "pixel_md5": "fbca7895b002b93dea3435da5f03cdf0",
+  "photo_wh": [
+   3456,
+   4608
+  ],
+  "mask_wh": [
+   3456,
+   4608
+  ],
+  "mask_mode": "L",
+  "mask_values": [
+   0,
+   255
+  ],
+  "rust_px": 75473,
+  "pixels": 15925248,
+  "rust_share": 0.004739204061374742,
+  "contrast": 17.67649269104004,
+  "windows": {
+   "512px": {
+    "grid": [
+     9,
+     7
+    ],
+    "windows": 63,
+    "rust_windows": 20,
+    "overlap": [
+     0,
+     22
+    ],
+    "padding": [
+     0,
+     128
+    ]
+   },
+   "128px": {
+    "grid": [
+     18,
+     14
+    ],
+    "windows": 252,
+    "rust_windows": 32,
+    "overlap": [
+     0,
+     5
+    ],
+    "padding": [
+     0,
+     64
+    ]
+   }
+  },
+  "paper": {
+   "half_wh": [
+    1728,
+    2304
+   ],
+   "patches": 234,
+   "rust_patches": 31,
+   "dropped_px": [
+    64,
+    0
+   ],
+   "gp32": 3519
+  }
+ },
+ {
+  "id": "90",
+  "folder": "train",
+  "make": "HUAWEI",
+  "camera": "PAR-LX1M",
+  "orientation": 1,
+  "taken": "2022:03:11 11:21:41",
+  "paper_split": "train",
+  "split": "train",
+  "bytes": 5087275,
+  "pixel_md5": "c39fb7ac6150f2ed85c0879a9c2e38e4",
+  "photo_wh": [
+   3456,
+   4608
+  ],
+  "mask_wh": [
+   3456,
+   4608
+  ],
+  "mask_mode": "L",
+  "mask_values": [
+   0,
+   255
+  ],
+  "rust_px": 152912,
+  "pixels": 15925248,
+  "rust_share": 0.009601859889403291,
+  "contrast": 33.580230712890625,
+  "windows": {
+   "512px": {
+    "grid": [
+     9,
+     7
+    ],
+    "windows": 63,
+    "rust_windows": 25,
+    "overlap": [
+     0,
+     22
+    ],
+    "padding": [
+     0,
+     128
+    ]
+   },
+   "128px": {
+    "grid": [
+     18,
+     14
+    ],
+    "windows": 252,
+    "rust_windows": 38,
+    "overlap": [
+     0,
+     5
+    ],
+    "padding": [
+     0,
+     64
+    ]
+   }
+  },
+  "paper": {
+   "half_wh": [
+    1728,
+    2304
+   ],
+   "patches": 234,
+   "rust_patches": 37,
+   "dropped_px": [
+    64,
+    0
+   ],
+   "gp32": 3519
+  }
+ },
+ {
+  "id": "91",
+  "folder": "train",
+  "make": "HUAWEI",
+  "camera": "PAR-LX1M",
+  "orientation": 1,
+  "taken": "2022:03:11 11:21:33",
+  "paper_split": "train",
+  "split": "train",
+  "bytes": 7446319,
+  "pixel_md5": "0ae00052008ca72e18142a4de59dbe5c",
+  "photo_wh": [
+   3456,
+   4608
+  ],
+  "mask_wh": [
+   3456,
+   4608
+  ],
+  "mask_mode": "L",
+  "mask_values": [
+   0,
+   255
+  ],
+  "rust_px": 74118,
+  "pixels": 15925248,
+  "rust_share": 0.004654119044174383,
+  "contrast": 25.304147720336914,
+  "windows": {
+   "512px": {
+    "grid": [
+     9,
+     7
+    ],
+    "windows": 63,
+    "rust_windows": 17,
+    "overlap": [
+     0,
+     22
+    ],
+    "padding": [
+     0,
+     128
+    ]
+   },
+   "128px": {
+    "grid": [
+     18,
+     14
+    ],
+    "windows": 252,
+    "rust_windows": 33,
+    "overlap": [
+     0,
+     5
+    ],
+    "padding": [
+     0,
+     64
+    ]
+   }
+  },
+  "paper": {
+   "half_wh": [
+    1728,
+    2304
+   ],
+   "patches": 234,
+   "rust_patches": 30,
+   "dropped_px": [
+    64,
+    0
+   ],
+   "gp32": 3519
+  }
+ },
+ {
+  "id": "92",
+  "folder": "train",
+  "make": "HUAWEI",
+  "camera": "PAR-LX1M",
+  "orientation": 1,
+  "taken": "2022:03:11 11:21:50",
+  "paper_split": "train",
+  "split": "train",
+  "bytes": 5262558,
+  "pixel_md5": "0160fe1b79ddb20250a5fd9a198dd5eb",
+  "photo_wh": [
+   3456,
+   4608
+  ],
+  "mask_wh": [
+   3456,
+   4608
+  ],
+  "mask_mode": "L",
+  "mask_values": [
+   0,
+   255
+  ],
+  "rust_px": 344632,
+  "pixels": 15925248,
+  "rust_share": 0.021640604906121397,
+  "contrast": 17.60601234436035,
+  "windows": {
+   "512px": {
+    "grid": [
+     9,
+     7
+    ],
+    "windows": 63,
+    "rust_windows": 29,
+    "overlap": [
+     0,
+     22
+    ],
+    "padding": [
+     0,
+     128
+    ]
+   },
+   "128px": {
+    "grid": [
+     18,
+     14
+    ],
+    "windows": 252,
+    "rust_windows": 53,
+    "overlap": [
+     0,
+     5
+    ],
+    "padding": [
+     0,
+     64
+    ]
+   }
+  },
+  "paper": {
+   "half_wh": [
+    1728,
+    2304
+   ],
+   "patches": 234,
+   "rust_patches": 52,
+   "dropped_px": [
+    64,
+    0
+   ],
+   "gp32": 3519
+  }
+ },
+ {
+  "id": "93",
+  "folder": "train",
+  "make": "HUAWEI",
+  "camera": "PAR-LX1M",
+  "orientation": 1,
+  "taken": "2022:03:11 11:22:07",
+  "paper_split": "train",
+  "split": "train",
+  "bytes": 5205929,
+  "pixel_md5": "815f75bb8923dba142174095da2351e5",
+  "photo_wh": [
+   3456,
+   4608
+  ],
+  "mask_wh": [
+   3456,
+   4608
+  ],
+  "mask_mode": "L",
+  "mask_values": [
+   0,
+   255
+  ],
+  "rust_px": 37393,
+  "pixels": 15925248,
+  "rust_share": 0.0023480325078768004,
+  "contrast": 29.228588104248047,
+  "windows": {
+   "512px": {
+    "grid": [
+     9,
+     7
+    ],
+    "windows": 63,
+    "rust_windows": 8,
+    "overlap": [
+     0,
+     22
+    ],
+    "padding": [
+     0,
+     128
+    ]
+   },
+   "128px": {
+    "grid": [
+     18,
+     14
+    ],
+    "windows": 252,
+    "rust_windows": 9,
+    "overlap": [
+     0,
+     5
+    ],
+    "padding": [
+     0,
+     64
+    ]
+   }
+  },
+  "paper": {
+   "half_wh": [
+    1728,
+    2304
+   ],
+   "patches": 234,
+   "rust_patches": 7,
+   "dropped_px": [
+    64,
+    0
+   ],
+   "gp32": 3519
+  }
+ },
+ {
+  "id": "94",
+  "folder": "train",
+  "make": "HUAWEI",
+  "camera": "PAR-LX1M",
+  "orientation": 1,
+  "taken": "2022:03:11 11:22:37",
+  "paper_split": "train",
+  "split": "train",
+  "bytes": 3990348,
+  "pixel_md5": "2fa4fe175dab944dfe00f30b7cf967af",
+  "photo_wh": [
+   3456,
+   4608
+  ],
+  "mask_wh": [
+   3456,
+   4608
+  ],
+  "mask_mode": "L",
+  "mask_values": [
+   0,
+   255
+  ],
+  "rust_px": 310770,
+  "pixels": 15925248,
+  "rust_share": 0.019514295789930556,
+  "contrast": 23.622201919555664,
+  "windows": {
+   "512px": {
+    "grid": [
+     9,
+     7
+    ],
+    "windows": 63,
+    "rust_windows": 18,
+    "overlap": [
+     0,
+     22
+    ],
+    "padding": [
+     0,
+     128
+    ]
+   },
+   "128px": {
+    "grid": [
+     18,
+     14
+    ],
+    "windows": 252,
+    "rust_windows": 42,
+    "overlap": [
+     0,
+     5
+    ],
+    "padding": [
+     0,
+     64
+    ]
+   }
+  },
+  "paper": {
+   "half_wh": [
+    1728,
+    2304
+   ],
+   "patches": 234,
+   "rust_patches": 37,
+   "dropped_px": [
+    64,
+    0
+   ],
+   "gp32": 3519
+  }
+ },
+ {
+  "id": "95",
+  "folder": "train",
+  "make": "HUAWEI",
+  "camera": "PAR-LX1M",
+  "orientation": 1,
+  "taken": "2022:03:11 11:22:30",
+  "paper_split": "train",
+  "split": "train",
+  "bytes": 5577158,
+  "pixel_md5": "ead64bdf2160ea58f7664c536f315e6d",
+  "photo_wh": [
+   3456,
+   4608
+  ],
+  "mask_wh": [
+   3456,
+   4608
+  ],
+  "mask_mode": "L",
+  "mask_values": [
+   0,
+   255
+  ],
+  "rust_px": 322792,
+  "pixels": 15925248,
+  "rust_share": 0.020269197691615226,
+  "contrast": 18.458251953125,
+  "windows": {
+   "512px": {
+    "grid": [
+     9,
+     7
+    ],
+    "windows": 63,
+    "rust_windows": 31,
+    "overlap": [
+     0,
+     22
+    ],
+    "padding": [
+     0,
+     128
+    ]
+   },
+   "128px": {
+    "grid": [
+     18,
+     14
+    ],
+    "windows": 252,
+    "rust_windows": 53,
+    "overlap": [
+     0,
+     5
+    ],
+    "padding": [
+     0,
+     64
+    ]
+   }
+  },
+  "paper": {
+   "half_wh": [
+    1728,
+    2304
+   ],
+   "patches": 234,
+   "rust_patches": 53,
+   "dropped_px": [
+    64,
+    0
+   ],
+   "gp32": 3519
+  }
+ },
+ {
+  "id": "96",
+  "folder": "train",
+  "make": "HUAWEI",
+  "camera": "PAR-LX1M",
+  "orientation": 1,
+  "taken": "2022:03:11 11:14:01",
+  "paper_split": "train",
+  "split": "excluded (twin of 87)",
+  "bytes": 6492966,
+  "pixel_md5": "912be73d29b6f1b9eb2ad6917abdc14e",
+  "photo_wh": [
+   3456,
+   4608
+  ],
+  "mask_wh": [
+   3456,
+   4608
+  ],
+  "mask_mode": "L",
+  "mask_values": [
+   0,
+   255
+  ],
+  "rust_px": 39151,
+  "pixels": 15925248,
+  "rust_share": 0.002458423253440072,
+  "contrast": 15.453780174255371,
+  "windows": {
+   "512px": {
+    "grid": [
+     9,
+     7
+    ],
+    "windows": 63,
+    "rust_windows": 16,
+    "overlap": [
+     0,
+     22
+    ],
+    "padding": [
+     0,
+     128
+    ]
+   },
+   "128px": {
+    "grid": [
+     18,
+     14
+    ],
+    "windows": 252,
+    "rust_windows": 21,
+    "overlap": [
+     0,
+     5
+    ],
+    "padding": [
+     0,
+     64
+    ]
+   }
+  },
+  "paper": {
+   "half_wh": [
+    1728,
+    2304
+   ],
+   "patches": 234,
+   "rust_patches": 21,
+   "dropped_px": [
+    64,
+    0
+   ],
+   "gp32": 3519
+  }
+ },
+ {
+  "id": "98",
+  "folder": "train",
+  "make": "HUAWEI",
+  "camera": "PAR-LX1M",
+  "orientation": 1,
+  "taken": "2022:03:11 11:21:33",
+  "paper_split": "train",
+  "split": "train",
+  "bytes": 7446319,
+  "pixel_md5": "0ae00052008ca72e18142a4de59dbe5c",
+  "photo_wh": [
+   3456,
+   4608
+  ],
+  "mask_wh": [
+   3456,
+   4608
+  ],
+  "mask_mode": "L",
+  "mask_values": [
+   0,
+   255
+  ],
+  "rust_px": 50772,
+  "pixels": 15925248,
+  "rust_share": 0.0031881450135030865,
+  "contrast": 24.409496307373047,
+  "windows": {
+   "512px": {
+    "grid": [
+     9,
+     7
+    ],
+    "windows": 63,
+    "rust_windows": 15,
+    "overlap": [
+     0,
+     22
+    ],
+    "padding": [
+     0,
+     128
+    ]
+   },
+   "128px": {
+    "grid": [
+     18,
+     14
+    ],
+    "windows": 252,
+    "rust_windows": 24,
+    "overlap": [
+     0,
+     5
+    ],
+    "padding": [
+     0,
+     64
+    ]
+   }
+  },
+  "paper": {
+   "half_wh": [
+    1728,
+    2304
+   ],
+   "patches": 234,
+   "rust_patches": 21,
+   "dropped_px": [
+    64,
+    0
+   ],
+   "gp32": 3519
+  }
+ },
+ {
+  "id": "99",
+  "folder": "train",
+  "make": "HUAWEI",
+  "camera": "PAR-LX1M",
+  "orientation": 1,
+  "taken": "2022:03:11 10:38:21",
+  "paper_split": "train",
+  "split": "excluded (twin of 149)",
+  "bytes": 6822549,
+  "pixel_md5": "9ec4c0dd0a1be6951f990769e8af8471",
+  "photo_wh": [
+   3456,
+   4608
+  ],
+  "mask_wh": [
+   3456,
+   4608
+  ],
+  "mask_mode": "L",
+  "mask_values": [
+   0,
+   255
+  ],
+  "rust_px": 13101,
+  "pixels": 15925248,
+  "rust_share": 0.000822655948591821,
+  "contrast": 10.893693923950195,
+  "windows": {
+   "512px": {
+    "grid": [
+     9,
+     7
+    ],
+    "windows": 63,
+    "rust_windows": 26,
+    "overlap": [
+     0,
+     22
+    ],
+    "padding": [
+     0,
+     128
+    ]
+   },
+   "128px": {
+    "grid": [
+     18,
+     14
+    ],
+    "windows": 252,
+    "rust_windows": 23,
+    "overlap": [
+     0,
+     5
+    ],
+    "padding": [
+     0,
+     64
+    ]
+   }
+  },
+  "paper": {
+   "half_wh": [
+    1728,
+    2304
+   ],
+   "patches": 234,
+   "rust_patches": 18,
+   "dropped_px": [
+    64,
+    0
+   ],
+   "gp32": 3519
+  }
+ },
+ {
+  "id": "100",
+  "folder": "train",
+  "make": "HUAWEI",
+  "camera": "PAR-LX1M",
+  "orientation": 1,
+  "taken": "2022:03:11 10:35:05",
+  "paper_split": "train",
+  "split": "train",
+  "bytes": 2992082,
+  "pixel_md5": "34db2c1116abc303a61ebe88e318eda3",
+  "photo_wh": [
+   3456,
+   4608
+  ],
+  "mask_wh": [
+   3456,
+   4608
+  ],
+  "mask_mode": "L",
+  "mask_values": [
+   0,
+   255
+  ],
+  "rust_px": 59445,
+  "pixels": 15925248,
+  "rust_share": 0.0037327519169560184,
+  "contrast": 29.839141845703125,
+  "windows": {
+   "512px": {
+    "grid": [
+     9,
+     7
+    ],
+    "windows": 63,
+    "rust_windows": 5,
+    "overlap": [
+     0,
+     22
+    ],
+    "padding": [
+     0,
+     128
+    ]
+   },
+   "128px": {
+    "grid": [
+     18,
+     14
+    ],
+    "windows": 252,
+    "rust_windows": 8,
+    "overlap": [
+     0,
+     5
+    ],
+    "padding": [
+     0,
+     64
+    ]
+   }
+  },
+  "paper": {
+   "half_wh": [
+    1728,
+    2304
+   ],
+   "patches": 234,
+   "rust_patches": 5,
+   "dropped_px": [
+    64,
+    0
+   ],
+   "gp32": 3519
+  }
+ },
+ {
+  "id": "101",
+  "folder": "train",
+  "make": null,
+  "camera": "no EXIF",
+  "orientation": null,
+  "taken": null,
+  "paper_split": "val",
+  "split": "val",
+  "bytes": 5978822,
+  "pixel_md5": "bd3cc33950658cf25ae4f147aa441209",
+  "photo_wh": [
+   3612,
+   3456
+  ],
+  "mask_wh": [
+   3593,
+   3435
+  ],
+  "mask_mode": "L",
+  "mask_values": [
+   0,
+   255
+  ],
+  "rust_px": 40760,
+  "pixels": 12341955,
+  "rust_share": 0.0033025561995648177,
+  "placement": {
+   "photo_wh": [
+    3612,
+    3456
+   ],
+   "mask_wh": [
+    3593,
+    3435
+   ],
+   "best_yx": [
+    0,
+    0
+   ],
+   "best": 17.4,
+   "top_left": 17.4,
+   "centre": 10.06,
+   "bottom_right": 7.14,
+   "stretched": 9.22
+  },
+  "windows": {
+   "512px": {
+    "grid": [
+     7,
+     8
+    ],
+    "windows": 56,
+    "rust_windows": 18,
+    "overlap": [
+     25,
+     72
+    ],
+    "padding": [
+     149,
+     503
+    ]
+   },
+   "128px": {
+    "grid": [
+     14,
+     15
+    ],
+    "windows": 210,
+    "rust_windows": 33,
+    "overlap": [
+     6,
+     9
+    ],
+    "padding": [
+     74,
+     124
+    ]
+   }
+  },
+  "paper": {
+   "half_wh": [
+    1796,
+    1718
+   ],
+   "patches": 182,
+   "rust_patches": 29,
+   "dropped_px": [
+    4,
+    54
+   ],
+   "gp32": 2650
+  }
+ },
+ {
+  "id": "102",
+  "folder": "train",
+  "make": null,
+  "camera": "no EXIF",
+  "orientation": null,
+  "taken": null,
+  "paper_split": "train",
+  "split": "train",
+  "bytes": 5791698,
+  "pixel_md5": "664d54026e46dcbc48b68eed1de82468",
+  "photo_wh": [
+   4248,
+   2984
+  ],
+  "mask_wh": [
+   4248,
+   2984
+  ],
+  "mask_mode": "L",
+  "mask_values": [
+   0,
+   255
+  ],
+  "rust_px": 26058,
+  "pixels": 12676032,
+  "rust_share": 0.002055690613592645,
+  "contrast": 30.04744529724121,
+  "windows": {
+   "512px": {
+    "grid": [
+     6,
+     9
+    ],
+    "windows": 54,
+    "rust_windows": 14,
+    "overlap": [
+     18,
+     45
+    ],
+    "padding": [
+     88,
+     360
+    ]
+   },
+   "128px": {
+    "grid": [
+     12,
+     17
+    ],
+    "windows": 204,
+    "rust_windows": 19,
+    "overlap": [
+     4,
+     4
+    ],
+    "padding": [
+     44,
+     52
+    ]
+   }
+  },
+  "paper": {
+   "half_wh": [
+    2124,
+    1492
+   ],
+   "patches": 176,
+   "rust_patches": 13,
+   "dropped_px": [
+    76,
+    84
+   ],
+   "gp32": 2709
+  }
+ },
+ {
+  "id": "103",
+  "folder": "train",
+  "make": null,
+  "camera": "no EXIF",
+  "orientation": null,
+  "taken": null,
+  "paper_split": "train",
+  "split": "train",
+  "bytes": 6178339,
+  "pixel_md5": "18ebc3ea7a32b4119008e01d59ac3b6e",
+  "photo_wh": [
+   3456,
+   3584
+  ],
+  "mask_wh": [
+   3456,
+   3584
+  ],
+  "mask_mode": "L",
+  "mask_values": [
+   0,
+   255
+  ],
+  "rust_px": 15575,
+  "pixels": 12386304,
+  "rust_share": 0.0012574372468171296,
+  "contrast": 20.20112419128418,
+  "windows": {
+   "512px": {
+    "grid": [
+     7,
+     7
+    ],
+    "windows": 49,
+    "rust_windows": 9,
+    "overlap": [
+     0,
+     22
+    ],
+    "padding": [
+     0,
+     128
+    ]
+   },
+   "128px": {
+    "grid": [
+     14,
+     14
+    ],
+    "windows": 196,
+    "rust_windows": 10,
+    "overlap": [
+     0,
+     5
+    ],
+    "padding": [
+     0,
+     64
+    ]
+   }
+  },
+  "paper": {
+   "half_wh": [
+    1728,
+    1792
+   ],
+   "patches": 182,
+   "rust_patches": 9,
+   "dropped_px": [
+    64,
+    0
+   ],
+   "gp32": 2703
+  }
+ },
+ {
+  "id": "104",
+  "folder": "train",
+  "make": "HUAWEI",
+  "camera": "PAR-LX1M",
+  "orientation": 1,
+  "taken": "2022:02:17 10:24:04",
+  "paper_split": "train",
+  "split": "train",
+  "bytes": 7771372,
+  "pixel_md5": "4a365ad2a6fb48fea88cc65a19b6c150",
+  "photo_wh": [
+   4608,
+   3456
+  ],
+  "mask_wh": [
+   4608,
+   3456
+  ],
+  "mask_mode": "L",
+  "mask_values": [
+   0,
+   255
+  ],
+  "rust_px": 27388,
+  "pixels": 15925248,
+  "rust_share": 0.0017197848347479425,
+  "contrast": 17.60283851623535,
+  "windows": {
+   "512px": {
+    "grid": [
+     7,
+     9
+    ],
+    "windows": 63,
+    "rust_windows": 15,
+    "overlap": [
+     22,
+     0
+    ],
+    "padding": [
+     128,
+     0
+    ]
+   },
+   "128px": {
+    "grid": [
+     14,
+     18
+    ],
+    "windows": 252,
+    "rust_windows": 23,
+    "overlap": [
+     5,
+     0
+    ],
+    "padding": [
+     64,
+     0
+    ]
+   }
+  },
+  "paper": {
+   "half_wh": [
+    2304,
+    1728
+   ],
+   "patches": 234,
+   "rust_patches": 20,
+   "dropped_px": [
+    0,
+    64
+   ],
+   "gp32": 3519
+  }
+ },
+ {
+  "id": "105",
+  "folder": "test",
+  "make": "HUAWEI",
+  "camera": "PAR-LX1M",
+  "orientation": 1,
+  "taken": "2022:02:17 10:23:52",
+  "paper_split": "test",
+  "split": "test",
+  "bytes": 6305393,
+  "pixel_md5": "7c4180c3933cc9d96db9575bc5b25e2a",
+  "photo_wh": [
+   4604,
+   2844
+  ],
+  "mask_wh": [
+   4604,
+   2844
+  ],
+  "mask_mode": "L",
+  "mask_values": [
+   0,
+   255
+  ],
+  "rust_px": 74976,
+  "pixels": 13093776,
+  "rust_share": 0.005726079321961824,
+  "contrast": 21.765300750732422,
+  "windows": {
+   "512px": {
+    "grid": [
+     6,
+     9
+    ],
+    "windows": 54,
+    "rust_windows": 20,
+    "overlap": [
+     46,
+     1
+    ],
+    "padding": [
+     228,
+     4
+    ]
+   },
+   "128px": {
+    "grid": [
+     12,
+     18
+    ],
+    "windows": 216,
+    "rust_windows": 47,
+    "overlap": [
+     11,
+     1
+    ],
+    "padding": [
+     114,
+     2
+    ]
+   }
+  },
+  "paper": {
+   "half_wh": [
+    2302,
+    1422
+   ],
+   "patches": 187,
+   "rust_patches": 40,
+   "dropped_px": [
+    126,
+    14
+   ],
+   "gp32": 2788
+  }
+ },
+ {
+  "id": "109",
+  "folder": "train",
+  "make": "HUAWEI",
+  "camera": "PAR-LX1M",
+  "orientation": 1,
+  "taken": "2022:03:04 10:53:41",
+  "paper_split": "train",
+  "split": "train",
+  "bytes": 5942912,
+  "pixel_md5": "5d3867be6d8d159988993a707ca9a56b",
+  "photo_wh": [
+   3456,
+   4608
+  ],
+  "mask_wh": [
+   3456,
+   4608
+  ],
+  "mask_mode": "L",
+  "mask_values": [
+   0,
+   255
+  ],
+  "rust_px": 265621,
+  "pixels": 15925248,
+  "rust_share": 0.016679237899466307,
+  "contrast": 26.989810943603516,
+  "windows": {
+   "512px": {
+    "grid": [
+     9,
+     7
+    ],
+    "windows": 63,
+    "rust_windows": 22,
+    "overlap": [
+     0,
+     22
+    ],
+    "padding": [
+     0,
+     128
+    ]
+   },
+   "128px": {
+    "grid": [
+     18,
+     14
+    ],
+    "windows": 252,
+    "rust_windows": 42,
+    "overlap": [
+     0,
+     5
+    ],
+    "padding": [
+     0,
+     64
+    ]
+   }
+  },
+  "paper": {
+   "half_wh": [
+    1728,
+    2304
+   ],
+   "patches": 234,
+   "rust_patches": 41,
+   "dropped_px": [
+    64,
+    0
+   ],
+   "gp32": 3519
+  }
+ },
+ {
+  "id": "110",
+  "folder": "train",
+  "make": "HUAWEI",
+  "camera": "PAR-LX1M",
+  "orientation": 1,
+  "taken": "2022:03:04 10:53:44",
+  "paper_split": "train",
+  "split": "train",
+  "bytes": 4669777,
+  "pixel_md5": "09e2a26e94a14a3aec905bb48269c495",
+  "photo_wh": [
+   2536,
+   4600
+  ],
+  "mask_wh": [
+   2536,
+   4600
+  ],
+  "mask_mode": "L",
+  "mask_values": [
+   0,
+   255
+  ],
+  "rust_px": 185243,
+  "pixels": 11665600,
+  "rust_share": 0.015879423261555344,
+  "contrast": 22.547056198120117,
+  "windows": {
+   "512px": {
+    "grid": [
+     9,
+     5
+    ],
+    "windows": 45,
+    "rust_windows": 16,
+    "overlap": [
+     1,
+     6
+    ],
+    "padding": [
+     8,
+     24
+    ]
+   },
+   "128px": {
+    "grid": [
+     18,
+     10
+    ],
+    "windows": 180,
+    "rust_windows": 34,
+    "overlap": [
+     1,
+     2
+    ],
+    "padding": [
+     4,
+     12
+    ]
+   }
+  },
+  "paper": {
+   "half_wh": [
+    1268,
+    2300
+   ],
+   "patches": 153,
+   "rust_patches": 27,
+   "dropped_px": [
+    116,
+    124
+   ],
+   "gp32": 2448
+  }
+ },
+ {
+  "id": "111",
+  "folder": "train",
+  "make": "HUAWEI",
+  "camera": "PAR-LX1M",
+  "orientation": 1,
+  "taken": "2022:03:04 10:53:49",
+  "paper_split": "train",
+  "split": "train",
+  "bytes": 4780116,
+  "pixel_md5": "734553e12a9c2851e28a985bae1c87a5",
+  "photo_wh": [
+   4608,
+   2909
+  ],
+  "mask_wh": [
+   4608,
+   2909
+  ],
+  "mask_mode": "L",
+  "mask_values": [
+   0,
+   255
+  ],
+  "rust_px": 186816,
+  "pixels": 13404672,
+  "rust_share": 0.013936633436461556,
+  "contrast": 23.586837768554688,
+  "windows": {
+   "512px": {
+    "grid": [
+     6,
+     9
+    ],
+    "windows": 54,
+    "rust_windows": 16,
+    "overlap": [
+     33,
+     0
+    ],
+    "padding": [
+     163,
+     0
+    ]
+   },
+   "128px": {
+    "grid": [
+     12,
+     18
+    ],
+    "windows": 216,
+    "rust_windows": 29,
+    "overlap": [
+     8,
+     0
+    ],
+    "padding": [
+     82,
+     0
+    ]
+   }
+  },
+  "paper": {
+   "half_wh": [
+    2304,
+    1454
+   ],
+   "patches": 198,
+   "rust_patches": 27,
+   "dropped_px": [
+    0,
+    46
+   ],
+   "gp32": 2898
+  }
+ },
+ {
+  "id": "113",
+  "folder": "train",
+  "make": "HUAWEI",
+  "camera": "PAR-LX1M",
+  "orientation": 1,
+  "taken": "2022:03:04 10:54:22",
+  "paper_split": "train",
+  "split": "train",
+  "bytes": 5564855,
+  "pixel_md5": "3fbd3a2704f82804ea56746442a700dc",
+  "photo_wh": [
+   3456,
+   4608
+  ],
+  "mask_wh": [
+   3456,
+   4608
+  ],
+  "mask_mode": "L",
+  "mask_values": [
+   0,
+   255
+  ],
+  "rust_px": 54854,
+  "pixels": 15925248,
+  "rust_share": 0.0034444675524048355,
+  "contrast": 11.603191375732422,
+  "windows": {
+   "512px": {
+    "grid": [
+     9,
+     7
+    ],
+    "windows": 63,
+    "rust_windows": 12,
+    "overlap": [
+     0,
+     22
+    ],
+    "padding": [
+     0,
+     128
+    ]
+   },
+   "128px": {
+    "grid": [
+     18,
+     14
+    ],
+    "windows": 252,
+    "rust_windows": 14,
+    "overlap": [
+     0,
+     5
+    ],
+    "padding": [
+     0,
+     64
+    ]
+   }
+  },
+  "paper": {
+   "half_wh": [
+    1728,
+    2304
+   ],
+   "patches": 234,
+   "rust_patches": 15,
+   "dropped_px": [
+    64,
+    0
+   ],
+   "gp32": 3519
+  }
+ },
+ {
+  "id": "114",
+  "folder": "train",
+  "make": "HUAWEI",
+  "camera": "PAR-LX1M",
+  "orientation": 1,
+  "taken": "2022:03:04 10:54:16",
+  "paper_split": "train",
+  "split": "train",
+  "bytes": 4960698,
+  "pixel_md5": "d6ea9efa89f85e62f47ef27596ea6089",
+  "photo_wh": [
+   4608,
+   3456
+  ],
+  "mask_wh": [
+   4608,
+   3456
+  ],
+  "mask_mode": "L",
+  "mask_values": [
+   0,
+   255
+  ],
+  "rust_px": 57499,
+  "pixels": 15925248,
+  "rust_share": 0.0036105560177147633,
+  "contrast": 17.153461456298828,
+  "windows": {
+   "512px": {
+    "grid": [
+     7,
+     9
+    ],
+    "windows": 63,
+    "rust_windows": 5,
+    "overlap": [
+     22,
+     0
+    ],
+    "padding": [
+     128,
+     0
+    ]
+   },
+   "128px": {
+    "grid": [
+     14,
+     18
+    ],
+    "windows": 252,
+    "rust_windows": 5,
+    "overlap": [
+     5,
+     0
+    ],
+    "padding": [
+     64,
+     0
+    ]
+   }
+  },
+  "paper": {
+   "half_wh": [
+    2304,
+    1728
+   ],
+   "patches": 234,
+   "rust_patches": 8,
+   "dropped_px": [
+    0,
+    64
+   ],
+   "gp32": 3519
+  }
+ },
+ {
+  "id": "117",
+  "folder": "train",
+  "make": "HUAWEI",
+  "camera": "PAR-LX1M",
+  "orientation": 1,
+  "taken": "2022:03:04 10:53:52",
+  "paper_split": "train",
+  "split": "train",
+  "bytes": 5396788,
+  "pixel_md5": "9043ee0b0e2b60790695f6510173d4ef",
+  "photo_wh": [
+   4608,
+   3456
+  ],
+  "mask_wh": [
+   4608,
+   3456
+  ],
+  "mask_mode": "L",
+  "mask_values": [
+   0,
+   255
+  ],
+  "rust_px": 378725,
+  "pixels": 15925248,
+  "rust_share": 0.02378141929092721,
+  "contrast": 24.890033721923828,
+  "windows": {
+   "512px": {
+    "grid": [
+     7,
+     9
+    ],
+    "windows": 63,
+    "rust_windows": 24,
+    "overlap": [
+     22,
+     0
+    ],
+    "padding": [
+     128,
+     0
+    ]
+   },
+   "128px": {
+    "grid": [
+     14,
+     18
+    ],
+    "windows": 252,
+    "rust_windows": 50,
+    "overlap": [
+     5,
+     0
+    ],
+    "padding": [
+     64,
+     0
+    ]
+   }
+  },
+  "paper": {
+   "half_wh": [
+    2304,
+    1728
+   ],
+   "patches": 234,
+   "rust_patches": 45,
+   "dropped_px": [
+    0,
+    64
+   ],
+   "gp32": 3519
+  }
+ },
+ {
+  "id": "118",
+  "folder": "train",
+  "make": "HUAWEI",
+  "camera": "PAR-LX1M",
+  "orientation": 1,
+  "taken": "2022:03:04 10:55:25",
+  "paper_split": "val",
+  "split": "val",
+  "bytes": 5285925,
+  "pixel_md5": "60a684cf0d2626e679736b06bc5615f9",
+  "photo_wh": [
+   4608,
+   3456
+  ],
+  "mask_wh": [
+   4608,
+   3456
+  ],
+  "mask_mode": "L",
+  "mask_values": [
+   0,
+   255
+  ],
+  "rust_px": 106977,
+  "pixels": 15925248,
+  "rust_share": 0.006717446409625772,
+  "contrast": 11.485800743103027,
+  "windows": {
+   "512px": {
+    "grid": [
+     7,
+     9
+    ],
+    "windows": 63,
+    "rust_windows": 16,
+    "overlap": [
+     22,
+     0
+    ],
+    "padding": [
+     128,
+     0
+    ]
+   },
+   "128px": {
+    "grid": [
+     14,
+     18
+    ],
+    "windows": 252,
+    "rust_windows": 28,
+    "overlap": [
+     5,
+     0
+    ],
+    "padding": [
+     64,
+     0
+    ]
+   }
+  },
+  "paper": {
+   "half_wh": [
+    2304,
+    1728
+   ],
+   "patches": 234,
+   "rust_patches": 28,
+   "dropped_px": [
+    0,
+    64
+   ],
+   "gp32": 3519
+  }
+ },
+ {
+  "id": "119",
+  "folder": "train",
+  "make": "HUAWEI",
+  "camera": "PAR-LX1M",
+  "orientation": 1,
+  "taken": "2022:03:04 10:55:19",
+  "paper_split": "train",
+  "split": "train",
+  "bytes": 5290228,
+  "pixel_md5": "4b7f4cfe82bfa34730e9a4355092c519",
+  "photo_wh": [
+   4608,
+   3456
+  ],
+  "mask_wh": [
+   4608,
+   3456
+  ],
+  "mask_mode": "L",
+  "mask_values": [
+   0,
+   255
+  ],
+  "rust_px": 97472,
+  "pixels": 15925248,
+  "rust_share": 0.0061205954218107,
+  "contrast": 10.611921310424805,
+  "windows": {
+   "512px": {
+    "grid": [
+     7,
+     9
+    ],
+    "windows": 63,
+    "rust_windows": 21,
+    "overlap": [
+     22,
+     0
+    ],
+    "padding": [
+     128,
+     0
+    ]
+   },
+   "128px": {
+    "grid": [
+     14,
+     18
+    ],
+    "windows": 252,
+    "rust_windows": 32,
+    "overlap": [
+     5,
+     0
+    ],
+    "padding": [
+     64,
+     0
+    ]
+   }
+  },
+  "paper": {
+   "half_wh": [
+    2304,
+    1728
+   ],
+   "patches": 234,
+   "rust_patches": 35,
+   "dropped_px": [
+    0,
+    64
+   ],
+   "gp32": 3519
+  }
+ },
+ {
+  "id": "120",
+  "folder": "train",
+  "make": "HUAWEI",
+  "camera": "PAR-LX1M",
+  "orientation": 1,
+  "taken": "2022:03:04 10:55:13",
+  "paper_split": "train",
+  "split": "train",
+  "bytes": 6978177,
+  "pixel_md5": "fab129a5daaf5f500ca56a53258b232c",
+  "photo_wh": [
+   3456,
+   4608
+  ],
+  "mask_wh": [
+   3456,
+   4608
+  ],
+  "mask_mode": "L",
+  "mask_values": [
+   0,
+   255
+  ],
+  "rust_px": 51439,
+  "pixels": 15925248,
+  "rust_share": 0.003230028191711677,
+  "contrast": 2.913494110107422,
+  "windows": {
+   "512px": {
+    "grid": [
+     9,
+     7
+    ],
+    "windows": 63,
+    "rust_windows": 30,
+    "overlap": [
+     0,
+     22
+    ],
+    "padding": [
+     0,
+     128
+    ]
+   },
+   "128px": {
+    "grid": [
+     18,
+     14
+    ],
+    "windows": 252,
+    "rust_windows": 26,
+    "overlap": [
+     0,
+     5
+    ],
+    "padding": [
+     0,
+     64
+    ]
+   }
+  },
+  "paper": {
+   "half_wh": [
+    1728,
+    2304
+   ],
+   "patches": 234,
+   "rust_patches": 27,
+   "dropped_px": [
+    64,
+    0
+   ],
+   "gp32": 3519
+  }
+ },
+ {
+  "id": "121",
+  "folder": "train",
+  "make": "HUAWEI",
+  "camera": "PAR-LX1M",
+  "orientation": 1,
+  "taken": "2022:03:04 10:55:17",
+  "paper_split": "train",
+  "split": "train",
+  "bytes": 5754762,
+  "pixel_md5": "28f74c0cda0f804a5eed272831e2bb73",
+  "photo_wh": [
+   4608,
+   3456
+  ],
+  "mask_wh": [
+   4608,
+   3456
+  ],
+  "mask_mode": "L",
+  "mask_values": [
+   0,
+   255
+  ],
+  "rust_px": 118220,
+  "pixels": 15925248,
+  "rust_share": 0.007423432275591564,
+  "contrast": 14.976354598999023,
+  "windows": {
+   "512px": {
+    "grid": [
+     7,
+     9
+    ],
+    "windows": 63,
+    "rust_windows": 22,
+    "overlap": [
+     22,
+     0
+    ],
+    "padding": [
+     128,
+     0
+    ]
+   },
+   "128px": {
+    "grid": [
+     14,
+     18
+    ],
+    "windows": 252,
+    "rust_windows": 44,
+    "overlap": [
+     5,
+     0
+    ],
+    "padding": [
+     64,
+     0
+    ]
+   }
+  },
+  "paper": {
+   "half_wh": [
+    2304,
+    1728
+   ],
+   "patches": 234,
+   "rust_patches": 34,
+   "dropped_px": [
+    0,
+    64
+   ],
+   "gp32": 3519
+  }
+ },
+ {
+  "id": "122",
+  "folder": "train",
+  "make": "HUAWEI",
+  "camera": "PAR-LX1M",
+  "orientation": 1,
+  "taken": "2022:03:04 10:58:03",
+  "paper_split": "train",
+  "split": "train",
+  "bytes": 6866193,
+  "pixel_md5": "393ed496cc1ea127b8d0d9671a2b1aec",
+  "photo_wh": [
+   4608,
+   3456
+  ],
+  "mask_wh": [
+   4608,
+   3456
+  ],
+  "mask_mode": "L",
+  "mask_values": [
+   0,
+   255
+  ],
+  "rust_px": 85380,
+  "pixels": 15925248,
+  "rust_share": 0.005361297984182099,
+  "contrast": 13.346580505371094,
+  "windows": {
+   "512px": {
+    "grid": [
+     7,
+     9
+    ],
+    "windows": 63,
+    "rust_windows": 18,
+    "overlap": [
+     22,
+     0
+    ],
+    "padding": [
+     128,
+     0
+    ]
+   },
+   "128px": {
+    "grid": [
+     14,
+     18
+    ],
+    "windows": 252,
+    "rust_windows": 27,
+    "overlap": [
+     5,
+     0
+    ],
+    "padding": [
+     64,
+     0
+    ]
+   }
+  },
+  "paper": {
+   "half_wh": [
+    2304,
+    1728
+   ],
+   "patches": 234,
+   "rust_patches": 24,
+   "dropped_px": [
+    0,
+    64
+   ],
+   "gp32": 3519
+  }
+ },
+ {
+  "id": "123",
+  "folder": "test",
+  "make": "HUAWEI",
+  "camera": "PAR-LX1M",
+  "orientation": 1,
+  "taken": "2022:03:04 10:57:52",
+  "paper_split": "test",
+  "split": "test",
+  "bytes": 4965109,
+  "pixel_md5": "790ab63cc02dea8956b95acd20ef3bb2",
+  "photo_wh": [
+   3456,
+   4608
+  ],
+  "mask_wh": [
+   3456,
+   4608
+  ],
+  "mask_mode": "L",
+  "mask_values": [
+   0,
+   255
+  ],
+  "rust_px": 154876,
+  "pixels": 15925248,
+  "rust_share": 0.009725186069315843,
+  "contrast": 21.684307098388672,
+  "windows": {
+   "512px": {
+    "grid": [
+     9,
+     7
+    ],
+    "windows": 63,
+    "rust_windows": 25,
+    "overlap": [
+     0,
+     22
+    ],
+    "padding": [
+     0,
+     128
+    ]
+   },
+   "128px": {
+    "grid": [
+     18,
+     14
+    ],
+    "windows": 252,
+    "rust_windows": 40,
+    "overlap": [
+     0,
+     5
+    ],
+    "padding": [
+     0,
+     64
+    ]
+   }
+  },
+  "paper": {
+   "half_wh": [
+    1728,
+    2304
+   ],
+   "patches": 234,
+   "rust_patches": 38,
+   "dropped_px": [
+    64,
+    0
+   ],
+   "gp32": 3519
+  }
+ },
+ {
+  "id": "124",
+  "folder": "train",
+  "make": "HUAWEI",
+  "camera": "PAR-LX1M",
+  "orientation": 1,
+  "taken": "2022:03:04 10:57:49",
+  "paper_split": "train",
+  "split": "train",
+  "bytes": 5364228,
+  "pixel_md5": "e8a75000694f74b481ee122b49fb511c",
+  "photo_wh": [
+   3456,
+   4608
+  ],
+  "mask_wh": [
+   3456,
+   4608
+  ],
+  "mask_mode": "L",
+  "mask_values": [
+   0,
+   255
+  ],
+  "rust_px": 151596,
+  "pixels": 15925248,
+  "rust_share": 0.009519223813657407,
+  "contrast": 21.061594009399414,
+  "windows": {
+   "512px": {
+    "grid": [
+     9,
+     7
+    ],
+    "windows": 63,
+    "rust_windows": 24,
+    "overlap": [
+     0,
+     22
+    ],
+    "padding": [
+     0,
+     128
+    ]
+   },
+   "128px": {
+    "grid": [
+     18,
+     14
+    ],
+    "windows": 252,
+    "rust_windows": 33,
+    "overlap": [
+     0,
+     5
+    ],
+    "padding": [
+     0,
+     64
+    ]
+   }
+  },
+  "paper": {
+   "half_wh": [
+    1728,
+    2304
+   ],
+   "patches": 234,
+   "rust_patches": 35,
+   "dropped_px": [
+    64,
+    0
+   ],
+   "gp32": 3519
+  }
+ },
+ {
+  "id": "125",
+  "folder": "train",
+  "make": "HUAWEI",
+  "camera": "PAR-LX1M",
+  "orientation": 1,
+  "taken": "2022:03:04 10:57:42",
+  "paper_split": "train",
+  "split": "train",
+  "bytes": 6293282,
+  "pixel_md5": "015ee7eae45fc2126238b5448bd2623f",
+  "photo_wh": [
+   3456,
+   4608
+  ],
+  "mask_wh": [
+   3456,
+   4608
+  ],
+  "mask_mode": "L",
+  "mask_values": [
+   0,
+   255
+  ],
+  "rust_px": 92823,
+  "pixels": 15925248,
+  "rust_share": 0.005828669041763117,
+  "contrast": 15.000761032104492,
+  "windows": {
+   "512px": {
+    "grid": [
+     9,
+     7
+    ],
+    "windows": 63,
+    "rust_windows": 16,
+    "overlap": [
+     0,
+     22
+    ],
+    "padding": [
+     0,
+     128
+    ]
+   },
+   "128px": {
+    "grid": [
+     18,
+     14
+    ],
+    "windows": 252,
+    "rust_windows": 29,
+    "overlap": [
+     0,
+     5
+    ],
+    "padding": [
+     0,
+     64
+    ]
+   }
+  },
+  "paper": {
+   "half_wh": [
+    1728,
+    2304
+   ],
+   "patches": 234,
+   "rust_patches": 29,
+   "dropped_px": [
+    64,
+    0
+   ],
+   "gp32": 3519
+  }
+ },
+ {
+  "id": "128",
+  "folder": "train",
+  "make": "HUAWEI",
+  "camera": "PAR-LX1M",
+  "orientation": 1,
+  "taken": "2022:03:04 10:56:58",
+  "paper_split": "train",
+  "split": "train",
+  "bytes": 5828144,
+  "pixel_md5": "4bc54c8eec1e3dbcbd681958a0fb2c12",
+  "photo_wh": [
+   4608,
+   3456
+  ],
+  "mask_wh": [
+   4608,
+   3456
+  ],
+  "mask_mode": "L",
+  "mask_values": [
+   0,
+   255
+  ],
+  "rust_px": 9843,
+  "pixels": 15925248,
+  "rust_share": 0.0006180751470871913,
+  "contrast": 7.49937629699707,
+  "windows": {
+   "512px": {
+    "grid": [
+     7,
+     9
+    ],
+    "windows": 63,
+    "rust_windows": 15,
+    "overlap": [
+     22,
+     0
+    ],
+    "padding": [
+     128,
+     0
+    ]
+   },
+   "128px": {
+    "grid": [
+     14,
+     18
+    ],
+    "windows": 252,
+    "rust_windows": 15,
+    "overlap": [
+     5,
+     0
+    ],
+    "padding": [
+     64,
+     0
+    ]
+   }
+  },
+  "paper": {
+   "half_wh": [
+    2304,
+    1728
+   ],
+   "patches": 234,
+   "rust_patches": 10,
+   "dropped_px": [
+    0,
+    64
+   ],
+   "gp32": 3519
+  }
+ },
+ {
+  "id": "129",
+  "folder": "train",
+  "make": "HUAWEI",
+  "camera": "PAR-LX1M",
+  "orientation": 1,
+  "taken": "2022:03:04 10:55:36",
+  "paper_split": "train",
+  "split": "train",
+  "bytes": 5854195,
+  "pixel_md5": "9c74d5443a1dc465b971a9faf77fb748",
+  "photo_wh": [
+   4608,
+   3456
+  ],
+  "mask_wh": [
+   4608,
+   3456
+  ],
+  "mask_mode": "L",
+  "mask_values": [
+   0,
+   255
+  ],
+  "rust_px": 96478,
+  "pixels": 15925248,
+  "rust_share": 0.006058178811406893,
+  "contrast": 17.552978515625,
+  "windows": {
+   "512px": {
+    "grid": [
+     7,
+     9
+    ],
+    "windows": 63,
+    "rust_windows": 24,
+    "overlap": [
+     22,
+     0
+    ],
+    "padding": [
+     128,
+     0
+    ]
+   },
+   "128px": {
+    "grid": [
+     14,
+     18
+    ],
+    "windows": 252,
+    "rust_windows": 34,
+    "overlap": [
+     5,
+     0
+    ],
+    "padding": [
+     64,
+     0
+    ]
+   }
+  },
+  "paper": {
+   "half_wh": [
+    2304,
+    1728
+   ],
+   "patches": 234,
+   "rust_patches": 34,
+   "dropped_px": [
+    0,
+    64
+   ],
+   "gp32": 3519
+  }
+ },
+ {
+  "id": "130",
+  "folder": "train",
+  "make": "HUAWEI",
+  "camera": "PAR-LX1M",
+  "orientation": 1,
+  "taken": "2022:03:04 10:55:33",
+  "paper_split": "train",
+  "split": "train",
+  "bytes": 5927118,
+  "pixel_md5": "59178990a4ff063ffe55f67e57fa59a1",
+  "photo_wh": [
+   4608,
+   3456
+  ],
+  "mask_wh": [
+   4608,
+   3456
+  ],
+  "mask_mode": "L",
+  "mask_values": [
+   0,
+   255
+  ],
+  "rust_px": 66286,
+  "pixels": 15925248,
+  "rust_share": 0.004162321365419238,
+  "contrast": 14.291547775268555,
+  "windows": {
+   "512px": {
+    "grid": [
+     7,
+     9
+    ],
+    "windows": 63,
+    "rust_windows": 20,
+    "overlap": [
+     22,
+     0
+    ],
+    "padding": [
+     128,
+     0
+    ]
+   },
+   "128px": {
+    "grid": [
+     14,
+     18
+    ],
+    "windows": 252,
+    "rust_windows": 36,
+    "overlap": [
+     5,
+     0
+    ],
+    "padding": [
+     64,
+     0
+    ]
+   }
+  },
+  "paper": {
+   "half_wh": [
+    2304,
+    1728
+   ],
+   "patches": 234,
+   "rust_patches": 32,
+   "dropped_px": [
+    0,
+    64
+   ],
+   "gp32": 3519
+  }
+ },
+ {
+  "id": "131",
+  "folder": "train",
+  "make": "HUAWEI",
+  "camera": "PAR-LX1M",
+  "orientation": 1,
+  "taken": "2022:03:04 10:55:29",
+  "paper_split": "train",
+  "split": "train",
+  "bytes": 6305409,
+  "pixel_md5": "ba92f9c5c54e83bd41ce64b7f1d041db",
+  "photo_wh": [
+   4608,
+   3456
+  ],
+  "mask_wh": [
+   4608,
+   3456
+  ],
+  "mask_mode": "L",
+  "mask_values": [
+   0,
+   255
+  ],
+  "rust_px": 52125,
+  "pixels": 15925248,
+  "rust_share": 0.0032731044439621914,
+  "contrast": 7.090761184692383,
+  "windows": {
+   "512px": {
+    "grid": [
+     7,
+     9
+    ],
+    "windows": 63,
+    "rust_windows": 18,
+    "overlap": [
+     22,
+     0
+    ],
+    "padding": [
+     128,
+     0
+    ]
+   },
+   "128px": {
+    "grid": [
+     14,
+     18
+    ],
+    "windows": 252,
+    "rust_windows": 30,
+    "overlap": [
+     5,
+     0
+    ],
+    "padding": [
+     64,
+     0
+    ]
+   }
+  },
+  "paper": {
+   "half_wh": [
+    2304,
+    1728
+   ],
+   "patches": 234,
+   "rust_patches": 25,
+   "dropped_px": [
+    0,
+    64
+   ],
+   "gp32": 3519
+  }
+ },
+ {
+  "id": "132",
+  "folder": "train",
+  "make": "HUAWEI",
+  "camera": "PAR-LX1M",
+  "orientation": 1,
+  "taken": "2022:03:04 11:05:08",
+  "paper_split": "train",
+  "split": "train",
+  "bytes": 4589223,
+  "pixel_md5": "1cec9f45432d78387d192be3b45e26f9",
+  "photo_wh": [
+   3456,
+   4608
+  ],
+  "mask_wh": [
+   3456,
+   4608
+  ],
+  "mask_mode": "L",
+  "mask_values": [
+   0,
+   255
+  ],
+  "rust_px": 115307,
+  "pixels": 15925248,
+  "rust_share": 0.007240515186953446,
+  "contrast": 26.573232650756836,
+  "windows": {
+   "512px": {
+    "grid": [
+     9,
+     7
+    ],
+    "windows": 63,
+    "rust_windows": 9,
+    "overlap": [
+     0,
+     22
+    ],
+    "padding": [
+     0,
+     128
+    ]
+   },
+   "128px": {
+    "grid": [
+     18,
+     14
+    ],
+    "windows": 252,
+    "rust_windows": 13,
+    "overlap": [
+     0,
+     5
+    ],
+    "padding": [
+     0,
+     64
+    ]
+   }
+  },
+  "paper": {
+   "half_wh": [
+    1728,
+    2304
+   ],
+   "patches": 234,
+   "rust_patches": 13,
+   "dropped_px": [
+    64,
+    0
+   ],
+   "gp32": 3519
+  }
+ },
+ {
+  "id": "133",
+  "folder": "train",
+  "make": "HUAWEI",
+  "camera": "PAR-LX1M",
+  "orientation": 1,
+  "taken": "2022:03:04 11:05:02",
+  "paper_split": "train",
+  "split": "train",
+  "bytes": 4288930,
+  "pixel_md5": "85ce32a2c6005bff040753975078986a",
+  "photo_wh": [
+   3456,
+   4608
+  ],
+  "mask_wh": [
+   3456,
+   4608
+  ],
+  "mask_mode": "L",
+  "mask_values": [
+   0,
+   255
+  ],
+  "rust_px": 55017,
+  "pixels": 15925248,
+  "rust_share": 0.00345470287181713,
+  "contrast": 25.440343856811523,
+  "windows": {
+   "512px": {
+    "grid": [
+     9,
+     7
+    ],
+    "windows": 63,
+    "rust_windows": 4,
+    "overlap": [
+     0,
+     22
+    ],
+    "padding": [
+     0,
+     128
+    ]
+   },
+   "128px": {
+    "grid": [
+     18,
+     14
+    ],
+    "windows": 252,
+    "rust_windows": 5,
+    "overlap": [
+     0,
+     5
+    ],
+    "padding": [
+     0,
+     64
+    ]
+   }
+  },
+  "paper": {
+   "half_wh": [
+    1728,
+    2304
+   ],
+   "patches": 234,
+   "rust_patches": 6,
+   "dropped_px": [
+    64,
+    0
+   ],
+   "gp32": 3519
+  }
+ },
+ {
+  "id": "134",
+  "folder": "train",
+  "make": "HUAWEI",
+  "camera": "PAR-LX1M",
+  "orientation": 1,
+  "taken": "2022:03:11 10:36:11",
+  "paper_split": "train",
+  "split": "train",
+  "bytes": 6489508,
+  "pixel_md5": "5525fb3b22b8fc78d2a0cf9a6f7eaac8",
+  "photo_wh": [
+   3456,
+   4608
+  ],
+  "mask_wh": [
+   3456,
+   4608
+  ],
+  "mask_mode": "L",
+  "mask_values": [
+   0,
+   255
+  ],
+  "rust_px": 31378,
+  "pixels": 15925248,
+  "rust_share": 0.0019703303835519547,
+  "contrast": 20.868282318115234,
+  "windows": {
+   "512px": {
+    "grid": [
+     9,
+     7
+    ],
+    "windows": 63,
+    "rust_windows": 19,
+    "overlap": [
+     0,
+     22
+    ],
+    "padding": [
+     0,
+     128
+    ]
+   },
+   "128px": {
+    "grid": [
+     18,
+     14
+    ],
+    "windows": 252,
+    "rust_windows": 26,
+    "overlap": [
+     0,
+     5
+    ],
+    "padding": [
+     0,
+     64
+    ]
+   }
+  },
+  "paper": {
+   "half_wh": [
+    1728,
+    2304
+   ],
+   "patches": 234,
+   "rust_patches": 24,
+   "dropped_px": [
+    64,
+    0
+   ],
+   "gp32": 3519
+  }
+ },
+ {
+  "id": "135",
+  "folder": "train",
+  "make": "HUAWEI",
+  "camera": "PAR-LX1M",
+  "orientation": 1,
+  "taken": "2022:03:11 10:35:52",
+  "paper_split": "train",
+  "split": "train",
+  "bytes": 6474807,
+  "pixel_md5": "0d5a3d8b483858d14efe8dad76aa17ad",
+  "photo_wh": [
+   3456,
+   4608
+  ],
+  "mask_wh": [
+   3456,
+   4608
+  ],
+  "mask_mode": "L",
+  "mask_values": [
+   0,
+   255
+  ],
+  "rust_px": 16594,
+  "pixels": 15925248,
+  "rust_share": 0.00104199319219393,
+  "contrast": 23.291309356689453,
+  "windows": {
+   "512px": {
+    "grid": [
+     9,
+     7
+    ],
+    "windows": 63,
+    "rust_windows": 7,
+    "overlap": [
+     0,
+     22
+    ],
+    "padding": [
+     0,
+     128
+    ]
+   },
+   "128px": {
+    "grid": [
+     18,
+     14
+    ],
+    "windows": 252,
+    "rust_windows": 11,
+    "overlap": [
+     0,
+     5
+    ],
+    "padding": [
+     0,
+     64
+    ]
+   }
+  },
+  "paper": {
+   "half_wh": [
+    1728,
+    2304
+   ],
+   "patches": 234,
+   "rust_patches": 9,
+   "dropped_px": [
+    64,
+    0
+   ],
+   "gp32": 3519
+  }
+ },
+ {
+  "id": "136",
+  "folder": "train",
+  "make": "HUAWEI",
+  "camera": "PAR-LX1M",
+  "orientation": 1,
+  "taken": "2022:03:11 10:35:14",
+  "paper_split": "val",
+  "split": "val",
+  "bytes": 2901579,
+  "pixel_md5": "b780fdbafbd786581774105c22541847",
+  "photo_wh": [
+   4608,
+   3456
+  ],
+  "mask_wh": [
+   4608,
+   3456
+  ],
+  "mask_mode": "L",
+  "mask_values": [
+   0,
+   255
+  ],
+  "rust_px": 84315,
+  "pixels": 15925248,
+  "rust_share": 0.005294423044463734,
+  "contrast": 23.938060760498047,
+  "windows": {
+   "512px": {
+    "grid": [
+     7,
+     9
+    ],
+    "windows": 63,
+    "rust_windows": 6,
+    "overlap": [
+     22,
+     0
+    ],
+    "padding": [
+     128,
+     0
+    ]
+   },
+   "128px": {
+    "grid": [
+     14,
+     18
+    ],
+    "windows": 252,
+    "rust_windows": 13,
+    "overlap": [
+     5,
+     0
+    ],
+    "padding": [
+     64,
+     0
+    ]
+   }
+  },
+  "paper": {
+   "half_wh": [
+    2304,
+    1728
+   ],
+   "patches": 234,
+   "rust_patches": 10,
+   "dropped_px": [
+    0,
+    64
+   ],
+   "gp32": 3519
+  }
+ },
+ {
+  "id": "137",
+  "folder": "train",
+  "make": "HUAWEI",
+  "camera": "PAR-LX1M",
+  "orientation": 1,
+  "taken": "2022:03:11 10:35:05",
+  "paper_split": "train",
+  "split": "train",
+  "bytes": 2992082,
+  "pixel_md5": "34db2c1116abc303a61ebe88e318eda3",
+  "photo_wh": [
+   3456,
+   4608
+  ],
+  "mask_wh": [
+   3456,
+   4608
+  ],
+  "mask_mode": "L",
+  "mask_values": [
+   0,
+   255
+  ],
+  "rust_px": 82571,
+  "pixels": 15925248,
+  "rust_share": 0.0051849114060892485,
+  "contrast": 27.776020050048828,
+  "windows": {
+   "512px": {
+    "grid": [
+     9,
+     7
+    ],
+    "windows": 63,
+    "rust_windows": 11,
+    "overlap": [
+     0,
+     22
+    ],
+    "padding": [
+     0,
+     128
+    ]
+   },
+   "128px": {
+    "grid": [
+     18,
+     14
+    ],
+    "windows": 252,
+    "rust_windows": 17,
+    "overlap": [
+     0,
+     5
+    ],
+    "padding": [
+     0,
+     64
+    ]
+   }
+  },
+  "paper": {
+   "half_wh": [
+    1728,
+    2304
+   ],
+   "patches": 234,
+   "rust_patches": 15,
+   "dropped_px": [
+    64,
+    0
+   ],
+   "gp32": 3519
+  }
+ },
+ {
+  "id": "138",
+  "folder": "train",
+  "make": "HUAWEI",
+  "camera": "PAR-LX1M",
+  "orientation": 1,
+  "taken": "2022:03:11 10:36:45",
+  "paper_split": "train",
+  "split": "train",
+  "bytes": 2736717,
+  "pixel_md5": "c20995dacdf9753b0848ce8b58da72e4",
+  "photo_wh": [
+   3456,
+   4608
+  ],
+  "mask_wh": [
+   3456,
+   4608
+  ],
+  "mask_mode": "L",
+  "mask_values": [
+   0,
+   255
+  ],
+  "rust_px": 408716,
+  "pixels": 15925248,
+  "rust_share": 0.025664655269418725,
+  "contrast": 17.56758689880371,
+  "windows": {
+   "512px": {
+    "grid": [
+     9,
+     7
+    ],
+    "windows": 63,
+    "rust_windows": 23,
+    "overlap": [
+     0,
+     22
+    ],
+    "padding": [
+     0,
+     128
+    ]
+   },
+   "128px": {
+    "grid": [
+     18,
+     14
+    ],
+    "windows": 252,
+    "rust_windows": 41,
+    "overlap": [
+     0,
+     5
+    ],
+    "padding": [
+     0,
+     64
+    ]
+   }
+  },
+  "paper": {
+   "half_wh": [
+    1728,
+    2304
+   ],
+   "patches": 234,
+   "rust_patches": 43,
+   "dropped_px": [
+    64,
+    0
+   ],
+   "gp32": 3519
+  }
+ },
+ {
+  "id": "139",
+  "folder": "train",
+  "make": "HUAWEI",
+  "camera": "PAR-LX1M",
+  "orientation": 1,
+  "taken": "2022:03:11 10:34:20",
+  "paper_split": "train",
+  "split": "train",
+  "bytes": 5146248,
+  "pixel_md5": "a304e6615c435af965254a5965641d23",
+  "photo_wh": [
+   4608,
+   3456
+  ],
+  "mask_wh": [
+   4608,
+   3456
+  ],
+  "mask_mode": "L",
+  "mask_values": [
+   0,
+   255
+  ],
+  "rust_px": 161435,
+  "pixels": 15925248,
+  "rust_share": 0.010137047787262089,
+  "contrast": 22.753623962402344,
+  "windows": {
+   "512px": {
+    "grid": [
+     7,
+     9
+    ],
+    "windows": 63,
+    "rust_windows": 32,
+    "overlap": [
+     22,
+     0
+    ],
+    "padding": [
+     128,
+     0
+    ]
+   },
+   "128px": {
+    "grid": [
+     14,
+     18
+    ],
+    "windows": 252,
+    "rust_windows": 54,
+    "overlap": [
+     5,
+     0
+    ],
+    "padding": [
+     64,
+     0
+    ]
+   }
+  },
+  "paper": {
+   "half_wh": [
+    2304,
+    1728
+   ],
+   "patches": 234,
+   "rust_patches": 47,
+   "dropped_px": [
+    0,
+    64
+   ],
+   "gp32": 3519
+  }
+ },
+ {
+  "id": "140",
+  "folder": "train",
+  "make": "HUAWEI",
+  "camera": "PAR-LX1M",
+  "orientation": 1,
+  "taken": "2022:03:11 10:34:17",
+  "paper_split": "train",
+  "split": "train",
+  "bytes": 4785828,
+  "pixel_md5": "68d0a0d52b492e700de8b1f5d2be9f44",
+  "photo_wh": [
+   4608,
+   3456
+  ],
+  "mask_wh": [
+   4608,
+   3456
+  ],
+  "mask_mode": "L",
+  "mask_values": [
+   0,
+   255
+  ],
+  "rust_px": 100091,
+  "pixels": 15925248,
+  "rust_share": 0.006285051259484311,
+  "contrast": 19.16006088256836,
+  "windows": {
+   "512px": {
+    "grid": [
+     7,
+     9
+    ],
+    "windows": 63,
+    "rust_windows": 19,
+    "overlap": [
+     22,
+     0
+    ],
+    "padding": [
+     128,
+     0
+    ]
+   },
+   "128px": {
+    "grid": [
+     14,
+     18
+    ],
+    "windows": 252,
+    "rust_windows": 29,
+    "overlap": [
+     5,
+     0
+    ],
+    "padding": [
+     64,
+     0
+    ]
+   }
+  },
+  "paper": {
+   "half_wh": [
+    2304,
+    1728
+   ],
+   "patches": 234,
+   "rust_patches": 27,
+   "dropped_px": [
+    0,
+    64
+   ],
+   "gp32": 3519
+  }
+ },
+ {
+  "id": "141",
+  "folder": "train",
+  "make": "HUAWEI",
+  "camera": "PAR-LX1M",
+  "orientation": 1,
+  "taken": "2022:03:11 10:44:36",
+  "paper_split": "train",
+  "split": "train",
+  "bytes": 6145465,
+  "pixel_md5": "cbe8dd6bb964e26bf58bb08bcb5510d8",
+  "photo_wh": [
+   3456,
+   4608
+  ],
+  "mask_wh": [
+   3456,
+   4608
+  ],
+  "mask_mode": "L",
+  "mask_values": [
+   0,
+   255
+  ],
+  "rust_px": 75918,
+  "pixels": 15925248,
+  "rust_share": 0.004767147111304012,
+  "contrast": 23.021224975585938,
+  "windows": {
+   "512px": {
+    "grid": [
+     9,
+     7
+    ],
+    "windows": 63,
+    "rust_windows": 15,
+    "overlap": [
+     0,
+     22
+    ],
+    "padding": [
+     0,
+     128
+    ]
+   },
+   "128px": {
+    "grid": [
+     18,
+     14
+    ],
+    "windows": 252,
+    "rust_windows": 23,
+    "overlap": [
+     0,
+     5
+    ],
+    "padding": [
+     0,
+     64
+    ]
+   }
+  },
+  "paper": {
+   "half_wh": [
+    1728,
+    2304
+   ],
+   "patches": 234,
+   "rust_patches": 21,
+   "dropped_px": [
+    64,
+    0
+   ],
+   "gp32": 3519
+  }
+ },
+ {
+  "id": "142",
+  "folder": "train",
+  "make": "HUAWEI",
+  "camera": "PAR-LX1M",
+  "orientation": 1,
+  "taken": "2022:03:11 10:44:27",
+  "paper_split": "train",
+  "split": "train",
+  "bytes": 5833644,
+  "pixel_md5": "44ed252fae9b0586acef95b5fa43429f",
+  "photo_wh": [
+   3456,
+   4608
+  ],
+  "mask_wh": [
+   3456,
+   4608
+  ],
+  "mask_mode": "L",
+  "mask_values": [
+   0,
+   255
+  ],
+  "rust_px": 55763,
+  "pixels": 15925248,
+  "rust_share": 0.0035015467263052984,
+  "contrast": 23.463424682617188,
+  "windows": {
+   "512px": {
+    "grid": [
+     9,
+     7
+    ],
+    "windows": 63,
+    "rust_windows": 12,
+    "overlap": [
+     0,
+     22
+    ],
+    "padding": [
+     0,
+     128
+    ]
+   },
+   "128px": {
+    "grid": [
+     18,
+     14
+    ],
+    "windows": 252,
+    "rust_windows": 19,
+    "overlap": [
+     0,
+     5
+    ],
+    "padding": [
+     0,
+     64
+    ]
+   }
+  },
+  "paper": {
+   "half_wh": [
+    1728,
+    2304
+   ],
+   "patches": 234,
+   "rust_patches": 17,
+   "dropped_px": [
+    64,
+    0
+   ],
+   "gp32": 3519
+  }
+ },
+ {
+  "id": "144",
+  "folder": "train",
+  "make": "HUAWEI",
+  "camera": "PAR-LX1M",
+  "orientation": 1,
+  "taken": "2022:03:11 10:44:03",
+  "paper_split": "train",
+  "split": "train",
+  "bytes": 5913765,
+  "pixel_md5": "9c9d2e5b84da87e6f671eaf6e4591d81",
+  "photo_wh": [
+   3456,
+   4608
+  ],
+  "mask_wh": [
+   3456,
+   4608
+  ],
+  "mask_mode": "L",
+  "mask_values": [
+   0,
+   255
+  ],
+  "rust_px": 22993,
+  "pixels": 15925248,
+  "rust_share": 0.0014438079708397635,
+  "contrast": 23.537927627563477,
+  "windows": {
+   "512px": {
+    "grid": [
+     9,
+     7
+    ],
+    "windows": 63,
+    "rust_windows": 4,
+    "overlap": [
+     0,
+     22
+    ],
+    "padding": [
+     0,
+     128
+    ]
+   },
+   "128px": {
+    "grid": [
+     18,
+     14
+    ],
+    "windows": 252,
+    "rust_windows": 8,
+    "overlap": [
+     0,
+     5
+    ],
+    "padding": [
+     0,
+     64
+    ]
+   }
+  },
+  "paper": {
+   "half_wh": [
+    1728,
+    2304
+   ],
+   "patches": 234,
+   "rust_patches": 8,
+   "dropped_px": [
+    64,
+    0
+   ],
+   "gp32": 3519
+  }
+ },
+ {
+  "id": "145",
+  "folder": "train",
+  "make": "HUAWEI",
+  "camera": "PAR-LX1M",
+  "orientation": 1,
+  "taken": "2022:03:11 10:43:56",
+  "paper_split": "train",
+  "split": "train",
+  "bytes": 5431465,
+  "pixel_md5": "ecac4ef899fa84a5a517cbffc39cb4d2",
+  "photo_wh": [
+   3456,
+   4608
+  ],
+  "mask_wh": [
+   3456,
+   4608
+  ],
+  "mask_mode": "L",
+  "mask_values": [
+   0,
+   255
+  ],
+  "rust_px": 37428,
+  "pixels": 15925248,
+  "rust_share": 0.0023502302758487653,
+  "contrast": 17.0081787109375,
+  "windows": {
+   "512px": {
+    "grid": [
+     9,
+     7
+    ],
+    "windows": 63,
+    "rust_windows": 14,
+    "overlap": [
+     0,
+     22
+    ],
+    "padding": [
+     0,
+     128
+    ]
+   },
+   "128px": {
+    "grid": [
+     18,
+     14
+    ],
+    "windows": 252,
+    "rust_windows": 18,
+    "overlap": [
+     0,
+     5
+    ],
+    "padding": [
+     0,
+     64
+    ]
+   }
+  },
+  "paper": {
+   "half_wh": [
+    1728,
+    2304
+   ],
+   "patches": 234,
+   "rust_patches": 17,
+   "dropped_px": [
+    64,
+    0
+   ],
+   "gp32": 3519
+  }
+ },
+ {
+  "id": "146",
+  "folder": "train",
+  "make": "HUAWEI",
+  "camera": "PAR-LX1M",
+  "orientation": 1,
+  "taken": "2022:03:11 10:43:46",
+  "paper_split": "train",
+  "split": "train",
+  "bytes": 3327563,
+  "pixel_md5": "c65959f0011b5b2e7d5c38b3b17e0e9b",
+  "photo_wh": [
+   3456,
+   4608
+  ],
+  "mask_wh": [
+   3456,
+   4608
+  ],
+  "mask_mode": "L",
+  "mask_values": [
+   0,
+   255
+  ],
+  "rust_px": 66834,
+  "pixels": 15925248,
+  "rust_share": 0.004196732132523148,
+  "contrast": 22.939531326293945,
+  "windows": {
+   "512px": {
+    "grid": [
+     9,
+     7
+    ],
+    "windows": 63,
+    "rust_windows": 10,
+    "overlap": [
+     0,
+     22
+    ],
+    "padding": [
+     0,
+     128
+    ]
+   },
+   "128px": {
+    "grid": [
+     18,
+     14
+    ],
+    "windows": 252,
+    "rust_windows": 18,
+    "overlap": [
+     0,
+     5
+    ],
+    "padding": [
+     0,
+     64
+    ]
+   }
+  },
+  "paper": {
+   "half_wh": [
+    1728,
+    2304
+   ],
+   "patches": 234,
+   "rust_patches": 15,
+   "dropped_px": [
+    64,
+    0
+   ],
+   "gp32": 3519
+  }
+ },
+ {
+  "id": "149",
+  "folder": "train",
+  "make": "HUAWEI",
+  "camera": "PAR-LX1M",
+  "orientation": 1,
+  "taken": "2022:03:11 10:38:21",
+  "paper_split": "val",
+  "split": "val",
+  "bytes": 5683193,
+  "pixel_md5": "83a53ca63e66540324bd3eaf228ec44e",
+  "photo_wh": [
+   3424,
+   3968
+  ],
+  "mask_wh": [
+   3424,
+   3968
+  ],
+  "mask_mode": "L",
+  "mask_values": [
+   0,
+   255
+  ],
+  "rust_px": 18993,
+  "pixels": 13586432,
+  "rust_share": 0.001397938767146518,
+  "contrast": 4.92696475982666,
+  "windows": {
+   "512px": {
+    "grid": [
+     8,
+     7
+    ],
+    "windows": 56,
+    "rust_windows": 18,
+    "overlap": [
+     19,
+     27
+    ],
+    "padding": [
+     128,
+     160
+    ]
+   },
+   "128px": {
+    "grid": [
+     16,
+     14
+    ],
+    "windows": 224,
+    "rust_windows": 12,
+    "overlap": [
+     5,
+     7
+    ],
+    "padding": [
+     64,
+     80
+    ]
+   }
+  },
+  "paper": {
+   "half_wh": [
+    1712,
+    1984
+   ],
+   "patches": 195,
+   "rust_patches": 15,
+   "dropped_px": [
+    48,
+    64
+   ],
+   "gp32": 2950
+  }
+ },
+ {
+  "id": "150",
+  "folder": "train",
+  "make": "HUAWEI",
+  "camera": "PAR-LX1M",
+  "orientation": 1,
+  "taken": "2022:03:11 10:43:20",
+  "paper_split": "val",
+  "split": "val",
+  "bytes": 6592135,
+  "pixel_md5": "4c253cca6189343e96019c9348962abb",
+  "photo_wh": [
+   4608,
+   3456
+  ],
+  "mask_wh": [
+   4608,
+   3456
+  ],
+  "mask_mode": "L",
+  "mask_values": [
+   0,
+   255
+  ],
+  "rust_px": 53584,
+  "pixels": 15925248,
+  "rust_share": 0.0033647199717078188,
+  "contrast": 6.68378210067749,
+  "windows": {
+   "512px": {
+    "grid": [
+     7,
+     9
+    ],
+    "windows": 63,
+    "rust_windows": 27,
+    "overlap": [
+     22,
+     0
+    ],
+    "padding": [
+     128,
+     0
+    ]
+   },
+   "128px": {
+    "grid": [
+     14,
+     18
+    ],
+    "windows": 252,
+    "rust_windows": 33,
+    "overlap": [
+     5,
+     0
+    ],
+    "padding": [
+     64,
+     0
+    ]
+   }
+  },
+  "paper": {
+   "half_wh": [
+    2304,
+    1728
+   ],
+   "patches": 234,
+   "rust_patches": 33,
+   "dropped_px": [
+    0,
+    64
+   ],
+   "gp32": 3519
+  }
+ }
+]
