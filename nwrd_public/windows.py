@@ -3,9 +3,9 @@
 The release's photographs have 10 sizes, and none has both sides a whole number of 512 px. On a
 side of L px, ceil(L / P) windows of P px are spread evenly from 0 to L - P. No padding is
 needed, every pixel is covered, and neighbours overlap only by what L lacks of a whole number of
-windows (at most 72 px at 512px, 11 px at 128px). For scoring, each overlap is split at its
-midpoint, so every pixel is scored exactly once, by the window whose centre is nearer
-(docs/protocol.md §3).
+windows (on the photographs used, at most 46 px at 512px and 11 px at 128px). For scoring, each
+overlap is split at its midpoint, so every pixel is scored exactly once, by the window whose
+centre is nearer (docs/protocol.md §3).
 
 At the NWRD paper's scale a photograph is first resized by 0.5 with an anti-aliased Lanczos filter,
 and its mask by area (a half-size pixel is rust when at least half of the area it replaces is).

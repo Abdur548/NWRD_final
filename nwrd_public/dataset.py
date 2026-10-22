@@ -23,7 +23,11 @@ ZENODO_BYTES = 608_898_312
 
 # The authors' validation photographs: their loader shuffles the sorted training file names with
 # NumPy seed 0 and keeps the first 10% (paper_validation_ids). Their test set is the test/ folder.
-VAL_IDS = ('2', '30', '72', '87', '101', '118', '136', '149', '150')
+PAPER_VAL_IDS = ('2', '30', '72', '87', '101', '118', '136', '149', '150')
+# Photo 101's mask is 19 px narrower and 21 px shorter than the photograph, and lines up with it
+# only shifted 8 px left and 1 px up, partly past its edge (docs/dataset.md §3): it is in no split.
+EXCLUDED_MISALIGNED = ('101',)
+VAL_IDS = tuple(i for i in PAPER_VAL_IDS if i not in EXCLUDED_MISALIGNED)
 # The release repeats ten scenes: nine pairs of files decode to identical pixels, and 149 is 99
 # cropped and saved again; each copy has its own mask. These four training photographs are twins
 # of validation or test photographs (value), so no model trains on them.
@@ -84,16 +88,16 @@ def paper_validation_ids(train_images: list[str]) -> list[str]:
 
 def splits(manifest: dict) -> dict[str, list[str]]:
     """Photograph ids per split, each sorted by number: the authors' validation and test
-    photographs, and their training photographs without EXCLUDED_TWINS."""
+    photographs, and their training photographs without EXCLUDED_TWINS; photo 101
+    (EXCLUDED_MISALIGNED) in none."""
     folders = photo_folders(manifest)
-    stray = [i for i in VAL_IDS if folders.get(i) != 'train']
+    stray = [i for i in PAPER_VAL_IDS if folders.get(i) != 'train']
     if stray:
         raise ValueError(f'validation photographs {stray} are not in the release train/ folder')
+    held_out = set(PAPER_VAL_IDS) | set(EXCLUDED_TWINS) | set(EXCLUDED_MISALIGNED)
     in_train = [i for i, f in folders.items() if f == 'train']
     return {
-        'train': sorted(
-            (i for i in in_train if i not in VAL_IDS and i not in EXCLUDED_TWINS), key=int
-        ),
+        'train': sorted((i for i in in_train if i not in held_out), key=int),
         'val': sorted(VAL_IDS, key=int),
         'test': sorted((i for i, f in folders.items() if f == 'test'), key=int),
     }
@@ -176,18 +180,18 @@ def read_photo(root: str, folder: str, pid: str) -> tuple[np.ndarray, np.ndarray
     """One photograph (RGB uint8) and its rust mask (bool), of the same shape.
 
     The stored pixels are used as they are: every photograph has EXIF orientation 1 or none, and
-    every mask matches its photograph's stored size, except photo 101's, which is 19 px narrower
-    and 21 px shorter and lines up with its top-left corner (docs/dataset.md). A photograph is
-    therefore cropped to a smaller mask at the top left; a larger mask is an error."""
+    every mask matches its photograph's stored size, except photo 101's, which is in no split
+    (EXCLUDED_MISALIGNED). A mask of another size is an error: where it belongs on the photograph
+    cannot be assumed."""
     path = _file(root, folder, 'images', pid)
     bgr = cv2.imread(path, cv2.IMREAD_COLOR | cv2.IMREAD_IGNORE_ORIENTATION)
     if bgr is None:
         raise FileNotFoundError(path)
     rust = read_mask(root, folder, pid)
     (h, w), (mh, mw) = bgr.shape[:2], rust.shape
-    if mh > h or mw > w:
-        raise ValueError(f'photo {pid}: mask {mw}x{mh} is larger than the photograph {w}x{h}')
-    return cv2.cvtColor(bgr[:mh, :mw], cv2.COLOR_BGR2RGB), rust
+    if (mh, mw) != (h, w):
+        raise ValueError(f'photo {pid}: mask {mw}x{mh} does not match the photograph {w}x{h}')
+    return cv2.cvtColor(bgr, cv2.COLOR_BGR2RGB), rust
 
 
 def camera(root: str, folder: str, pid: str) -> str:

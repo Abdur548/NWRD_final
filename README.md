@@ -15,7 +15,7 @@ Kaggle runs have not been made yet. Results will appear in `results/` and `docs/
 - **10 photograph sizes** (6016×4000 Nikon, 4608×3456 and 3456×4608 Huawei, 7 cropped ones), and
   no photograph has both sides a whole number of windows. Windows are therefore placed on a
   stride fitted to each photograph: ⌈L/512⌉ windows spread evenly over a side of L pixels, no
-  padding, overlaps of 0–72 px. Every pixel of a validation or test photograph is scored exactly
+  padding, overlaps of 0–46 px. Every pixel of a validation or test photograph is scored exactly
   once, at native resolution, at both scales (512px native, and the paper's 128px windows of
   halved photographs).
 - **Rust is sparse**: 0.57% of all pixels, and 0.61% of the training photographs' pixels against
@@ -23,7 +23,10 @@ Kaggle runs have not been made yet. Results will appear in `results/` and `docs/
 - **The release repeats ten scenes** with different masks (twin masks agree at IoU 0.40–0.63),
   and under the paper's split two test and two validation photographs have their twin in
   training. This study keeps the paper's validation and test photographs and leaves those four
-  twins out of training: 77 / 9 / 10 photographs.
+  twins out of training.
+- **Photo 101's mask is misplaced**: it is smaller than the photograph and lines up with it only
+  shifted 8 px left and 1 px up, past its edge. 101, one of the paper's validation photographs,
+  is left out: 77 / 8 / 10 photographs.
 
 Details: [`docs/dataset.md`](docs/dataset.md). Protocol and decision rule:
 [`docs/protocol.md`](docs/protocol.md).

@@ -50,8 +50,14 @@ again, each copy with its own mask ([`dataset.md`](dataset.md) §4).
 | Split | Photographs | Which |
 |---|---|---|
 | Test | 10 | The release's `test/` folder: 25, 29, 62, 63, 67, 77, 80, 89, 105, 123. Also the NWRD paper's test set |
-| Validation | 9 | 2, 30, 72, 87, 101, 118, 136, 149, 150: the NWRD paper's, drawn by its code with NumPy seed 0 from the sorted training file names (reproduced exactly) |
+| Validation | 8 | 2, 30, 72, 87, 118, 136, 149, 150: the NWRD paper's, drawn by its code with NumPy seed 0 from the sorted training file names (reproduced exactly), without 101 |
 | Training | 77 | The other 81 photographs of `train/` except 79, 86, 96 and 99 |
+
+*Amended 2026-10-23, before any result:* photo 101, the paper's ninth validation photograph, is
+in no split. Its mask is 19 px narrower and 21 px shorter than the photograph and lines up with
+it only shifted 8 px left and 1 px up, partly past the photograph's edge
+([`dataset.md`](dataset.md) §3); it was first taken to line up with the top-left corner. The
+first 512px runs, which validated on it, were stopped before they finished and were not used.
 
 Photographs 79, 86, 96 and 99 are twins of test photographs 80 and 89 and of validation
 photographs 87 and 149. The paper trained on them; no model here does, so no model is validated
@@ -68,8 +74,8 @@ exactly the paper's, and so are its 2,737 test patches (§3.3).
 A side of L pixels gets ⌈L/P⌉ windows of P pixels, spread evenly from 0 to L − P (window i starts
 at round(i·(L − P)/(n − 1)); `nwrd_public/windows.py`). Every pixel is covered and nothing is
 padded; neighbouring windows overlap only by what L lacks of a whole number of windows. At 512px
-that is 0 px on sides of 4608, 12–14 px on 6016 and 4000, 22 px on 3456, and at most 72 px (one
-cropped photograph); at 128px at most 11 px. A padded grid would instead add up to 503 px of
+that is 0 px on sides of 4608, 12–14 px on 6016 and 4000, 22 px on 3456, and at most 46 px (on
+cropped photographs); at 128px at most 11 px. A padded grid would instead add up to 360 px of
 black, and resizing whole photographs would shrink rust pustules a few pixels wide. A side
 shorter than a window is an error, never padded.
 
@@ -79,9 +85,8 @@ and its mask by area: a half-size pixel is rust when at least half of the area i
 OpenCV's `INTER_LANCZOS4`, which `NWRD_final` used, keeps a fixed kernel when shrinking and lets
 fine leaf texture fold back into false patterns.
 
-Photo 101's mask is 19 px narrower and 21 px shorter than the photograph and lines up with its
-top-left corner, so the photograph is cropped to the mask before anything else
-([`dataset.md`](dataset.md) §3).
+Every photograph used has a mask of its own size; reading one whose mask has another size is an
+error (`dataset.read_photo`), since where such a mask belongs cannot be assumed (photo 101, §2).
 
 ### 3.2 Training windows
 
@@ -150,8 +155,8 @@ up, so the best threshold may lie above 0.95; the threshold grid is therefore wi
 run whose threshold still lands on the grid's edge is flagged in the reports.
 
 Rough cost on a T4 for three seeds, from `NWRD_final`'s mean epoch times scaled to these
-samples (`results/dataset/summary.md`): at 512px CANet-B4 3.0 h, UNet 6.2 h, DeepLabV3+ R50
-2.0 h; at 128px 2.6, 1.5 and 1.0 h. About 16 GPU-hours in all; each (model, scale) fits in one
+samples (`results/dataset/summary.md`): at 512px CANet-B4 3.0 h, UNet 6.1 h, DeepLabV3+ R50
+2.0 h; at 128px 2.6, 1.4 and 1.0 h. About 16 GPU-hours in all; each (model, scale) fits in one
 Kaggle session.
 
 ---
@@ -190,6 +195,7 @@ as they come out, whichever way they go.
 |---|---|---|---|
 | Photographs and test set | The release; test = its `test/` folder | The same | Same data and test photographs |
 | Training set | 81 photographs, including twins of test photographs 80 and 89 and of validation photographs 87 and 149 | 77: those four twins left out | The paper's test numbers include a leak; ours do not |
+| Validation set | 9 photographs, including 101 with its mask misplaced by 8 px | 8: 101 left out | Checkpoint and threshold choice only; the test set is unchanged |
 | Scale and windows | 0.5× Lanczos, 128px patches on a grid from the origin; training at stride 32 | 512px native and the paper's 0.5×/128px (anti-aliased Lanczos), both on fitted grids with no padding | The `128px` scale matches its patch size and resizing as described; the authors' resizing code is not public |
 | Patch sampling | APF: rust patches plus, every 5 epochs, patches where the model produced false positives | All rust windows plus a fixed 20% of background windows | APF is not reproduced; the re-trained `unet` tests the paper's architecture, not its full method |
 | Loss | Focal loss | 0.7·Dice + 0.3·weighted BCE | Same for every model here |
@@ -205,7 +211,7 @@ as they come out, whichever way they go.
 ## 7. Threats to validity
 
 1. **Test set size.** Every test number rests on 10 photographs, and the checkpoint and threshold
-   are chosen on 9.
+   are chosen on 8.
 2. **Annotation agreement.** Where the release holds two masks of the same photograph, they
    agree at IoU 0.40 to 0.63 (median 0.50). A model's IoU against one annotation is bounded by
    how consistently rust is annotated, so absolute IoUs here are low by construction and should

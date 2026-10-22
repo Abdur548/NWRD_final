@@ -57,7 +57,8 @@ def test_windows_cover_every_pixel_without_padding(length, size, scale):
 
 
 def test_documented_overlaps():
-    assert [overlap(n) for n in (4608, 6016, 4000, 3456, 3593)] == [0, 12, 14, 22, 72]
+    # 2844 (photo 105) is the largest among the photographs used; 101's 3593 would be 72.
+    assert [overlap(n) for n in (4608, 6016, 4000, 3456, 2844)] == [0, 12, 14, 22, 46]
     assert max(overlap(round(n / 2), 128) for n in SIDES) == 11
 
 
@@ -158,12 +159,12 @@ def test_halving_removes_detail_half_the_resolution_cannot_hold():
 @pytest.mark.parametrize('scale', [1.0, 0.5])
 def test_cut_windows_are_crops_of_the_resized_photograph(synthetic_release, tmp_path, scale):
     release = open_release(synthetic_release.root, synthetic_release.manifest, limit=2, log=_quiet)
-    info = cut_training_windows(release, ['101'], str(tmp_path), 128, scale, 1.0, 42, log=_quiet)
-    rgb, rust = read_photo(release.root, 'train', '101')
+    info = cut_training_windows(release, ['3'], str(tmp_path), 128, scale, 1.0, 42, log=_quiet)
+    rgb, rust = read_photo(release.root, 'train', '3')
     rgb, rust = resize_photo(rgb, scale), resize_mask(rust, scale)
     assert info['windows'] == len(grid(*rust.shape, 128)) == info['sample']  # every window kept
     for (y, x), name in zip(grid(*rust.shape, 128), info['files'], strict=True):
-        assert name == window_name('101', y, x)
+        assert name == window_name('3', y, x)
         img = cv2.cvtColor(cv2.imread(str(tmp_path / 'images' / name)), cv2.COLOR_BGR2RGB)
         mask = cv2.imread(str(tmp_path / 'masks' / name), cv2.IMREAD_GRAYSCALE) > 127
         assert np.array_equal(img, rgb[y : y + 128, x : x + 128])

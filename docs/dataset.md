@@ -57,22 +57,31 @@ NWRD paper's (§6); this study then leaves four twins out of training (§4).
 | **All** | | **81** | **9** | **10** | **100** | | |
 
 The cropped photographs are 110 (2536×4600), 111 (4608×2909), 102 (4248×2984) and 103
-(3456×3584) in training; 101 (3612×3456) and 149 (3424×3968) in validation; 105 (4604×2844) in
-test. 101, 102 and 103 carry no EXIF.
+(3456×3584) in training; 101 (3612×3456) and 149 (3424×3968) in the paper's validation set;
+105 (4604×2844) in test. 101, 102 and 103 carry no EXIF. This study leaves 101 out (below).
 
 - **No photograph needs rotating.** 97 have EXIF orientation 1 and 3 have no EXIF, so the
   portrait photographs are stored as portrait pixels, and every mask has its photograph's stored
-  size, photo 101 aside.
+  size, photo 101 aside (below).
 - **Every mask holds only the values 0 and 255**, so binarising at > 0 (the authors) or at > 127
   (this code) gives the same masks.
 - **Every mask lines up with its photograph.** In all 99 masks of their photograph's size, the
   pixels under the mask are clearly more orange than the rest: mean R − G higher by 2.9 to 48.5
   (median 23.0), measured at 1/8 scale.
-- **Photo 101's mask is 19 px narrower and 21 px shorter than the photograph** (3593×3435 on
-  3612×3456). Tried at every placement inside the photograph, it lines up best with the
-  top-left corner: rust contrast 17.4 there, against 10.1 centred, 7.1 at the bottom right and
-  9.2 stretched to the photograph's size. The unannotated right and bottom strips are therefore
-  cropped off (`dataset.read_photo`), which is also what the authors' loader effectively did.
+- **Photo 101's mask is 19 px narrower and 21 px shorter than the photograph, and misplaced**
+  (3593×3435 on 3612×3456). Among placements entirely inside the photograph, the top-left corner
+  fits best (rust contrast 17.4, against 10.1 centred, 7.1 at the bottom right and 9.2 stretched
+  to the photograph's size), and it was first taken to line up there. Searching up to 24 px past
+  the edges at full resolution, it fits best with its corner 8 px left of and 1 px above the
+  photograph's: contrast 21.1, a gain of 3.7. The six other cropped photographs, whose masks
+  have their size, fit best within 3 px of their own corner and gain at most 0.4 from any shift
+  (`results/dataset/summary.md`, "EXIF, masks and alignment"). Outlines of the mask drawn on the
+  photograph show the same (`results/dataset/mask_101.png`, its three largest annotations): placed
+  at the corner they sit about 8 px right of the rust streaks, shifted they sit on them, on the
+  left, middle and right of the photograph alike. The authors'
+  loader used it at the corner, as this study first did. **101 is in no split** (it was one of
+  the paper's nine validation photographs): its mask's right and bottom edges are unknown, and
+  `dataset.read_photo` refuses a mask of another size than its photograph.
 
 ---
 
@@ -114,7 +123,7 @@ but it covers only 0.57% of all pixels.
 | Split | Photographs | Rust share per photograph: min / median / max | Pooled |
 |---|---|---|---|
 | Train (the paper's) | 81 | 0.03% / 0.35% / 2.99% | 0.60% |
-| Validation | 9 | 0.12% / 0.27% / 0.67% | 0.30% |
+| Validation (the paper's) | 9 | 0.12% / 0.27% / 0.67% | 0.30% |
 | Test | 10 | 0.08% / 0.52% / 1.24% | 0.63% |
 | Train (ours, without the four twins) | 77 | 0.03% / 0.36% / 2.99% | 0.61% |
 
@@ -133,7 +142,8 @@ Table 2:
 - **Test set = the release's `test` folder.** The code reads only `train/` and `test/`.
 - **Validation = 9 of the 90 training photographs**, drawn by `np.random.seed(0)` over the sorted
   file names (`BaseDataLoader._split_sampler`, validation_split 0.1): photographs 2, 30, 72, 87,
-  101, 118, 136, 149 and 150 (`dataset.paper_validation_ids` reproduces the draw).
+  101, 118, 136, 149 and 150 (`dataset.paper_validation_ids` reproduces the draw). This study
+  validates on the same photographs without 101 (§3).
 - **Patches:** photographs halved with a Lanczos filter before training, then 128×128 patches on a
   grid **starting at the origin, without padding**. Training uses stride 32 (and APF); validation
   and test use stride 128, so whatever does not fill a whole patch at the right and bottom edges
@@ -170,14 +180,14 @@ README) give 468.
 
 How windows are fitted to each size, and how every pixel is scored once, is in
 [`protocol.md`](protocol.md) §3. Per size class (`results/dataset/summary.md`, "Windows per
-size"): 512px windows overlap by at most 22 px on the three common sizes and 72 px on photo
-101's, where a padded grid would add up to 503 px of black; 128px windows of the halved
-photographs overlap by at most 11 px.
+size"): 512px windows overlap by at most 22 px on the three common sizes and 46 px on the
+cropped photographs used (72 px on the excluded 101), where a padded grid would add up to 360 px
+of black (503 px on 101); 128px windows of the halved photographs overlap by at most 11 px.
 
 | Split (ours) | Photographs | 512px windows (with rust) | 128px windows (with rust) | The paper's patches (with rust) |
 |---|---|---|---|---|
 | Train | 77 | 5,626 (1,349) | 22,492 (2,230) | 20,566 (2,056) |
-| Validation | 9 | 619 (134) | 2,462 (188) | 2,237 (176) |
+| Validation | 8 | 563 (116) | 2,252 (155) | 2,055 (147) |
 | Test | 10 | 753 (232) | 3,012 (443) | 2,737 (394) |
 
 A window or patch has rust when its (halved, at 0.5×) mask has a rust pixel. The training sample,

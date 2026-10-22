@@ -28,8 +28,9 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, ROOT)  # run from a checkout without installing the package
 
 from nwrd_public.dataset import (  # noqa: E402
+    EXCLUDED_MISALIGNED,
     EXCLUDED_TWINS,
-    VAL_IDS,
+    PAPER_VAL_IDS,
     load_manifest,
     paper_validation_ids,
     photo_folders,
@@ -47,6 +48,10 @@ from nwrd_public.windows import (  # noqa: E402
 
 Image.MAX_IMAGE_PIXELS = 60_000_000  # the photographs are 16-24 MP
 SCALES = {'512px': (512, 1.0), '128px': (128, 0.5)}
+# Masks placed at every offset up to PLACEMENT_MARGIN px around the photograph's corner: photo 101,
+# whose mask is smaller, and as controls the release's six other cropped photographs.
+PLACEMENT_CONTROLS = ('102', '103', '105', '110', '111', '149')
+PLACEMENT_MARGIN = 24
 # The NWRD paper's Table 2 (patches of 128px on half-size photographs; training at stride 32),
 # for all 100 photographs and for its 22-photograph subset, whose photographs its README names.
 TABLE2 = {'val': 2237, 'test': 2737, 'train_gp32': 327929}
@@ -94,40 +99,89 @@ def rust_contrast(rgb: np.ndarray, rust: np.ndarray) -> float | None:
     return float(s[rust].mean() - s[~rust].mean())
 
 
-def placement_search(rgb: np.ndarray, rust: np.ndarray) -> dict:
-    """For a mask smaller than its photograph: the rust contrast of every placement of the mask
-    inside the photograph, and of the mask stretched to the photograph's size."""
+def placement_search(rgb: np.ndarray, rust: np.ndarray, margin: int = PLACEMENT_MARGIN) -> dict:
+    """The rust contrast, at full resolution, of every placement (dy, dx) of the mask's top-left
+    corner on its photograph, from `margin` px before the photograph's corner to `margin` px past
+    the last placement inside it. A placement partly past an edge is scored on the part of the
+    mask over the photograph. For a mask of another size, also the centred and bottom-right
+    placements and the mask stretched to the photograph's size."""
     s = rgb[..., 0].astype(np.float32) - rgb[..., 1].astype(np.float32)
     big_h, big_w = s.shape
     h, w = rust.shape
     integral = np.zeros((big_h + 1, big_w + 1), np.float64)
     integral[1:, 1:] = s.cumsum(0, dtype=np.float64).cumsum(1)
     ys, xs = np.nonzero(rust)
-    n_in, n_out = len(ys), h * w - len(ys)
     found = {}
-    for dy in range(big_h - h + 1):
-        for dx in range(big_w - w + 1):
-            inside = float(s[ys + dy, xs + dx].sum())
+    for dy in range(-margin, big_h - h + margin + 1):
+        y_lo, y_hi = max(0, dy), min(big_h, dy + h)
+        rows_on = (ys + dy >= 0) & (ys + dy < big_h)
+        for dx in range(-margin, big_w - w + margin + 1):
+            x_lo, x_hi = max(0, dx), min(big_w, dx + w)
+            on = rows_on & (xs + dx >= 0) & (xs + dx < big_w)
+            n_in = int(on.sum())
+            inside = float(s[ys[on] + dy, xs[on] + dx].sum())
             total = (
-                integral[dy + h, dx + w]
-                - integral[dy, dx + w]
-                - integral[dy + h, dx]
-                + integral[dy, dx]
+                integral[y_hi, x_hi]
+                - integral[y_lo, x_hi]
+                - integral[y_hi, x_lo]
+                + integral[y_lo, x_lo]
             )
+            n_out = (y_hi - y_lo) * (x_hi - x_lo) - n_in
             found[(dy, dx)] = inside / n_in - (total - inside) / n_out
     best = max(found, key=found.get)
-    centre = ((big_h - h) // 2, (big_w - w) // 2)
-    stretched = Image.fromarray(rust.astype(np.uint8) * 255).resize((big_w, big_h), Image.NEAREST)
-    return {
+    out = {
         'photo_wh': [big_w, big_h],
         'mask_wh': [w, h],
+        'margin': margin,
         'best_yx': list(best),
         'best': round(found[best], 2),
         'top_left': round(found[(0, 0)], 2),
-        'centre': round(found[centre], 2),
-        'bottom_right': round(found[(big_h - h, big_w - w)], 2),
-        'stretched': round(rust_contrast(rgb, np.asarray(stretched) > 127), 2),
     }
+    if (h, w) != (big_h, big_w):
+        stretched = Image.fromarray(rust.astype(np.uint8) * 255).resize(
+            (big_w, big_h), Image.NEAREST
+        )
+        out |= {
+            'centre': round(found[((big_h - h) // 2, (big_w - w) // 2)], 2),
+            'bottom_right': round(found[(big_h - h, big_w - w)], 2),
+            'stretched': round(rust_contrast(rgb, np.asarray(stretched) > 127), 2),
+        }
+    return out
+
+
+def placement_figure(
+    rgb: np.ndarray, rust: np.ndarray, best_yx: list[int], path: str, crops=3, half=70, zoom=3
+) -> None:
+    """Close-ups of the mask's largest annotations, one row each: the photograph, the mask's
+    outline with its corner at the photograph's (cyan) and at the best placement (magenta)."""
+    h, w = rust.shape
+    big_h, big_w = rgb.shape[:2]
+
+    def placed(dy: int, dx: int) -> np.ndarray:
+        out = np.zeros((big_h, big_w), np.uint8)
+        ys = slice(max(0, dy), min(big_h, h + dy))
+        xs = slice(max(0, dx), min(big_w, w + dx))
+        out[ys, xs] = rust[ys.start - dy : ys.stop - dy, xs.start - dx : xs.stop - dx]
+        return out
+
+    at_corner, at_best = placed(0, 0), placed(*best_yx)
+    _, _, stats, centres = cv2.connectedComponentsWithStats(at_corner)
+    rows = []
+    for label in np.argsort(-stats[1:, cv2.CC_STAT_AREA])[:crops] + 1:
+        cx, cy = (int(v) for v in centres[label])
+        y0 = min(max(0, cy - half), big_h - 2 * half)
+        x0 = min(max(0, cx - half), big_w - 2 * half)
+        window = (slice(y0, y0 + 2 * half), slice(x0, x0 + 2 * half))
+        crop = cv2.resize(rgb[window], None, fx=zoom, fy=zoom, interpolation=cv2.INTER_NEAREST)
+        panels = [crop]
+        for mask, colour in ((at_corner, (0, 255, 255)), (at_best, (255, 0, 255))):
+            big = cv2.resize(mask[window], None, fx=zoom, fy=zoom, interpolation=cv2.INTER_NEAREST)
+            contours, _ = cv2.findContours(big, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_NONE)
+            panels.append(cv2.drawContours(crop.copy(), contours, -1, colour, 1))
+        gap = np.full((crop.shape[0], 6, 3), 255, np.uint8)
+        rows.append(np.concatenate([panels[0], gap, panels[1], gap, panels[2]], axis=1))
+    gap = np.full((6, rows[0].shape[1], 3), 255, np.uint8)
+    Image.fromarray(np.concatenate([part for row in rows for part in (row, gap)][:-1])).save(path)
 
 
 def windows_of(rust: np.ndarray) -> tuple[dict, dict]:
@@ -189,7 +243,12 @@ def describe(root: str, manifest: dict) -> tuple[list[dict], dict, dict]:
         rec.update(
             {
                 'paper_split': 'val' if pid in paper_val else folder,
-                'split': our_split.get(pid, f'excluded (twin of {EXCLUDED_TWINS.get(pid)})'),
+                'split': our_split.get(pid)
+                or (
+                    'excluded (mask misaligned)'
+                    if pid in EXCLUDED_MISALIGNED
+                    else f'excluded (twin of {EXCLUDED_TWINS[pid]})'
+                ),
                 'bytes': os.path.getsize(img_path),
                 'pixel_md5': hashlib.md5(rgb.tobytes()).hexdigest(),
                 'photo_wh': [rgb.shape[1], rgb.shape[0]],
@@ -205,7 +264,7 @@ def describe(root: str, manifest: dict) -> tuple[list[dict], dict, dict]:
             small = np.asarray(Image.fromarray(rgb).reduce(8))
             small_rust = np.asarray(Image.fromarray(rust.astype(np.uint8) * 255).reduce(8)) > 127
             rec['contrast'] = rust_contrast(small, small_rust)
-        else:
+        if rust.shape != rgb.shape[:2] or pid in PLACEMENT_CONTROLS:
             rec['placement'] = placement_search(rgb, rust)
         rec['windows'], window_stats[pid] = windows_of(rust)
         rec['paper'] = paper_patches(rust)
@@ -407,14 +466,30 @@ def write_summary(
         f'inside minus outside, at 1/8 scale): min {min(contrasts):.1f}, median '
         f'{statistics.median(contrasts):.1f}, max {max(contrasts):.1f}.',
     ]
-    for r in (r for r in records if 'placement' in r):
+    placed = [r for r in records if 'placement' in r]
+    for r in placed:
         p = r['placement']
-        L.append(
-            f'- Photo {r["id"]}: mask {p["mask_wh"][0]}×{p["mask_wh"][1]} on a '
-            f'{p["photo_wh"][0]}×{p["photo_wh"][1]} photograph. Contrast at the top left '
-            f'{p["top_left"]}, centred {p["centre"]}, bottom right {p["bottom_right"]}, stretched '
-            f'{p["stretched"]}; best placement (y, x) = {tuple(p["best_yx"])} at {p["best"]}.'
-        )
+        if 'stretched' in p:
+            L.append(
+                f'- Photo {r["id"]}: mask {p["mask_wh"][0]}×{p["mask_wh"][1]} on a '
+                f'{p["photo_wh"][0]}×{p["photo_wh"][1]} photograph. Contrast at the top left '
+                f'{p["top_left"]}, centred {p["centre"]}, bottom right {p["bottom_right"]}, '
+                f'stretched {p["stretched"]}; best placement (y, x) = {tuple(p["best_yx"])} at '
+                f'{p["best"]}. Split: {r["split"]}.'
+            )
+    L += [
+        '',
+        f'Every placement of the mask\'s top-left corner (y, x) up to {PLACEMENT_MARGIN} px around '
+        "the photograph's (partly past an edge: scored on the part over the photograph), rust "
+        'contrast at full resolution:',
+        '',
+        table(['Photograph', 'Photograph W×H', 'Mask W×H', 'Best placement (y, x)',
+               'Contrast there', 'At (0, 0)'],
+              [[r['id'], '×'.join(map(str, r['placement']['photo_wh'])),
+                '×'.join(map(str, r['placement']['mask_wh'])),
+                str(tuple(r['placement']['best_yx'])), r['placement']['best'],
+                r['placement']['top_left']] for r in placed]),
+    ]  # fmt: skip
     L += ['', '## Rust', '']
     rows = []
     for label, sel in (
@@ -501,7 +576,8 @@ def write_summary(
         '',
         '## The NWRD paper\'s Table 2, recomputed',
         '',
-        f'Its validation photographs (seed-0 draw): {", ".join(sorted(VAL_IDS, key=int))}; test: '
+        'Its validation photographs (seed-0 draw): '
+        f'{", ".join(sorted(PAPER_VAL_IDS, key=int))}; test: '
         "the release's test/ folder. 128px patches of the half-size photographs, from the "
         'origin, the remainder dropped; training at stride 32 (GP-32).',
         '',
@@ -589,6 +665,13 @@ def main(argv=None) -> None:
         with open(os.path.join(a.out, name), 'w', encoding='utf-8', newline='\n') as f:
             json.dump(data, f, indent=1)
             f.write('\n')
+    for r in (r for r in records if 'stretched' in r.get('placement', {})):  # photo 101
+        with Image.open(os.path.join(a.root, r['folder'], 'images', f'{r["id"]}.jpg')) as img:
+            rgb = np.asarray(img.convert('RGB'))
+        with Image.open(os.path.join(a.root, r['folder'], 'masks', f'{r["id"]}.png')) as m:
+            rust = np.asarray(m.convert('L')) > 127
+        figure = os.path.join(a.out, f'mask_{r["id"]}.png')
+        placement_figure(rgb, rust, r['placement']['best_yx'], figure)
     with open(EPOCH_TIMES, encoding='utf-8') as f:
         timing = json.load(f)
     summary = write_summary(records, repeats, sample, manifest, timing)

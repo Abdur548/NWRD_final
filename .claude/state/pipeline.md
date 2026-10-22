@@ -1,6 +1,6 @@
 # NWRD_public: pipeline, decisions and invariants
 
-**Updated:** 2026-10-22
+**Updated:** 2026-10-23
 
 Binary wheat-stripe-rust segmentation on the **public NWRD release** (Zenodo
 doi:10.5281/zenodo.21672928; 100 photographs, 10 sizes, rust 0.57% of pixels). CANet-B4 (ours)
@@ -35,7 +35,7 @@ scripts/collect_results.py <that folder> ──> results/<scale>/<model>/ ──
 | Stage | Does | Lives in |
 |---|---|---|
 | Protocol | Every setting; presets `512px` (window 512, scale 1) and `128px` (128, 0.5) | `nwrd_public/config.py` |
-| Release | Finds the release, MD5-checks it against the manifest, the D3 split, reads photos/masks (101 cropped to its mask) | `nwrd_public/dataset.py` |
+| Release | Finds the release, MD5-checks it against the manifest, the D3 split (101 in no split), reads photos/masks | `nwrd_public/dataset.py` |
 | Windows | Fitted-stride grid, ownership spans, resizing, rust counts, training sample and its cut | `nwrd_public/windows.py` |
 | Models, metrics | Copied byte for byte from NWRD_final | `nwrd_public/models.py`, `metrics.py` |
 | Training | NWRD_final's loop; per-epoch validation on whole photographs | `nwrd_public/train.py` |
@@ -60,8 +60,10 @@ scripts/collect_results.py <that folder> ──> results/<scale>/<model>/ ──
   photographs, never OpenCV's INTER_LANCZOS4, which aliases when shrinking; area for
   masks); predictions are resized only for scoring (bilinear to native; area to half size for the
   paper's patches at 512px).
-- The split is fixed: validation `VAL_IDS`, test = `test/`, training without `EXCLUDED_TWINS`
-  (79, 86, 96, 99). No validation or test photograph may have a twin in training.
+- The split is fixed: validation `VAL_IDS` (the paper's `PAPER_VAL_IDS` without 101), test =
+  `test/`, training without `EXCLUDED_TWINS` (79, 86, 96, 99) and `EXCLUDED_MISALIGNED` (101).
+  No validation or test photograph may have a twin in training. A mask of another size than its
+  photograph is an error, never cropped or placed by assumption.
 - Training windows are cut deterministically from (photos, window, scale, ratio, seed); the cache
   marker `windows.json` refuses other settings. A resumed Kaggle session re-cuts identically.
 - Checkpoints load with `weights_only=True` and never enter git or `results/`.
@@ -74,7 +76,7 @@ scripts/collect_results.py <that folder> ──> results/<scale>/<model>/ ──
 
 ### The user's D1–D8 (plan `../NWRD_public_PLAN.md` §5), approved 2026-10-22
 D1 local git only, `E:\NWRD\NWRD_public`. D2 512px first, then 128px. D3 the paper's val/test,
-training minus the four twins (77/9/10); in-train pairs keep both copies. D4 attach
+training minus the four twins (77/9/10; 77/8/10 since 101 left out, below); in-train pairs keep both copies. D4 attach
 `bcap52/nwrd-wheat` and MD5-check all 200 files every run (fallback: upload our own copy, needs
 the user's OK). D5 no new speed benchmark (NWRD_final's T4 numbers, `results/nwrd_final/`). D6 three
 models only. D7 NWRD_final's pre-registered rule, unchanged. D8 keep the `pos_weight` rule (63.1,
@@ -82,9 +84,20 @@ models only. D7 NWRD_final's pre-registered rule, unchanged. D8 keep the `pos_we
 
 ### Fitted stride instead of padding or resizing — 2026-10-22
 ⌈L/P⌉ windows spread evenly. Rejected: black padding (content never seen in a real photograph,
-scored as easy negatives: 4.4% of each NWRD_final test photograph; up to 503 px here) and
-resizing whole photographs (pustules are a few pixels wide). Consequence: overlaps of 0–72 px,
-split at their midpoint for scoring.
+scored as easy negatives: 4.4% of each NWRD_final test photograph; up to 360 px here, 503 px on
+the excluded 101) and resizing whole photographs (pustules are a few pixels wide). Consequence:
+overlaps of 0–46 px, split at their midpoint for scoring. Same window count as a padded grid, so
+no cost difference. The user re-examined padding on 2026-10-23 (and another agent's case for it,
+which assumed overlaps are scored twice) and kept the fitted stride.
+
+### Photo 101 left out — 2026-10-23
+Its mask (3593×3435 on a 3612×3456 photograph) was taken to line up with the top-left corner,
+the best placement *inside* the photograph. Searching past the edges, it lines up shifted 8 px
+left and 1 px up (rust contrast 21.1 vs 17.4; the six other cropped photographs peak at their
+own corner), confirmed by eye on overlays across the photograph. The user chose to remove it
+rather than re-register it: validation 8 photographs, 8.7% less validation rust. The first 512px
+kernels (v1, which validated on it) were stopped. `read_photo` now refuses any mask of another
+size.
 
 ### Whole photographs are the scoring unit, also during training — 2026-10-22
 Per-epoch validation and final evaluation both predict whole photographs and score native
@@ -106,7 +119,7 @@ prediction is thus scored two ways. Masks halved by area (the authors' method is
 
 ## Known limitations
 
-- 10 test photographs and 9 validation photographs: wide intervals.
+- 10 test photographs and 8 validation photographs: wide intervals.
 - Annotation agreement between two masks of one photograph is IoU 0.40–0.63, which bounds every
   model's attainable IoU.
 - APF, focal loss and the paper's 500-epoch schedule are not reproduced: the paper's published

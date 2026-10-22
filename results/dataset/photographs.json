@@ -4643,7 +4643,7 @@
   "orientation": null,
   "taken": null,
   "paper_split": "val",
-  "split": "val",
+  "split": "excluded (mask misaligned)",
   "bytes": 5978822,
   "pixel_md5": "bd3cc33950658cf25ae4f147aa441209",
   "photo_wh": [
@@ -4671,11 +4671,12 @@
     3593,
     3435
    ],
+   "margin": 24,
    "best_yx": [
-    0,
-    0
+    -1,
+    -8
    ],
-   "best": 17.4,
+   "best": 21.07,
    "top_left": 17.4,
    "centre": 10.06,
    "bottom_right": 7.14,
@@ -4757,6 +4758,23 @@
   "pixels": 12676032,
   "rust_share": 0.002055690613592645,
   "contrast": 30.04744529724121,
+  "placement": {
+   "photo_wh": [
+    4248,
+    2984
+   ],
+   "mask_wh": [
+    4248,
+    2984
+   ],
+   "margin": 24,
+   "best_yx": [
+    3,
+    -2
+   ],
+   "best": 29.93,
+   "top_left": 29.58
+  },
   "windows": {
    "512px": {
     "grid": [
@@ -4833,6 +4851,23 @@
   "pixels": 12386304,
   "rust_share": 0.0012574372468171296,
   "contrast": 20.20112419128418,
+  "placement": {
+   "photo_wh": [
+    3456,
+    3584
+   ],
+   "mask_wh": [
+    3456,
+    3584
+   ],
+   "margin": 24,
+   "best_yx": [
+    3,
+    -1
+   ],
+   "best": 21.12,
+   "top_left": 20.75
+  },
   "windows": {
    "512px": {
     "grid": [
@@ -4985,6 +5020,23 @@
   "pixels": 13093776,
   "rust_share": 0.005726079321961824,
   "contrast": 21.765300750732422,
+  "placement": {
+   "photo_wh": [
+    4604,
+    2844
+   ],
+   "mask_wh": [
+    4604,
+    2844
+   ],
+   "margin": 24,
+   "best_yx": [
+    -1,
+    0
+   ],
+   "best": 22.2,
+   "top_left": 22.2
+  },
   "windows": {
    "512px": {
     "grid": [
@@ -5137,6 +5189,23 @@
   "pixels": 11665600,
   "rust_share": 0.015879423261555344,
   "contrast": 22.547056198120117,
+  "placement": {
+   "photo_wh": [
+    2536,
+    4600
+   ],
+   "mask_wh": [
+    2536,
+    4600
+   ],
+   "margin": 24,
+   "best_yx": [
+    0,
+    2
+   ],
+   "best": 22.73,
+   "top_left": 22.7
+  },
   "windows": {
    "512px": {
     "grid": [
@@ -5213,6 +5282,23 @@
   "pixels": 13404672,
   "rust_share": 0.013936633436461556,
   "contrast": 23.586837768554688,
+  "placement": {
+   "photo_wh": [
+    4608,
+    2909
+   ],
+   "mask_wh": [
+    4608,
+    2909
+   ],
+   "margin": 24,
+   "best_yx": [
+    -1,
+    0
+   ],
+   "best": 23.86,
+   "top_left": 23.83
+  },
   "windows": {
    "512px": {
     "grid": [
@@ -7493,6 +7579,23 @@
   "pixels": 13586432,
   "rust_share": 0.001397938767146518,
   "contrast": 4.92696475982666,
+  "placement": {
+   "photo_wh": [
+    3424,
+    3968
+   ],
+   "mask_wh": [
+    3424,
+    3968
+   ],
+   "margin": 24,
+   "best_yx": [
+    -1,
+    3
+   ],
+   "best": 5.84,
+   "top_left": 5.63
+  },
   "windows": {
    "512px": {
     "grid": [

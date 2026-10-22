@@ -27,8 +27,9 @@ From this folder, with `python` (C:\Python313; torch CPU, pytest, ruff, kaggle):
 - CANet-B4 is "ours" in every table. Report results honestly, even when it loses.
 - **Never clone or open `github.com/dll-ncai/NUST-Wheat-Rust-Disease-NWRD`**: it is compromised
   (`docs/dataset.md` §1). Data comes from Zenodo or `bcap52/nwrd-wheat`, MD5-checked.
-- The split is fixed (`nwrd_public/dataset.py`): the paper's validation and test photographs,
-  training without the twins 79, 86, 96, 99. The decision rule in `docs/protocol.md` §5 was
+- The split is fixed (`nwrd_public/dataset.py`): the paper's validation (without photo 101, whose
+  mask is misplaced) and test photographs, training without the twins 79, 86, 96, 99 (77/8/10).
+  The decision rule in `docs/protocol.md` §5 was
   fixed before any run; don't change it after results exist.
 - Every number in `docs/` must trace to a file in `results/`.
 

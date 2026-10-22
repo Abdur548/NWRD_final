@@ -14,7 +14,7 @@ from nwrd_public.dataset import md5_of, photo_id
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 MANIFEST = os.path.join(ROOT, 'data', 'manifest.json')
 REAL_RELEASE = os.path.join(ROOT, 'data', 'raw', 'NWRD')
-# (height, width), in turn; every side stays at least 128 px when halved, photo 101's crop included
+# (height, width), in turn; every side stays at least 128 px when halved
 SIZES = [(280, 300), (300, 280), (288, 384), (410, 296)]
 
 
@@ -23,7 +23,7 @@ def write_release(root: str) -> str:
 
     Every photograph has one rust square near its top left, and every third a second one near
     its bottom right; photo 101's mask is 19 px narrower and 21 px shorter than its photograph,
-    as in the release."""
+    as in the release (it is in no split, and reading it is an error)."""
     with open(MANIFEST, encoding='utf-8') as f:
         names = json.load(f)['files']
     ids = sorted({photo_id(n) for n in names}, key=int)

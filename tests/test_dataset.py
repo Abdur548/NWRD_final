@@ -9,7 +9,9 @@ import numpy as np
 import pytest
 
 from nwrd_public.dataset import (
+    EXCLUDED_MISALIGNED,
     EXCLUDED_TWINS,
+    PAPER_VAL_IDS,
     TWIN_PAIRS,
     VAL_IDS,
     camera,
@@ -31,16 +33,17 @@ def _quiet(_msg):
 def test_authors_validation_draw_gives_the_documented_ids():
     train_images = [n for n in load_manifest()['files'] if n.startswith('train/images/')]
     assert len(train_images) == 90
-    assert sorted(paper_validation_ids(train_images), key=int) == list(VAL_IDS)
+    assert sorted(paper_validation_ids(train_images), key=int) == list(PAPER_VAL_IDS)
 
 
-def test_split_is_the_authors_minus_the_twins():
+def test_split_is_the_authors_minus_the_twins_and_101():
     s = splits(load_manifest())
-    assert [len(s[k]) for k in ('train', 'val', 'test')] == [77, 9, 10]
-    assert s['val'] == list(VAL_IDS)
+    assert [len(s[k]) for k in ('train', 'val', 'test')] == [77, 8, 10]
+    assert s['val'] == list(VAL_IDS) == [i for i in PAPER_VAL_IDS if i != '101']
     assert s['test'] == ['25', '29', '62', '63', '67', '77', '80', '89', '105', '123']
-    assert not set(EXCLUDED_TWINS) & set(s['train'])
-    assert len(set(s['train']) | set(s['val']) | set(s['test'])) == 96
+    used = set(s['train']) | set(s['val']) | set(s['test'])
+    assert not (set(EXCLUDED_TWINS) | set(EXCLUDED_MISALIGNED)) & used
+    assert len(used) == 95
 
 
 def test_no_val_or_test_photo_has_a_twin_in_training():
@@ -96,22 +99,26 @@ def test_open_release_checks_splits_and_limits(synthetic_release):
     assert r.folders['2'] == 'train' and r.folders['105'] == 'test' and len(r.folders) == 100
 
 
-def test_photo_is_cropped_to_a_smaller_mask_only(synthetic_release, tmp_path):
+def test_a_mask_of_another_size_is_an_error(synthetic_release, tmp_path):
     root = synthetic_release.root
-    rgb, rust = read_photo(root, 'train', '101')
-    full = cv2.imread(os.path.join(root, 'train', 'images', '101.jpg'))
-    full = cv2.cvtColor(full, cv2.COLOR_BGR2RGB)
-    assert rgb.shape[:2] == rust.shape == (full.shape[0] - 21, full.shape[1] - 19)
-    assert np.array_equal(rgb, full[: rust.shape[0], : rust.shape[1]])
     rgb, rust = read_photo(root, 'train', '10')  # mask and photograph of the same size
-    assert rgb.shape[:2] == rust.shape and rust.dtype == bool and rust.any()
-
+    full = cv2.cvtColor(
+        cv2.imread(os.path.join(root, 'train', 'images', '10.jpg')), cv2.COLOR_BGR2RGB
+    )
+    assert np.array_equal(rgb, full) and rust.shape == full.shape[:2] and rust.dtype == bool
+    assert rust.any()
+    # 101's smaller mask cannot be placed by assumption: in the release it fits only shifted past
+    # the photograph's edge, so 101 is in no split.
+    with pytest.raises(ValueError, match='does not match the photograph'):
+        read_photo(root, 'train', '101')
     copy = tmp_path / 'copy'
     shutil.copytree(root, copy)
-    big = np.zeros((full.shape[0] + 1, full.shape[1]), np.uint8)
-    cv2.imwrite(str(copy / 'train' / 'masks' / '101.png'), big)
-    with pytest.raises(ValueError, match='larger than the photograph'):
-        read_photo(str(copy), 'train', '101')
+    cv2.imwrite(
+        str(copy / 'train' / 'masks' / '10.png'),
+        np.zeros((full.shape[0] + 1, full.shape[1]), np.uint8),
+    )
+    with pytest.raises(ValueError, match='does not match the photograph'):
+        read_photo(str(copy), 'train', '10')
 
 
 def test_camera_reads_the_exif_model(tmp_path):
