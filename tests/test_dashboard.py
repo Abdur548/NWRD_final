@@ -21,7 +21,7 @@ def test_dashboard_starts_on_the_overview():
     at = AppTest.from_file(f'{ROOT}/app/dashboard.py', default_timeout=120).run()
     assert not at.exception
     text = ' '.join(m.value for m in at.markdown)
-    assert 'NWRD (NUST Wheat Rust Disease)' in text and 'docs/results.md' in text
+    assert '100 field photographs' in text and 'docs/results.md' in text
 
 
 def _results():

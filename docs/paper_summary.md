@@ -3,10 +3,13 @@
 > Anwar, H.; Khan, S.U.; Ghaffar, M.M.; Fayyaz, M.; Khan, M.J.; Weis, C.; Wehn, N.; Shafait, F.
 > **The NWRD Dataset: An Open-Source Annotated Segmentation Dataset of Diseased Wheat Crop.**
 > *Sensors* 2023, 23(15), 6942. doi:[10.3390/s23156942](https://doi.org/10.3390/s23156942).
-> Code and data: [github.com/dll-ncai/NUST-Wheat-Rust-Disease-NWRD](https://github.com/dll-ncai/NUST-Wheat-Rust-Disease-NWRD)
+> Code: [github.com/dll-ncai/NUST-Wheat-Rust-Disease-NWRD](https://github.com/dll-ncai/NUST-Wheat-Rust-Disease-NWRD).
+> Data: Zenodo, doi:[10.5281/zenodo.21672928](https://doi.org/10.5281/zenodo.21672928) (CC BY 4.0).
 
-This is the **baseline paper** for our project: its UNet + APF result is the published state of
-the art on NWRD that our CANet-B4 is compared against. How the comparison was made is in
+This is the **baseline paper** for our project: its UNet is the architecture our CANet-B4 is
+compared against, and its UNet + APF result is the published state of the art on NWRD. Our
+photographs are not those of the NWRD release ([`protocol.md`](protocol.md) §3.1), so its
+published numbers are context only. How the comparison was made is in
 [`protocol.md`](protocol.md); what it found is in [`results.md`](results.md).
 
 **How to read this document.** Every figure and table image below was extracted directly from the
@@ -20,9 +23,10 @@ numbers. Claims are checked in §6; the arithmetic there was re-computed, not co
 
 ## TL;DR
 
-- **Contribution 1: a dataset.** NWRD is 100 high-resolution field images (4608×3456, a few
-  6016×4000) of wheat with **stripe rust**, with pixel-level binary masks. It is the first
-  multi-leaf, wide-angle *segmentation* dataset for wheat rust.
+- **Contribution 1: a dataset.** NWRD is 100 high-resolution field images of wheat with
+  **stripe rust** (stated as 4608×3456 and a few 6016×4000; as released, about a third are
+  6016×4000, C7), with pixel-level binary masks. It is the first multi-leaf, wide-angle
+  *segmentation* dataset for wheat rust.
 - **Contribution 2: a training pipeline.** Downsample the images, cut 128×128 patches, and train
   a **plain UNet** on patches chosen by **adaptive patching with feedback (APF)**: rust patches,
   plus the patches where the model recently produced false positives.
@@ -65,6 +69,11 @@ close-up single leaves. Estimating *how much* of a field is infected needs pixel
 - **Resolution:** "a few images of 6016 × 4000 resolution, while the rest have a resolution of
   4608 × 3456" (p. 5, §3.2).
 - **Size:** 100 annotated images (Table 1).
+- **As released** (Zenodo archive, checked 2026-10-18): 100 photographs numbered 2–150 in `train`
+  (90) and `test` (10) folders. 66 come from a Huawei phone (PAR-LX1M): 27 at 4608×3456, 35 at
+  3456×4608 (portrait) and 4 cropped. 31 come from a Nikon D3200 at 6016×4000, and 3 carry no
+  EXIF (cropped sizes). The EXIF dates run from 17 February to 11 March 2022. One mask does not
+  match its photograph: image 101 is 3612×3456, its mask 3593×3435 (C7 in §6).
 
 ![Figure 1 (p. 5): aerial view of the NARC wheat fields where the data were collected.](figures/paper/fig1_data_collection_site.png)
 
@@ -268,8 +277,8 @@ The authors also argue *against* that background-removal protocol:
 
 ## 6. Claims and verification
 
-Each claim is checked against the paper's own numbers. The recomputations are
-F1 = 2PR/(P+R) and, for a pooled confusion matrix, IoU = F1/(2−F1).
+Each claim is checked against the paper's own numbers, or (C7) against the released data. The
+recomputations are F1 = 2PR/(P+R) and, for a pooled confusion matrix, IoU = F1/(2−F1).
 
 | # | Claim (as stated) | Evidence in the paper | Check | Verdict |
 |---|---|---|---|---|
@@ -279,6 +288,7 @@ F1 = 2PR/(P+R) and, for a pooled confusion matrix, IoU = F1/(2−F1).
 | C4 | UNet + APF outperforms the state of the art (Octave-UNet) in F1 and IoU | Table 4 | +0.035 F1, +0.122 IoU, one run each, no variance or significance test; Octave-UNet retrained by the authors | **Supported as reported**, but thin: single runs |
 | C5 | Downsampling causes only "a slight decrease in the F1 score" | §3.4.1 | No table or number is given | **Unsupported** by data in the paper |
 | C6 | Reported metrics are internally consistent | Tables 3–4 | See below | **Partly.** Four of six Table 3 rows check out exactly; the other two rows and all of Table 4 don't |
+| C7 | "A few images of 6016 × 4000 resolution, while the rest have a resolution of 4608 × 3456" (p. 5) | §3.2 | The release (§2.1): 31 at 6016×4000, 62 at 4608×3456 (35 of them portrait), 7 cropped to other sizes; image 101's mask is smaller than its photograph | **Inaccurate** for the released data: about a third are 6016×4000 |
 
 **C6 in detail.** F1 recomputed from the reported P and R:
 
@@ -334,15 +344,15 @@ Additional observations relevant to our comparison:
 
 | From the paper | How we use it |
 |---|---|
-| NWRD dataset and its rust-class metrics | Same task and metrics (P, R, F1 = Dice, IoU) |
+| NWRD's task and its rust-class metrics | Same task and metrics (P, R, F1 = Dice, IoU), but on other photographs: ours are not the NWRD release ([`protocol.md`](protocol.md) §3.1) |
 | UNet (4 enc / 4 dec) is the published model | Re-implemented (`unet`) and re-trained under our protocol for a like-for-like comparison, plus `unet_tuned` with a from-scratch lr so the baseline isn't handicapped |
 | Table 4 removes background-only patches | We also report a matching "rust-positive patches only" metric |
 | Their argument that background must stay in training and test | Adopted: 20% of background patches kept in training, all kept in test |
 | APF patch sampling | **Not reproduced.** Our comparison tests the architecture, not APF ([`protocol.md`](protocol.md) §6) |
-| Their test photographs | Not published; our test set is photographs 91–100. A separate 128px experiment reproduces their patch size and field of view |
+| Their test photographs | Not listed in the paper (the release ships a 10-photograph `test` folder). Ours, photographs 91–100, come from a different collection, so no test photograph is shared |
 | Their downsampling to 0.5× and 128px patches | Reproduced in the 128px experiment ([`results.md`](results.md) §3) |
 
 How CANet-B4 differs from this UNet is in [`protocol.md`](protocol.md) §2. Under one protocol,
 CANet-B4's accuracy was comparable to the re-trained UNet at 512px and lower at the paper's 128px
-scale, at a tenth of the computation; both far exceed the published figures
-([`results.md`](results.md)).
+scale, at a tenth of the computation; both far exceed the published figures, on different
+photographs ([`results.md`](results.md)).

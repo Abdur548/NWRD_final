@@ -33,7 +33,7 @@ KAGGLE_SETUP = f"""**Kaggle setup**
 notebook's latest version as an input and commit again. Repeat until the log has no `INCOMPLETE`."""
 
 INTRO = {
-    'main': """# NWRD wheat-rust segmentation: CANet-B4 vs baselines (512px)
+    'main': """# Wheat-rust segmentation: CANet-B4 vs the NWRD paper's baselines (512px)
 
 Trains CANet-B4 (ours), the NWRD paper's UNet architecture, DeepLabV3+ R50 and a UNet
 learning-rate control under one protocol on 512×512 native-resolution patches. Each run's
@@ -45,7 +45,7 @@ benchmarked; the comparison is written to `runs/comparison.md`.
 Rough cost on a T4: 1.5–2.5 GPU-hours per run, 4 models × 3 seeds, so plan on two or three
 sessions (Kaggle's weekly quota is about 30 GPU-hours). Runs go seed by seed, so a paired
 comparison exists as soon as the first seed finishes; the `unet_tuned` control runs last.""",
-    '128px': """# NWRD at the paper's scale: CANet-B4 vs baselines on 128×128 patches
+    '128px': """# At the NWRD paper's scale: CANet-B4 vs baselines on 128×128 patches
 
 The NWRD paper (Anwar et al., Sensors 2023) trained its UNet on **128×128 patches of photographs
 halved in size** with a Lanczos filter (§3.4.1–3.4.2). This notebook trains CANet-B4, the paper's
@@ -53,10 +53,12 @@ UNet architecture and DeepLabV3+ R50 at that scale, so accuracy and efficiency a
 the paper measured them; the main notebook (`nwrd_experiments.ipynb`) uses 512×512
 native-resolution patches.
 
-**The data.** `abdur548/nwrd-patched` pads each photograph and cuts it, at native resolution,
-into 512×512 patches. Each patch is halved (Lanczos) and cut 2×2 into 128×128 tiles, so a tile
-covers 256×256 native pixels: the footprint of one of the paper's patches. Tiles go to local disk
-(not the saved output) and are rebuilt identically every session, in a few minutes.
+**The data.** `abdur548/nwrd-patched` centres each photograph on a black canvas and cuts it, at
+native resolution, into 512×512 patches. Each patch is halved (Lanczos) and cut 2×2 into 128×128
+tiles, so a tile covers 256×256 native pixels, as one of the paper's patches does. The
+photographs are not those of the public NWRD release (`docs/protocol.md` §3 in the repository).
+Tiles go to local disk (not the saved output) and are rebuilt identically every session, in a few
+minutes.
 
 **Everything else is the main experiment's protocol**: the same split by photograph, every rust
 tile plus 20% of background tiles, 30 epochs, batch 8, AdamW lr 5e-5, checkpoint and threshold
@@ -117,7 +119,8 @@ DATA = """from nwrd.data import find_data_root
 DATA_ROOT = find_data_root(None)   # the attached dataset, under /kaggle/input
 print('dataset:', DATA_ROOT, '|',
       {s: len(os.listdir(os.path.join(DATA_ROOT, s, 'images'))) for s in ('train', 'val', 'test')})
-# The dataset's own notes say how it was made (padding, split by photograph).
+# The dataset's own notes, printed for the record. Their counts are doubled (each mask is counted
+# as an image); how the patches were cut is in docs/protocol.md §3.2.
 for f in ('README.md', 'processing_stats.json'):
     p = os.path.join(DATA_ROOT, f)
     if os.path.exists(p):

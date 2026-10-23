@@ -26,7 +26,7 @@ Test split: 960 patches, 266 with rust, 8.0% rust pixels. Threshold chosen per r
 | unet_tuned, re-run: all test patches | 0.685 | 0.861 | 0.763 | 0.616 |
 | unet_tuned, re-run: rust-positive test patches (≈ Table 4) | 0.825 | 0.861 | 0.843 | 0.728 |
 
-Paper figures are as published, on a different test unit (full-image patches, 128px). The `unet` row is the paper's architecture re-trained under this protocol, so CANet vs `unet` is the like-for-like comparison.
+Paper figures are as published, on other photographs (the public NWRD release, not this dataset; docs/protocol.md §3.1) and a different test unit (128px patches). The `unet` row is the paper's architecture re-trained under this protocol, so CANet vs `unet` is the like-for-like comparison.
 
 ## Is the difference real? (CANet-B4 minus baseline, test split)
 

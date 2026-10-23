@@ -1,6 +1,6 @@
 # Results: CANet-B4 against the NWRD paper's UNet and DeepLabV3+ R50
 
-*Final, 2026-10-18.* CANet-B4, UNet and DeepLabV3+ R50, three seeds each at both scales, under
+*Final, 2026-10-20.* CANet-B4, UNet and DeepLabV3+ R50, three seeds each at both scales, under
 the protocol in [`protocol.md`](protocol.md). Every number here comes from a file in `results/`
 (Appendix). CANet-B4 is "ours" throughout; it is reported as measured, including where it loses.
 
@@ -29,9 +29,10 @@ the protocol in [`protocol.md`](protocol.md). Every number here comes from a fil
    scales (§6).
 3. **The published baseline.** CANet-B4 far exceeds the paper's published figures (F1 0.826 vs
    0.557 at the paper's scale), but so do the paper's UNet architecture and DeepLabV3+ R50 when
-   re-trained under this protocol (F1 0.857 and 0.845). The gain over the published numbers
-   therefore comes from the training and evaluation protocol, not from CANet-B4's architecture
-   (§4).
+   re-trained under this protocol (F1 0.857 and 0.845). The gain over the published numbers is
+   therefore not due to CANet-B4's architecture. It reflects differences in protocol and in the
+   photographs themselves, which are not those of the public NWRD release
+   ([`protocol.md`](protocol.md) §3.1; §4).
 
 ---
 
@@ -66,7 +67,7 @@ on validation; metrics pooled over all test pixels; mean ± sample standard devi
 ## 3. The paper's scale: 128px
 
 Each 512px patch halved (Lanczos) and cut into 2×2 tiles of 128px: the paper's patch size and
-field of view. Test split: the same 10 photographs, 3,840 tiles, 722 with rust, 8.1% rust pixels.
+downsampling. Test split: the same 10 photographs, 3,840 tiles, 722 with rust, 8.1% rust pixels.
 
 | Model | Seeds | IoU | Dice / F1 | Precision | Recall | IoU at 0.5 | IoU, rust tiles only | IoU per seed |
 |---|---|---|---|---|---|---|---|---|
@@ -97,8 +98,9 @@ below the scale it was designed for.
 
 ## 4. Against the paper's published numbers
 
-These rows are context, not a paired comparison: the paper's test photographs, training (APF,
-RMSprop at lr 1e-6, 500 epochs, focal loss) and metric averaging all differ from ours.
+These rows are context, not a paired comparison: the paper's photographs (the public NWRD
+release; ours are not from it, [`protocol.md`](protocol.md) §3.1), its training (APF, RMSprop at
+lr 1e-6, 500 epochs, focal loss) and its metric averaging all differ from ours.
 
 | Source | Test set | Precision | Recall | F1 / Dice | IoU |
 |---|---|---|---|---|---|
@@ -114,11 +116,12 @@ RMSprop at lr 1e-6, 500 epochs, focal loss) and metric averaging all differ from
 All three re-trained models far exceed the published figures at the paper's own scale. Because the
 paper's architecture, trained from scratch under our protocol, does as well as or better than
 CANet-B4, **the gain over the published numbers is not due to CANet-B4's architecture**. It comes
-from differences in training and evaluation that this study cannot separate: optimiser and
-learning rate, loss, augmentation, a threshold chosen on validation, pooled rather than
-per-image metrics, and a different set of test photographs. The paper's own Table 4 F1 and IoU are
-not consistent as pooled values ([`paper_summary.md`](paper_summary.md) §6), which is another
-reason not to compare decimals.
+from differences that this study cannot separate: optimiser and learning rate, loss,
+augmentation, a threshold chosen on validation, pooled rather than per-image metrics, and the
+photographs themselves. These are not just another test split but another collection, all from
+one DSLR, where two-thirds of the release's photographs come from a phone. The paper's own
+Table 4 F1 and IoU are not consistent as pooled values ([`paper_summary.md`](paper_summary.md)
+§6), which is another reason not to compare decimals.
 
 ---
 
@@ -219,16 +222,17 @@ scale is the smallest memory footprint at batch 64.
 
 ### 6.3 Per photograph
 
-For one 4608×3456 photograph (61 native 512px patches, or 243 tiles of 128px at 0.5×, by area):
+For one 6016×4000 photograph (96 native 512px patches, or 384 tiles of 128px at 0.5×, padding
+included):
 
 | Scale | Model | TFLOPs | T4 fp16, batched (s) | CPU, bs 1 (s) |
 |---|---|---|---|---|
-| 512px | CANet-B4 | 2.24 | 0.84 | 44.0 |
-| 512px | UNet | 23.41 | 2.17 | 191.8 |
-| 512px | DeepLabV3+ R50 | 4.44 | 0.64 | 35.2 |
-| 128px | CANet-B4 | 0.56 | 0.28 | 16.3 |
-| 128px | UNet | 5.85 | 0.46 | 38.0 |
-| 128px | DeepLabV3+ R50 | 1.11 | 0.18 | 13.9 |
+| 512px | CANet-B4 | 3.54 | 1.32 | 69.6 |
+| 512px | UNet | 36.99 | 3.43 | 303.1 |
+| 512px | DeepLabV3+ R50 | 7.02 | 1.01 | 55.6 |
+| 128px | CANet-B4 | 0.89 | 0.44 | 25.7 |
+| 128px | UNet | 9.25 | 0.73 | 60.0 |
+| 128px | DeepLabV3+ R50 | 1.76 | 0.29 | 21.9 |
 
 ![Accuracy against cost, 512px](../results/analysis/512px/accuracy_vs_cost.png)
 
@@ -361,12 +365,14 @@ Supported by these results:
 - *"CANet-B4 needs 10.4× fewer FLOPs than the paper's UNet at any input size. At 512px it runs 3.1×
   faster on a T4 GPU (fp32, batch 1) and 4.4× faster on a CPU, with 2.5× less GPU memory."*
 - *"CANet-B4, the paper's re-trained UNet and DeepLabV3+ R50 all exceed the paper's published
-  scores by a wide margin, so that improvement comes from the training and evaluation protocol
-  rather than from CANet-B4's architecture."*
+  scores by a wide margin, on different photographs, so that margin is not due to CANet-B4's
+  architecture."*
 
 Not supported, and not claimed:
 
 - That CANet-B4 is more accurate than either baseline.
+- That the models would score the same on the public NWRD release, or that the protocol alone
+  explains the margin over the published scores: the photographs differ.
 - That CANet-B4 is faster than DeepLabV3+ R50, or that its context module is what makes it cheap.
 - That CANet-B4 beats the paper's full method (UNet + APF): APF was not reproduced.
 - Anything finer than 10 test photographs can resolve.
@@ -376,18 +382,23 @@ Not supported, and not claimed:
 ## 10. Limitations
 
 1. **Ten test photographs, five for validation.** They bound the precision of every estimate.
-2. **One shared schedule.** The pretrained models peak between epochs 8 and 23 and then overfit,
+2. **Not the public NWRD photographs.** The 100 photographs (one DSLR, 6016×4000, March 2023) are
+   not those of the NWRD release (two-thirds phone photographs, 2022). They come from the Kaggle
+   dataset `manan369/nwrd-f`, which does not say where they were taken
+   ([`protocol.md`](protocol.md) §3.1). The comparison among the three models is unaffected,
+   but whether its results hold on the release, or on phone photographs, is untested.
+3. **One shared schedule.** The pretrained models peak between epochs 8 and 23 and then overfit,
    while the from-scratch UNet is still improving at epoch 30 at 512px (its best epochs are 21–23
    at 128px). A longer schedule would more likely help UNet than CANet-B4.
-3. **Pretraining is folded into "architecture",** and the same-encoder ablation that would
+4. **Pretraining is folded into "architecture",** and the same-encoder ablation that would
    separate encoder from context module was not trained.
-4. **APF and the paper's own test set are not reproduced.**
-5. **Compression robustness is untested.** The training patches are lossless PNG. In a smoke test
-   of the app on one rust-heavy 1024×1024 region of test photograph 100, re-encoding it as JPEG at
-   quality 95 (a mean change of 0.8 grey levels) lowered the share predicted as rust from 61% to
-   49%. One region is anecdotal, but field photographs are usually JPEG, so this needs a test-set
-   evaluation before deployment.
-6. **Efficiency was measured on one GPU type (T4) and one CPU type.**
+5. **APF is not reproduced.**
+6. **Compression robustness is untested.** The training patches are lossless PNG crops of the
+   camera's JPEGs, decoded once. In a smoke test of the app on one rust-heavy 1024×1024 region of
+   test photograph 100, re-encoding it as JPEG at quality 95 (a mean change of 0.8 grey levels)
+   lowered the share predicted as rust from 61% to 49%. One region is anecdotal, but uploaded
+   photographs are often re-compressed, so this needs a test-set evaluation before deployment.
+7. **Efficiency was measured on one GPU type (T4) and one CPU type.**
 
 ---
 
@@ -399,6 +410,7 @@ Not supported, and not claimed:
 | §8 results by model | `results/<scale>/final/<model>/summary.md`, written with `comparison.json` from the same files |
 | Per-photograph, lesion size, false alarms, training, thresholds | `results/analysis/512px/analysis.json`, `results/analysis/128px/analysis.json` (`scripts/analyse_results.py`) |
 | Effect of scale, per-photograph cost | `results/analysis/scales.md` (`scripts/compare_scales.py`) |
+| The photographs and the release they are compared with | [`protocol.md`](protocol.md) §3.1–3.2, checked with `scripts/verify_dataset.py` and the release's archive |
 | Efficiency | `results/512px/final/benchmark.json`, `results/128px/final/benchmark.json`; training time from each run's `history.json` |
 | Run-to-run noise | `results/512px/replicate/log.txt` against `results/512px/final/` (`analysis.json`, `replicate`) |
 | Paper figures | Anwar et al. 2023, Tables 3 and 4 ([`paper_summary.md`](paper_summary.md)) |

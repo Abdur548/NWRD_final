@@ -1,12 +1,13 @@
-# Wheat stripe-rust segmentation on NWRD: CANet-B4 against the paper's baselines
+# Wheat stripe-rust segmentation: CANet-B4 against the NWRD paper's baselines
 
-Pixel-level segmentation of wheat stripe rust in field photographs of the NWRD dataset (Anwar et
-al., *The NWRD Dataset*, Sensors 23(15):6942, 2023). The method studied is **CANet with an
-ImageNet-pretrained EfficientNet-B4 encoder (CANet-B4)**. It is compared with the NWRD paper's
-UNet architecture and with DeepLabV3+ R50 under one protocol: the same data, split by photograph,
-training schedule and threshold rule, three seeds per model, and a decision rule fixed before the
-results were seen. Accuracy and efficiency are both measured. A FastAPI service with a React
-interface, and a Streamlit dashboard, serve the trained model.
+Pixel-level segmentation of wheat stripe rust in 100 field photographs. The method studied is
+**CANet with an ImageNet-pretrained EfficientNet-B4 encoder (CANet-B4)**. It is compared with the
+UNet architecture of the NWRD paper (Anwar et al., *The NWRD Dataset*, Sensors 23(15):6942, 2023)
+and with DeepLabV3+ R50 under one protocol: the same data, split by photograph, training schedule
+and threshold rule, three seeds per model, and a decision rule fixed before the results were
+seen. Accuracy and efficiency are both measured. The photographs are not those of the public NWRD
+release ([Data](#data)). A FastAPI service with a React interface, and a Streamlit dashboard,
+serve the trained model.
 
 ## Results
 
@@ -24,20 +25,20 @@ CANet-B4 is not more accurate than either baseline: comparable to both at 512px 
 both at the paper's 128px scale. It needs a tenth of UNet's computation, and at 512px runs 3.1×
 faster than UNet on a T4 GPU and 4.4× faster on a CPU; DeepLabV3+ R50, with twice CANet-B4's
 FLOPs, is faster still on every device. All three re-trained models far exceed the paper's
-published scores (F1 0.826–0.857 against 0.557 at the same scale), so that gain comes from the
-training and evaluation protocol, not from CANet-B4's architecture. Each model's results are also
-reported on their own ([`docs/results.md`](docs/results.md) §8). Full results:
-[`docs/results.md`](docs/results.md). Protocol: [`docs/protocol.md`](docs/protocol.md). The
-baseline paper, with its figures and a check of its claims:
-[`docs/paper_summary.md`](docs/paper_summary.md).
+published scores (F1 0.826–0.857 against 0.557 at the same scale), so that margin is not due to
+CANet-B4's architecture; it reflects this study's protocol and photographs, which differ from the
+paper's. Each model's results are also reported on their own
+([`docs/results.md`](docs/results.md) §8). Full results: [`docs/results.md`](docs/results.md).
+Protocol: [`docs/protocol.md`](docs/protocol.md). The baseline paper, with its figures and a
+check of its claims: [`docs/paper_summary.md`](docs/paper_summary.md).
 
 ## Repository layout
 
 ```
 nwrd/            the pipeline: models, data, tiling, training, evaluation, benchmark, comparison,
                  app export, whole-photograph inference
-scripts/         Kaggle runner, notebook builder, result analysis, cross-scale report, PDF and
-                 paper-figure tools
+scripts/         Kaggle runner, notebook builder, dataset check, result analysis, cross-scale
+                 report, PDF and paper-figure tools
 notebooks/       the two Kaggle notebooks, generated from nwrd/ by scripts/build_notebooks.py
 results/         curated outputs of the Kaggle runs and their analysis (see results/README.md)
 app/             backend/ (FastAPI), frontend/ (React + Vite), dashboard.py (Streamlit),
@@ -98,22 +99,29 @@ documented in `app/backend/main.py`. The interface reads the API address from `V
 
 ```bash
 python -m pytest -m "not slow"     # unit, app and notebook tests, about a minute
-python -m pytest                   # all 77, with the end-to-end pipeline runs: about 4 minutes on a CPU
+python -m pytest                   # all 82, with the end-to-end pipeline runs: about 4 minutes on a CPU
 python -m ruff check . && python -m ruff format --check .
 ```
 
 ## Data
 
-The experiments use the Kaggle dataset `abdur548/nwrd-patched`: the 100 NWRD photographs cut
-into 512×512 patches at native resolution and split by photograph (train 1–85, validation
-86–90, test 91–100). The original NWRD dataset is published by its authors at
-[github.com/dll-ncai/NUST-Wheat-Rust-Disease-NWRD](https://github.com/dll-ncai/NUST-Wheat-Rust-Disease-NWRD).
+The experiments use the Kaggle dataset `abdur548/nwrd-patched`, cut from the Kaggle dataset
+`manan369/nwrd-f`: 100 field photographs of wheat with stripe rust (Nikon D3200, 6016×4000) and
+their masks, each centred on a black 6144×4096 canvas and cut, without resizing, into 96
+non-overlapping 512×512 patches, split by photograph (train 1–85, validation 86–90, test
+91–100). The script that cut them was not kept; `scripts/verify_dataset.py` checks the
+reconstructed recipe against the source photographs.
+
+These photographs are **not** those of the public NWRD release, which the NWRD paper's authors
+publish on Zenodo ([doi:10.5281/zenodo.21672928](https://doi.org/10.5281/zenodo.21672928),
+CC BY 4.0): 100 photographs from 2022, two-thirds of them from a phone, at several sizes.
+Provenance, recipe and checks: [`docs/protocol.md`](docs/protocol.md) §3.
 
 ## Credits
 
-- **Dataset and baseline:** Anwar, H. et al. *The NWRD Dataset: An Open-Source Annotated
-  Segmentation Dataset of Diseased Wheat Crop.* Sensors 2023, 23(15), 6942.
-  doi:10.3390/s23156942.
+- **Baseline:** Anwar, H. et al. *The NWRD Dataset: An Open-Source Annotated Segmentation
+  Dataset of Diseased Wheat Crop.* Sensors 2023, 23(15), 6942. doi:10.3390/s23156942. Its
+  photographs (Zenodo, doi:10.5281/zenodo.21672928) were not used here.
 - **CANet design:** adapted from Tang, Q. et al. *Attention-guided Chained Context Aggregation for
   Semantic Segmentation*, arXiv:2002.12041; the project's reference is Shoaib, M. et al.,
   Frontiers in Plant Science 13:1095547 (2022). See [`docs/protocol.md`](docs/protocol.md) §2.1

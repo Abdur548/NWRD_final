@@ -79,8 +79,9 @@ def page_overview() -> None:
     left.markdown(
         card(
             '📊 Dataset',
-            'NWRD (NUST Wheat Rust Disease): 100 field photographs of wheat with stripe rust and '
-            'pixel-level masks, split by photograph into train (85), validation (5) and test (10).',
+            '100 field photographs of wheat with stripe rust (6016×4000) and pixel-level masks, '
+            'split by photograph into train (85), validation (5) and test (10). They are not the '
+            'photographs of the public NWRD release (<code>docs/protocol.md</code> §3).',
         )
         + card('🧠 Encoder', 'EfficientNet-B4, pretrained on ImageNet and fine-tuned.'),
         unsafe_allow_html=True,

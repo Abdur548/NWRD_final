@@ -5,7 +5,7 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "nwrd"
 version = "1.0.0"
-description = "Wheat stripe-rust segmentation on the NWRD dataset: CANet-B4 against the NWRD paper's baselines"
+description = "Wheat stripe-rust segmentation: CANet-B4 against the NWRD paper's baselines"
 readme = "README.md"
 requires-python = ">=3.10"
 authors = [

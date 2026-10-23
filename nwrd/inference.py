@@ -1,11 +1,12 @@
 """Whole-photograph inference for the app (backend and dashboard).
 
 The model was trained and tested on 512x512 patches cut at native resolution from padded
-photographs, never on downscaled photographs. A photograph is therefore predicted the same way
-the test set was scored: padded to a whole number of patches, cut into non-overlapping 512px
-patches, each preprocessed exactly as at test time (data.eval_transform), predicted, and
-stitched back; the padding is then cropped away. Padding mirrors the photograph's border, so
-edge patches see image content rather than a black band.
+photographs, never on downscaled photographs. A photograph is therefore predicted at native
+resolution too: padded to a whole number of patches, cut into non-overlapping 512px patches, each
+preprocessed exactly as at test time (data.eval_transform), predicted, and stitched back; the
+padding is then cropped away. Only the padding differs from the dataset's: it mirrors the
+photograph's border at the bottom and right, so edge patches see image content, where the
+dataset centred each photograph on a black canvas (docs/protocol.md §3.2).
 """
 
 import io
@@ -18,7 +19,7 @@ from . import data as D
 from .models import build_model
 
 PATCH = 512
-MAX_PIXELS = 40_000_000  # default upload limit: NWRD photographs are 16-24 MP
+MAX_PIXELS = 40_000_000  # default upload limit: this study's photographs are 24 MP, NWRD's 16-24
 # Upper bound (exclusive, % of image pixels predicted as rust) of each label below 'severe'.
 # Illustrative bands for the demo app only: they are not a validated agronomic severity scale,
 # and a photograph may include soil or sky as well as leaves.

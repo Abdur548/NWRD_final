@@ -23,7 +23,7 @@ Test split: 3840 patches, 722 with rust, 8.1% rust pixels. Threshold chosen per 
 | unet, re-run: all test patches | 0.850 | 0.863 | 0.857 | 0.749 |
 | unet, re-run: rust-positive test patches (≈ Table 4) | 0.914 | 0.863 | 0.888 | 0.798 |
 
-Every model here sees 128px tiles re-cut at 0.5× scale, the paper's own patch size and field of view (nwrd/tiles.py). The paper's test photographs, training (APF, 500 epochs, focal loss) and patch sampling still differ, so its rows are reference points, not a paired comparison. The `unet` row is the paper's architecture re-trained under this protocol, so CANet vs `unet` is the like-for-like comparison.
+Every model here sees 128px tiles re-cut at 0.5× scale, the paper's own patch size and downsampling (nwrd/tiles.py). The paper's photographs (the public NWRD release, not this dataset; docs/protocol.md §3.1), test split, training (APF, 500 epochs, focal loss) and patch sampling still differ, so its rows are reference points, not a paired comparison. The `unet` row is the paper's architecture re-trained under this protocol, so CANet vs `unet` is the like-for-like comparison.
 
 ## Is the difference real? (CANet-B4 minus baseline, test split)
 

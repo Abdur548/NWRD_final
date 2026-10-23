@@ -27,7 +27,7 @@ Pre-registered decision rule at 128px: CANet-B4 **is worse than** DeepLabV3+ R50
 | unet, 128px | rust tiles only | 0.914 | 0.863 | 0.888 | 0.798 |
 | deeplabv3plus_r50, 128px | rust tiles only | 0.921 | 0.846 | 0.882 | 0.789 |
 
-Same patch size and field of view as the paper. Still different: the paper's test photographs (random 80/10/10 split), its training (APF, RMSprop, 500 epochs, focal loss) and patch sampling, so these rows are context, not a paired comparison.
+Same patch size and downsampling as the paper. Still different: the photographs (the paper's are the public NWRD release; this study's are not, docs/protocol.md §3.1), the paper's test split (random 80/10/10), its training (APF, RMSprop, 500 epochs, focal loss) and patch sampling, so these rows are context, not a paired comparison.
 
 ## Effect of scale on each model (test IoU, mean over seeds)
 
@@ -50,13 +50,13 @@ Measured on Tesla T4 (torch 2.10.0+cu128), random weights.
 | 128px | unet | 31.0 | 24.08 | 7.2 | 3.6 | 474 @bs8, 524 @bs64 | 156 | 1.7 |
 | 128px | deeplabv3plus_r50 | 26.7 | 4.57 | 6.3 | 7.3 | 987 @bs8, 1323 @bs64 | 57 | 1.2 |
 
-Per 4608×3456 photograph (60.8 native 512px patches, or 243 tiles of 128px at 0.5×, by area; GPU batched time uses the largest batch measured):
+Per 6016×4000 photograph (96 native 512px patches, or 384 tiles of 128px at 0.5×, padding included; GPU batched time uses the largest batch measured):
 
 | Scale | Model | TFLOPs / photo | GPU fp16 batched (ms / photo) | GPU fp32 bs1 (ms / photo) | CPU bs1 (s / photo) |
 |---|---|---|---|---|---|
-| 512px | canet_b4 | 2.24 | 837 | 1857 | 44.0 |
-| 512px | unet | 23.41 | 2172 | 5767 | 191.8 |
-| 512px | deeplabv3plus_r50 | 4.44 | 637 | 1658 | 35.2 |
-| 128px | canet_b4 | 0.56 | 280 | 5492 | 16.3 |
-| 128px | unet | 5.85 | 463 | 1746 | 38.0 |
-| 128px | deeplabv3plus_r50 | 1.11 | 184 | 1524 | 13.9 |
+| 512px | canet_b4 | 3.54 | 1323 | 2934 | 69.6 |
+| 512px | unet | 36.99 | 3432 | 9114 | 303.1 |
+| 512px | deeplabv3plus_r50 | 7.02 | 1007 | 2620 | 55.6 |
+| 128px | canet_b4 | 0.89 | 442 | 8679 | 25.7 |
+| 128px | unet | 9.25 | 732 | 2759 | 60.0 |
+| 128px | deeplabv3plus_r50 | 1.76 | 290 | 2408 | 21.9 |

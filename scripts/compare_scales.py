@@ -14,6 +14,7 @@ photograph. Reads only files the pipeline writes.
 import argparse
 import glob
 import json
+import math
 import os
 
 import numpy as np
@@ -23,8 +24,8 @@ from nwrd.compare import OURS, PAPER, VERDICTS, mean_std
 BASES = ('unet', 'deeplabv3plus_r50')  # in the order they are reported
 NAMES = {'unet': "the paper's UNet", 'deeplabv3plus_r50': 'DeepLabV3+ R50'}
 KEYS = ('Precision', 'Recall', 'Dice', 'IoU')
-# Most NWRD photographs are 4608×3456; a few are 6016×4000 (paper §3.2).
-PHOTO = (4608, 3456)
+# Every photograph of this study is 6016×4000 (docs/protocol.md §3.1).
+PHOTO = (6016, 4000)
 
 
 def _read_json(path: str):
@@ -53,9 +54,10 @@ def fmt(xs) -> str:
     return f'{m:.3f} ± {s:.3f}' if len(xs) > 1 else f'{m:.3f}'
 
 
-def per_photo(size: int, scale: float) -> float:
-    """Number of size-px inputs that cover one photograph resized by `scale` (by area)."""
-    return PHOTO[0] * scale * PHOTO[1] * scale / size**2
+def per_photo(size: int, scale: float) -> int:
+    """Number of size-px inputs one photograph, resized by `scale`, is cut into once padded to
+    whole inputs, as the dataset and the app cut it."""
+    return math.ceil(PHOTO[0] * scale / size) * math.ceil(PHOTO[1] * scale / size)
 
 
 def report(r128: dict, r512: dict) -> str:
@@ -124,9 +126,10 @@ def report(r128: dict, r512: dict) -> str:
             )
     L += [
         '',
-        "Same patch size and field of view as the paper. Still different: the paper's test "
-        'photographs (random 80/10/10 split), its training (APF, RMSprop, 500 epochs, focal '
-        'loss) and patch sampling, so these rows are context, not a paired comparison.',
+        'Same patch size and downsampling as the paper. Still different: the photographs (the '
+        "paper's are the public NWRD release; this study's are not, docs/protocol.md §3.1), "
+        "the paper's test split (random 80/10/10), its training (APF, RMSprop, 500 epochs, "
+        'focal loss) and patch sampling, so these rows are context, not a paired comparison.',
     ]
 
     L += [
@@ -178,9 +181,9 @@ def report(r128: dict, r512: dict) -> str:
             )
         L += [
             '',
-            f'Per {PHOTO[0]}×{PHOTO[1]} photograph ({per_photo(512, 1):.1f} native 512px patches, '
-            f'or {per_photo(128, 0.5):.0f} tiles of 128px at 0.5×, by area; GPU batched time uses '
-            'the largest batch measured):',
+            f'Per {PHOTO[0]}×{PHOTO[1]} photograph ({per_photo(512, 1)} native 512px patches, or '
+            f'{per_photo(128, 0.5)} tiles of 128px at 0.5×, padding included; GPU batched time '
+            'uses the largest batch measured):',
             '',
             '| Scale | Model | TFLOPs / photo | GPU fp16 batched (ms / photo) | '
             'GPU fp32 bs1 (ms / photo) | CPU bs1 (s / photo) |',

@@ -24,7 +24,7 @@ stayed on Kaggle.
 | `config.json` | The protocol settings the run used |
 | `tiling.json` (128px) | How the tiles were made, and the rust-pixel share before and after downsampling |
 | `log.txt` | The complete Kaggle log of every session, in order |
-| `_cache/mask_stats_*.json` | Rust pixels per training and validation patch; they show the splits share no photograph |
+| `_cache/mask_stats_*.json` | Rust pixels per training and validation patch; they show the splits share no photograph, and `scripts/verify_dataset.py --counts` checks them, with the test counts, against the source masks |
 | `comparison.md`, `comparison.json`, `figures/training_curves.png` | The aggregated comparison, including the pre-registered verdict |
 | `<model>/summary.md` | One model on its own: every seed's metrics, mean ± std, its comparison with CANet-B4, and its cost |
 | `figures/qualitative_results.png` | Test patches with each model's prediction (seed 42) |

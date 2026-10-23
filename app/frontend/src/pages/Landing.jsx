@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import { Database, Layers, Cpu, Target, ArrowRight } from 'lucide-react';
 
 const CARDS = [
-  { icon: Database, title: 'Dataset', value: 'NWRD (NUST Wheat Rust Disease)' },
+  { icon: Database, title: 'Dataset', value: '100 field photographs' },
   { icon: Layers, title: 'Architecture', value: 'CANet' },
   { icon: Cpu, title: 'Encoder', value: 'EfficientNet-B4' },
   { icon: Target, title: 'Task', value: 'Binary segmentation' },

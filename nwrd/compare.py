@@ -262,18 +262,20 @@ def write_markdown(path: str, summary: dict, tests: dict, bench, test_info: dict
         L += [
             '',
             f'Every model here sees {tiling["tile"]}px tiles re-cut at {tiling["scale"]:g}× '
-            "scale, the paper's own patch size and field of view (nwrd/tiles.py). The paper's "
-            'test photographs, training (APF, 500 epochs, focal loss) and patch sampling still '
-            'differ, so its rows are reference points, not a paired comparison. The `unet` row is '
-            "the paper's architecture re-trained under this protocol, so CANet vs `unet` is the "
+            "scale, the paper's own patch size and downsampling (nwrd/tiles.py). The paper's "
+            'photographs (the public NWRD release, not this dataset; docs/protocol.md §3.1), '
+            'test split, training (APF, 500 epochs, focal loss) and patch sampling still differ, '
+            'so its rows are reference points, not a paired comparison. The `unet` row is the '
+            "paper's architecture re-trained under this protocol, so CANet vs `unet` is the "
             'like-for-like comparison.',
         ]
     else:
         L += [
             '',
-            'Paper figures are as published, on a different test unit (full-image patches, '
-            "128px). The `unet` row is the paper's architecture re-trained under this protocol, so "
-            'CANet vs `unet` is the like-for-like comparison.',
+            'Paper figures are as published, on other photographs (the public NWRD release, not '
+            'this dataset; docs/protocol.md §3.1) and a different test unit (128px patches). The '
+            "`unet` row is the paper's architecture re-trained under this protocol, so CANet vs "
+            '`unet` is the like-for-like comparison.',
         ]
     if tests:
 

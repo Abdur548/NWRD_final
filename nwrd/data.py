@@ -1,7 +1,8 @@
 """NWRD patch dataset: split discovery, background subsampling, transforms.
 
-The dataset (Kaggle `abdur548/nwrd-patched`) holds 512x512 native-resolution patches of the 100
-NWRD photographs, split by photograph: <root>/{train,val,test}/{images,masks}/<photo>_patch_*.png.
+The dataset (Kaggle `abdur548/nwrd-patched`) holds 512x512 native-resolution patches of 100 field
+photographs, split by photograph: <root>/{train,val,test}/{images,masks}/<photo>_patch_*.png. The
+photographs are not those of the public NWRD release; how they were cut is in docs/protocol.md §3.
 """
 
 import glob
@@ -39,6 +40,7 @@ def split_dirs(root: str, split: str) -> tuple[str, str]:
 
 
 def read_mask(path: str) -> np.ndarray:
+    # The masks are 8-bit grey with soft edges (about 0.7% of pixels lie between 0 and 255).
     return (cv2.imread(path, cv2.IMREAD_GRAYSCALE) > 127).astype(np.float32)
 
 

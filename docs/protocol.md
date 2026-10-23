@@ -1,6 +1,6 @@
 # Experimental protocol: CANet-B4 against the NWRD paper's baselines
 
-*Final, 2026-10-18.* This document states what was compared and how, so that every number in
+*Final, 2026-10-20.* This document states what was compared and how, so that every number in
 [`results.md`](results.md) can be checked and the experiments repeated. The baseline paper is
 summarised, with its figures and a check of its claims, in [`paper_summary.md`](paper_summary.md).
 
@@ -130,13 +130,67 @@ inference: see [`results.md`](results.md) §6.
 
 ## 3. Data
 
+### 3.1 The photographs
+
+The study uses 100 field photographs of wheat with stripe rust and their pixel-level masks from
+the public Kaggle dataset `manan369/nwrd-f` ("NWRD-F", uploaded 2025-07-31 without a description
+or license), in a folder `NWRDF/`, numbered 1–100 and already split into `train`, `val` and
+`test`. The project's copy, the private `abdur548/nwrdf-unpatched` (2025-08-07), holds the same
+200 files with the same paths and byte sizes. Every photograph was taken with a Nikon D3200 at
+its native 6016×4000 pixels, and the EXIF dates are 15, 28 and 29 March 2023 (the camera's clock
+reads near midnight, so its times are off by hours). The masks are 8-bit greyscale PNGs of the
+same size, with soft edges: 0.7% of their pixels lie between 0 and 255, and `nwrd/data.py`
+binarises them at 127.
+
+**These are not the photographs of the public NWRD release.** The NWRD paper's dataset is
+published on Zenodo (Anwar and Shafait, doi:10.5281/zenodo.21672928, CC BY 4.0) as 100
+photographs numbered 2–150 in `train` (90) and `test` (10) folders: 66 from a Huawei phone
+(PAR-LX1M) at 4608×3456, 3456×4608 or cropped sizes, 31 from a Nikon D3200 at 6016×4000 and 3
+without EXIF, taken between 17 February and 11 March 2022. None of NWRDF's 200 files is
+byte-identical to a file of the release, all its photographs come from the Nikon, and their
+capture dates are a year later. Where and by whom NWRDF's photographs were taken is not stated;
+the uploader's own public notebooks use NWRD-F as a test set separate from the NWRD release.
+(Checked in October 2026 from the release's archive listing and image headers, the Kaggle file
+listings and the EXIF of all 100 NWRDF photographs.) The release itself is also on Kaggle, file
+for file, as `bcap52/nwrd-wheat`.
+
+The three models are trained and tested on the same photographs, so the comparison between them
+is unaffected. The paper's published scores, however, come from other photographs (§6), and
+whether the results here hold on the release's phone photographs is untested (§8).
+
+### 3.2 How the patches were cut
+
+The experiments read the public Kaggle dataset `abdur548/nwrd-patched` (2025-08-15), cut from
+NWRDF. The script that cut it was not kept, so the recipe was reconstructed from the data:
+
 | | |
 |---|---|
-| Source | Kaggle dataset `abdur548/nwrd-patched`: the 100 NWRD photographs (4608×3456; a few 6016×4000), each padded to 6144×4096 and cut into 96 non-overlapping 512×512 patches at native resolution |
-| Split | By photograph: train 1–85 (8,160 patches), validation 86–90 (480), test 91–100 (960). No photograph is in two splits, checked from the patch names (`results/analysis/512px/analysis.json`, `splits`) |
-| Rust pixels | 9.8% of training pixels, 7.2% of validation pixels, 8.0% of test pixels |
+| Canvas | Each photograph centred on a black 6144×4096 canvas: 64 px left and right, 48 px top and bottom |
+| Patches | A 12×8 grid of non-overlapping 512×512 patches at native resolution, without resizing: 96 per photograph, 9,600 in all. The padding is 4.4% of each canvas; the 36 border patches carry a black strip, and no patch is padding only |
+| Names | `<photo>_patch_<n>_x<left>_y<top>.png`, numbered row by row (`n` = 12·row + column), with `left` and `top` in canvas pixels |
+| Images | Lossless RGB PNG crops of the decoded JPEG |
+| Masks | Crops of the greyscale source masks, not binarised |
+
+`scripts/verify_dataset.py` checks this recipe. Centring the source masks reproduces the
+rust-pixel count of every one of the 9,600 patches, as saved with the 512px results
+(`--counts`); padding at the bottom right, or stretching each photograph to 6144×4096, does not.
+Every patch file of test photograph 91 (96 images and 96 masks) is identical, pixel for pixel,
+to its crop of the padded source (`--patches`).
+
+The dataset's own `README.md` and `processing_stats.json` are wrong in places. They count each
+mask as an image: 200 "processed images" and 19,200 "patches" for 100 photographs and 9,600
+patches, with every split doubled. `processing_stats.json` lists six image sizes for 100
+photographs, and the README names a `processed_patches/` folder (it is `wheat_rust_patches/`)
+and describes the masks as 0 or 255. The Kaggle dataset states no license.
+
+### 3.3 Splits and sampling
+
+| | |
+|---|---|
+| Split | By photograph, as NWRDF's folders: train 1–85 (8,160 patches), validation 86–90 (480), test 91–100 (960). No photograph is in two splits, checked from the patch names (`results/analysis/512px/analysis.json`, `splits`) |
+| Rust pixels | 9.8% of training pixels, 7.2% of validation pixels, 8.0% of test pixels (padding included) |
 | Training sample | Every patch with rust (2,597) plus 20% of the background-only patches (1,112 of 5,563), drawn once with a fixed data seed, so every model and seed trains on the same 3,709 patches. Validation and test are used in full |
-| 128px tiles | Each 512px patch halved with a Lanczos filter and cut 2×2 (`nwrd/tiles.py`); a mask pixel is rust when at least half of the area it replaces was rust. Train 32,640 tiles (6,939 with rust; sample 12,079), validation 1,920, test 3,840 (722 with rust). A tile covers 256×256 native pixels, the footprint of one of the paper's patches |
+| 128px tiles | Each 512px patch halved with a Lanczos filter and cut 2×2 (`nwrd/tiles.py`); a mask pixel is rust when at least half of the area it replaces was rust. Train 32,640 tiles (6,939 with rust; sample 12,079), validation 1,920, test 3,840 (722 with rust). A tile covers 256×256 native pixels, as one of the paper's patches does |
 
 ---
 
@@ -196,8 +250,9 @@ the change cannot have been fitted to the outcome.
 
 | Aspect | NWRD paper | This protocol | Effect on comparing with the paper |
 |---|---|---|---|
-| Test photographs | Random 80/10/10 split; test images not published | Photographs 91–100 | Not the same test set: published numbers are context only |
-| Patch size and scale | 0.5× Lanczos, 128×128 patches | 512px native (`main`), or the paper's 0.5× and 128px (`128px`) | The `128px` experiment matches the paper's patch size and field of view |
+| Photographs | The public NWRD release: 100 photographs from 2022, two-thirds from a phone, at several sizes | 100 other photographs (NWRDF, §3.1), all from one DSLR at 6016×4000, dated 2023 | Different data: published numbers are context only |
+| Test photographs | Random 80/10/10 split; the paper does not list its test images (the release ships a 10-photograph `test` folder) | Photographs 91–100 of NWRDF | No test photograph is shared |
+| Patch size and scale | 0.5× Lanczos, 128×128 patches | 512px native (`main`), or the paper's 0.5× and 128px (`128px`) | The `128px` experiment matches the paper's patch size and downsampling: a tile covers 256×256 native pixels, as theirs do |
 | Patch sampling | APF: rust patches plus, every 5 epochs, patches where the model produced false positives | All rust patches plus a fixed 20% of background patches | APF is not reproduced; the re-trained `unet` tests the paper's architecture, not its full method |
 | Loss | Focal loss | 0.7·Dice + 0.3·weighted BCE | Same for every model here |
 | Optimiser and schedule | RMSprop, lr 1e-6, 500 epochs, batch 64 | AdamW 5e-5, 30 epochs, batch 8 | 500 epochs is beyond a free GPU budget |
@@ -258,6 +313,10 @@ Two corrections were made to this pipeline itself during the work:
    from context module was not trained.
 7. **Efficiency was measured on one GPU type (T4) and one CPU type (Kaggle's).** Ratios carry
    over better than absolute times.
+8. **Not the public NWRD photographs.** The photographs are not those of the NWRD release, and
+   where they were taken is not stated by the Kaggle dataset they come from (§3.1). Every model
+   sees the same photographs, so the verdicts stand, but all of them come from one camera, and
+   whether the verdicts hold on the release's phone photographs is untested.
 
 ---
 
@@ -281,4 +340,13 @@ python -m nwrd.run --stage compare --out results/128px/final
 python scripts/analyse_results.py results/512px/final --replicate results/512px/replicate
 python scripts/analyse_results.py results/128px/final
 python scripts/compare_scales.py results/128px/final results/512px/final --out results/analysis/scales.md
+```
+
+The patching recipe (§3.2) is checked against the source photographs: the `NWRDF` folder of the
+public `manan369/nwrd-f` (or of the identical private copy). The first check needs only its
+masks; the second needs the patched dataset as well:
+
+```bash
+python scripts/verify_dataset.py --source NWRDF --counts results/512px/final
+python scripts/verify_dataset.py --source NWRDF --patches wheat_rust_patches
 ```
