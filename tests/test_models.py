@@ -1,11 +1,11 @@
-"""Model definitions, copied unchanged from NWRD_final: output shapes at both window sizes,
-CANet at 128px, and safe checkpoint loading."""
+"""Model definitions (NWRD_final's, plus the ablation's variants): output shapes at both window
+sizes, CANet at 128px, which encoders are frozen, and safe checkpoint loading."""
 
 import pytest
 import torch
 import torch.nn.functional as F
 
-from nwrd_public.config import COMPARED_MODELS
+from nwrd_public.config import ABLATION_MODELS, COMPARED_MODELS
 from nwrd_public.models import MODELS, ContextFlow, build_model, load_checkpoint
 
 
@@ -16,12 +16,35 @@ def test_models_output_logits_at_input_size(name):
         assert m(torch.randn(1, 3, 128, 128)).shape == (1, 1, 128, 128)
 
 
-@pytest.mark.parametrize('name', COMPARED_MODELS)
-def test_compared_models_run_at_both_window_sizes(name):
+@pytest.mark.parametrize('name', COMPARED_MODELS + ABLATION_MODELS)
+def test_models_run_here_work_at_both_window_sizes(name):
     m = build_model(name, pretrained=False).eval()
     with torch.no_grad():
         assert m(torch.randn(1, 3, 512, 512)).shape == (1, 1, 512, 512)
         assert m(torch.randn(2, 3, 128, 128)).shape == (2, 1, 128, 128)
+
+
+def test_only_an_imagenet_encoder_is_frozen():
+    """train.py freezes `.encoder` for the first epochs unless `has_pretrained_encoder` is
+    False: the from-scratch ablation must train its random encoder from the first epoch."""
+    scratch = build_model('deeplabv3plus_r50_scratch', pretrained=True)  # never downloads
+    assert scratch.has_pretrained_encoder is False
+    for name in ('deeplabv3plus_r50', 'unet_r50', 'deeplabv3plus_b4'):
+        assert build_model(name, pretrained=False).has_pretrained_encoder is False
+    assert not build_model('unet').has_pretrained_encoder
+
+
+def test_ablation_variants_change_one_part_of_deeplabv3plus_r50():
+    import segmentation_models_pytorch as smp
+
+    ref = build_model('deeplabv3plus_r50', pretrained=False)
+    scratch = build_model('deeplabv3plus_r50_scratch')
+    unet_r50 = build_model('unet_r50', pretrained=False)
+    b4 = build_model('deeplabv3plus_b4', pretrained=False)
+    assert type(scratch) is type(ref) is type(b4) is smp.DeepLabV3Plus
+    assert isinstance(unet_r50, smp.Unet)
+    assert type(scratch.encoder) is type(unet_r50.encoder) is type(ref.encoder)
+    assert type(b4.encoder) is not type(ref.encoder)
 
 
 def test_unknown_model_is_rejected():

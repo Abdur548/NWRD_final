@@ -8,6 +8,8 @@ import sys
 
 import pytest
 
+from nwrd_public.config import ABLATION_MODELS, COMPARED_MODELS
+
 from .conftest import ROOT
 
 sys.path.insert(0, os.path.join(ROOT, 'scripts'))
@@ -19,9 +21,12 @@ KERNELS = [k.kernel(m, p) for m, p in itertools.product(k.MODELS, k.PRESETS)]
 def test_one_kernel_per_model_and_scale():
     assert k.kernel('canet_b4', '512px')['slug'] == 'nwrd-public-canet-b4-512px'
     assert k.kernel('deeplabv3plus_r50', '128px')['slug'] == 'nwrd-public-deeplabv3plus-r50-128px'
+    scratch = k.kernel('deeplabv3plus_r50_scratch', '512px')
+    assert scratch['slug'] == 'nwrd-public-deeplabv3plus-r50-scratch-512px'
+    assert k.MODELS == COMPARED_MODELS + ABLATION_MODELS
     for key in ('slug', 'push_dir'):
-        assert len({e[key] for e in KERNELS}) == 6, key
-    assert len({k.output_dir(e, 'u', 1) for e in KERNELS}) == 6
+        assert len({e[key] for e in KERNELS}) == len(KERNELS) == 12, key
+    assert len({k.output_dir(e, 'u', 1) for e in KERNELS}) == 12
     assert all(os.path.exists(e['notebook']) for e in KERNELS)
 
 

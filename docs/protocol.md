@@ -4,6 +4,9 @@
 number in the results can be checked and the experiments repeated. The data are described in
 [`dataset.md`](dataset.md); every number quoted from it comes from `results/dataset/`.
 
+*Amended 2026-11-15, after the 512px results:* §9 adds an exploratory ablation. Sections 1 to 8,
+including the decision rule, are unchanged.
+
 ---
 
 ## 1. Question and models
@@ -244,3 +247,38 @@ python -m nwrd_public.compare results              # every comparison and result
 
 With a GPU and the release, locally:
 `python -m nwrd_public.run --model canet_b4 --preset 512px --data-root data/raw/NWRD --out runs`.
+
+---
+
+## 9. Exploratory ablation at 512px (amendment of 2026-11-15)
+
+**When and why.** Added on 2026-11-15, after the 512px results of §1–§5 were known, and therefore
+**exploratory**: no hypothesis or decision rule was fixed for it before it ran. The 512px results
+show DeepLabV3+ R50 ahead of both the NWRD paper's UNet and CANet-B4; the ablation asks which part
+of the design accounts for that. Each variant changes one part of DeepLabV3+ R50 (or, for the
+last comparison, of CANet-B4):
+
+| Model (`nwrd_public/models.py`) | What it is | Compared with | Isolates |
+|---|---|---|---|
+| `deeplabv3plus_r50_scratch` | DeepLabV3+ R50 with a randomly initialised encoder | `deeplabv3plus_r50` | ImageNet pretraining |
+| `unet_r50` | segmentation-models-pytorch 0.5.0's UNet decoder on the ImageNet ResNet-50 encoder | `deeplabv3plus_r50`; `unet` | The decoder (ASPP and DeepLabV3+'s decoder against UNet's); a pretrained encoder in a UNet |
+| `deeplabv3plus_b4` | DeepLabV3+ on CANet-B4's ImageNet EfficientNet-B4 encoder | `deeplabv3plus_r50`; `canet_b4` | The encoder; CANet's context modules against ASPP on the same encoder |
+
+**Protocol.** Everything of §2–§4 applies unchanged (split, windows, scoring, loss, optimiser,
+schedule, model selection, threshold, seeds 42–44), at the 512px scale only; only the model
+differs. Three points follow from the variants themselves:
+
+- An encoder is frozen for the first 3 epochs only when it carries ImageNet weights; the
+  from-scratch encoder trains from the first epoch (`tests/test_pipeline.py` checks it).
+- `deeplabv3plus_r50_scratch` keeps the learning rate and 30-epoch schedule chosen for
+  fine-tuning, so it measures what pretraining is worth **under this protocol**, not against a
+  from-scratch DeepLabV3+ tuned for its own sake (threat 6 of §7 applies to it too).
+- `unet_r50` and `unet` differ in both encoder and decoder widths; only `unet_r50` against
+  `deeplabv3plus_r50` changes the decoder alone.
+
+**Analysis.** For each pair, the seed-averaged difference in pooled test IoU with the paired
+photograph bootstrap of §5, the seed t-test and the seeds won (`scripts/build_paper.py`,
+`results/512px/pairwise.json`). These are estimates with intervals, **not verdicts**:
+`compare.py` applies the decision rule to CANet-B4 against `unet` and `deeplabv3plus_r50` only.
+Differences smaller than the run-to-run noise (threat 5 of §7: 0.028 test IoU between two
+sessions of one seed in `NWRD_final`) are not interpreted.

@@ -76,6 +76,17 @@ def test_side_by_side_report(tmp_path, patches):
     assert (scale_dir / 'unet' / 'summary.md').exists()
 
 
+def test_the_ablation_is_reported_but_never_judged(tmp_path):
+    scale_dir = tmp_path / '512px'
+    for model in ('canet_b4', 'unet', 'deeplabv3plus_r50', 'unet_r50'):
+        for seed in (42, 43, 44):
+            _fake_run(scale_dir / model / f'seed{seed}', model, seed, 2737)
+    compare(str(scale_dir), log=lambda _msg: None)
+    summary = json.loads((scale_dir / 'comparison.json').read_text())
+    assert 'unet_r50' in summary['summary']
+    assert list(summary['significance']) == ['deeplabv3plus_r50', 'unet']
+
+
 def test_photograph_bootstrap():
     photos = [str(p) for p in range(10)]
     base = [(70, 15, 15, 900)] * 10

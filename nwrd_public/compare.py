@@ -19,6 +19,7 @@ import sys
 
 import numpy as np
 
+from .config import COMPARED_MODELS
 from .metrics import dice, iou
 from .models import MODELS
 from .windows import grid, scaled_shape
@@ -162,11 +163,12 @@ def verdict(boot_photo_iou: dict, wins: int) -> str:
 
 
 def significance(runs: dict) -> dict:
-    """CANet-B4 against every other model, on the seeds both have."""
+    """CANet-B4 against each pre-registered baseline, on the seeds both have. The ablation's
+    models (config.ABLATION_MODELS) are exploratory and never judged by the decision rule."""
     tests = {}
     if OURS not in runs:
         return tests
-    for base in (m for m in runs if m != OURS):
+    for base in (m for m in runs if m != OURS and m in COMPARED_MODELS):
         seeds = sorted(set(runs[OURS]) & set(runs[base]))
         if not seeds:
             continue

@@ -7,9 +7,12 @@ Each field is also a command-line flag of `python -m nwrd_public.run` (`data_roo
 from dataclasses import asdict, dataclass, field
 
 # CANet-B4 is ours; UNet is the NWRD paper's architecture; DeepLabV3+ R50 is the second baseline.
-# models.py, copied unchanged from NWRD_final, also defines that study's `unet_tuned` control and
-# `deeplabv3plus_b4` ablation (and mentions its config.unet_tuned_lr); they are not run here.
+# The decision rule (docs/protocol.md §5) judges CANet-B4 against these two baselines only.
 COMPARED_MODELS = ('canet_b4', 'unet', 'deeplabv3plus_r50')
+# The exploratory 512px ablation, added 2026-11-15 after the 512px results (docs/protocol.md §9):
+# each changes one part of DeepLabV3+ R50 or CANet-B4. models.py also defines NWRD_final's
+# `unet_tuned` control (and mentions its config.unet_tuned_lr), which is not run here.
+ABLATION_MODELS = ('deeplabv3plus_r50_scratch', 'unet_r50', 'deeplabv3plus_b4')
 
 
 @dataclass
@@ -53,8 +56,10 @@ class Config:
     limit: int = 0  # >0: use only the first N photographs of each split (smoke tests)
 
     def validate(self) -> None:
-        if self.model not in COMPARED_MODELS:
-            raise ValueError(f'model {self.model!r} is not compared here; use {COMPARED_MODELS}')
+        if self.model not in COMPARED_MODELS + ABLATION_MODELS:
+            raise ValueError(
+                f'model {self.model!r} is not run here; use {COMPARED_MODELS + ABLATION_MODELS}'
+            )
         if not 0 < self.scale <= 1:
             raise ValueError(
                 f'scale {self.scale} must be in (0, 1]: photographs are never enlarged'

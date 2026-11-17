@@ -10,6 +10,7 @@ import numpy as np
 import pytest
 import torch
 
+from nwrd_public.config import ABLATION_MODELS
 from nwrd_public.dataset import read_photo
 from nwrd_public.run import main
 
@@ -116,6 +117,28 @@ def test_full_run_at_half_scale(synthetic_release, tmp_path):
         assert c.sum() == read_photo(synthetic_release.root, 'test', pid)[1].size  # native pixels
     config = json.loads(_read(out / 'config.json'))
     assert config['preset'] == '128px' and config['scale'] == 0.5
+
+
+@pytest.mark.parametrize('model', ABLATION_MODELS)
+def test_ablation_models_run_end_to_end(synthetic_release, tmp_path, model):
+    out = tmp_path / 'runs'
+    args = [*_data(synthetic_release, tmp_path), '--out', str(out), *FAST, '--model', model,
+            '--seeds', '1', '--epochs', '1']  # fmt: skip
+    assert main(args) == 0
+    m = json.loads(_read(out / model / 'seed1' / 'metrics.json'))
+    assert m['model'] == model and m['test_photos'] == 2
+
+
+def test_the_from_scratch_encoder_trains_from_the_first_epoch(synthetic_release, tmp_path):
+    """Freezing a random encoder would hold it at its initialisation: with the default three
+    frozen epochs, the from-scratch model must train exactly as with none."""
+    base = [*_data(synthetic_release, tmp_path), *FAST, '--model', 'deeplabv3plus_r50_scratch',
+            '--seeds', '1', '--epochs', '1', '--stage', 'train']  # fmt: skip
+    default, unfrozen = tmp_path / 'default', tmp_path / 'unfrozen'
+    assert main(base + ['--out', str(default)]) == 0
+    assert main(base + ['--out', str(unfrozen), '--freeze-encoder-epochs', '0']) == 0
+    run = ('deeplabv3plus_r50_scratch', 'seed1')
+    assert _same_weights(_weights(default.joinpath(*run)), _weights(unfrozen.joinpath(*run)))
 
 
 def test_training_is_reproducible_and_resumes_exactly(synthetic_release, tmp_path):

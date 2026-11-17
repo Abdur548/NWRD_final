@@ -33,7 +33,15 @@ import time
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DATASET = 'bcap52/nwrd-wheat'
-MODELS = ('canet_b4', 'unet', 'deeplabv3plus_r50')
+# nwrd_public.config's COMPARED_MODELS, then its ABLATION_MODELS (run at 512px only).
+MODELS = (
+    'canet_b4',
+    'unet',
+    'deeplabv3plus_r50',
+    'deeplabv3plus_r50_scratch',
+    'unet_r50',
+    'deeplabv3plus_b4',
+)
 PRESETS = ('512px', '128px')
 PUSH_ROOT = os.path.join(ROOT, 'build', 'kaggle_push')
 OUT_ROOT = os.path.join(ROOT, 'runs_kaggle')

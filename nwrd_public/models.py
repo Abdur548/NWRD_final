@@ -1,4 +1,5 @@
-"""Model definitions: CANet-B4 (ours), the NWRD paper's UNet, and the DeepLabV3+ baselines.
+"""Model definitions: CANet-B4 (ours), the NWRD paper's UNet, the DeepLabV3+ baselines, and the
+512px ablation's variants (docs/protocol.md §9).
 
 Module names inside CANet match the checkpoints trained since the sprint-2 notebook, so every
 existing checkpoint loads unchanged.
@@ -14,6 +15,10 @@ MODELS = {
     'canet_b4': 'CANet, EfficientNet-B4 encoder (ours)',
     'deeplabv3plus_r50': 'DeepLabV3+, ResNet-50 encoder (baseline)',
     'deeplabv3plus_b4': 'DeepLabV3+, EfficientNet-B4 encoder (same-encoder ablation)',
+    'deeplabv3plus_r50_scratch': (
+        'DeepLabV3+, ResNet-50 encoder, from scratch (pretraining ablation)'
+    ),
+    'unet_r50': 'UNet decoder on an ImageNet ResNet-50 encoder (decoder ablation)',
     'unet': 'UNet, 4 encoder / 4 decoder blocks, from scratch (NWRD paper baseline)',
     'unet_tuned': 'UNet (paper architecture) with a from-scratch lr (config.unet_tuned_lr)',
 }
@@ -185,19 +190,24 @@ class UNet(nn.Module):
 def build_model(name: str, pretrained: bool = True, dropout: float = Config.dropout) -> nn.Module:
     """All models return raw logits of shape (B, 1, H, W) and expose `.encoder`.
 
-    A model whose class sets `has_pretrained_encoder = False` is never frozen; the smp
-    baselines have ImageNet encoders and default to being frozen like CANet's."""
+    A model with `has_pretrained_encoder = False` is never frozen (train.py). An smp model has
+    it set to whether ImageNet weights were loaded, so `deeplabv3plus_r50_scratch`, whose
+    encoder is always random, is never frozen."""
     if name == 'canet_b4':
         return CANet(dropout=dropout, pretrained=pretrained)
     if name in ('unet', 'unet_tuned'):
         return UNet()
-    if name in ('deeplabv3plus_r50', 'deeplabv3plus_b4'):
+    if name in ('deeplabv3plus_r50', 'deeplabv3plus_b4', 'deeplabv3plus_r50_scratch', 'unet_r50'):
         import segmentation_models_pytorch as smp
 
-        encoder = 'resnet50' if name.endswith('r50') else 'efficientnet-b4'
-        return smp.DeepLabV3Plus(
-            encoder_name=encoder, encoder_weights='imagenet' if pretrained else None, classes=1
+        weights = 'imagenet' if pretrained and not name.endswith('_scratch') else None
+        model = (smp.Unet if name == 'unet_r50' else smp.DeepLabV3Plus)(
+            encoder_name='efficientnet-b4' if name.endswith('_b4') else 'resnet50',
+            encoder_weights=weights,
+            classes=1,
         )
+        model.has_pretrained_encoder = weights is not None
+        return model
     raise ValueError(f'unknown model {name!r}; choose from {sorted(MODELS)}')
 
 

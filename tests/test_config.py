@@ -2,7 +2,7 @@
 
 import pytest
 
-from nwrd_public.config import COMPARED_MODELS, PRESETS, Config, preset_of
+from nwrd_public.config import ABLATION_MODELS, COMPARED_MODELS, PRESETS, Config, preset_of
 
 
 def test_presets_fix_window_and_scale():
@@ -24,9 +24,10 @@ def test_protocol_defaults():
     assert (c.dice_weight, c.bce_weight, c.freeze_encoder_epochs) == (0.7, 0.3, 3)
 
 
-def test_only_the_compared_models_and_valid_scales_are_accepted():
+def test_only_the_compared_and_ablation_models_and_valid_scales_are_accepted():
     assert COMPARED_MODELS == ('canet_b4', 'unet', 'deeplabv3plus_r50')
-    for m in COMPARED_MODELS:
+    assert ABLATION_MODELS == ('deeplabv3plus_r50_scratch', 'unet_r50', 'deeplabv3plus_b4')
+    for m in COMPARED_MODELS + ABLATION_MODELS:
         Config(model=m).validate()
     with pytest.raises(ValueError, match='unet_tuned'):
         Config(model='unet_tuned').validate()
