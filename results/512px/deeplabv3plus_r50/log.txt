@@ -1,0 +1,112 @@
+05:41:52 nwrd_public 1.0.0 | deeplabv3plus_r50 | preset 512px | stages cut,train,eval,summary | python 3.13.15, torch 2.11.0+cu128, numpy 2.1.3, opencv 4.14.0, albumentations 2.0.8, segmentation-models-pytorch 0.5.0, efficientnet-pytorch 0.7.1, device Tesla T4
+05:42:13 data: /kaggle/input/datasets/bcap52/nwrd-wheat: all 200 files match the manifest
+05:42:53 windows: 77 photographs -> 5626 windows of 512px at 1x, 1349 with rust; sample 2204 (pos_weight 63.1), cut in 40s to /tmp/nwrd_public_windows/512px_x1
+05:42:58 [deeplabv3plus_r50 s42] data: {'windows': 5626, 'rust_windows': 1349, 'bg_kept': 855, 'bg_total': 4277, 'sample': 2204, 'pos_weight': 63.06163058262433, 'val_photos': 8}
+05:44:15 [deeplabv3plus_r50 s42] ep 01/30 (enc frozen) train 0.8741 val 0.4627 IoU@0.5 0.0531 Dice@0.5 0.1008 (67s)
+05:45:07 [deeplabv3plus_r50 s42] ep 02/30 (enc frozen) train 0.7542 val 0.4070 IoU@0.5 0.1469 Dice@0.5 0.2561 (52s)
+05:46:02 [deeplabv3plus_r50 s42] ep 03/30 (enc frozen) train 0.7027 val 0.3884 IoU@0.5 0.1401 Dice@0.5 0.2457 (54s)
+05:47:25 [deeplabv3plus_r50 s42] ep 04/30 train 0.6687 val 0.3712 IoU@0.5 0.1992 Dice@0.5 0.3323 (83s)
+05:48:42 [deeplabv3plus_r50 s42] ep 05/30 train 0.6312 val 0.3678 IoU@0.5 0.2142 Dice@0.5 0.3528 (76s)
+05:50:00 [deeplabv3plus_r50 s42] ep 06/30 train 0.6380 val 0.3432 IoU@0.5 0.2651 Dice@0.5 0.4191 (77s)
+05:51:17 [deeplabv3plus_r50 s42] ep 07/30 train 0.6182 val 0.3239 IoU@0.5 0.3074 Dice@0.5 0.4703 (77s)
+05:52:33 [deeplabv3plus_r50 s42] ep 08/30 train 0.5855 val 0.3226 IoU@0.5 0.1989 Dice@0.5 0.3318 (76s)
+05:53:51 [deeplabv3plus_r50 s42] ep 09/30 train 0.5294 val 0.3144 IoU@0.5 0.3282 Dice@0.5 0.4942 (77s)
+05:55:08 [deeplabv3plus_r50 s42] ep 10/30 train 0.5084 val 0.3113 IoU@0.5 0.3345 Dice@0.5 0.5013 (77s)
+05:56:25 [deeplabv3plus_r50 s42] ep 11/30 train 0.5094 val 0.3114 IoU@0.5 0.3503 Dice@0.5 0.5189 (77s)
+05:57:42 [deeplabv3plus_r50 s42] ep 12/30 train 0.4602 val 0.3216 IoU@0.5 0.3751 Dice@0.5 0.5455 (77s)
+05:58:59 [deeplabv3plus_r50 s42] ep 13/30 train 0.4486 val 0.3242 IoU@0.5 0.3757 Dice@0.5 0.5462 (77s)
+06:00:16 [deeplabv3plus_r50 s42] ep 14/30 train 0.4505 val 0.3154 IoU@0.5 0.3902 Dice@0.5 0.5613 (76s)
+06:01:33 [deeplabv3plus_r50 s42] ep 15/30 train 0.4176 val 0.3142 IoU@0.5 0.3743 Dice@0.5 0.5447 (77s)
+06:02:50 [deeplabv3plus_r50 s42] ep 16/30 train 0.4671 val 0.3157 IoU@0.5 0.3704 Dice@0.5 0.5406 (77s)
+06:04:07 [deeplabv3plus_r50 s42] ep 17/30 train 0.4790 val 0.3280 IoU@0.5 0.4051 Dice@0.5 0.5766 (76s)
+06:05:24 [deeplabv3plus_r50 s42] ep 18/30 train 0.4585 val 0.2897 IoU@0.5 0.3757 Dice@0.5 0.5462 (76s)
+06:06:41 [deeplabv3plus_r50 s42] ep 19/30 train 0.4594 val 0.2828 IoU@0.5 0.3130 Dice@0.5 0.4768 (77s)
+06:07:58 [deeplabv3plus_r50 s42] ep 20/30 train 0.4488 val 0.3053 IoU@0.5 0.3874 Dice@0.5 0.5584 (77s)
+06:09:15 [deeplabv3plus_r50 s42] ep 21/30 train 0.4135 val 0.2644 IoU@0.5 0.3768 Dice@0.5 0.5474 (77s)
+06:10:32 [deeplabv3plus_r50 s42] ep 22/30 train 0.4161 val 0.2852 IoU@0.5 0.3366 Dice@0.5 0.5036 (77s)
+06:11:49 [deeplabv3plus_r50 s42] ep 23/30 train 0.3905 val 0.2813 IoU@0.5 0.3644 Dice@0.5 0.5341 (77s)
+06:13:06 [deeplabv3plus_r50 s42] ep 24/30 train 0.3587 val 0.2960 IoU@0.5 0.4267 Dice@0.5 0.5982 (77s)
+06:14:23 [deeplabv3plus_r50 s42] ep 25/30 train 0.3490 val 0.3189 IoU@0.5 0.4383 Dice@0.5 0.6095 (77s)
+06:15:41 [deeplabv3plus_r50 s42] ep 26/30 train 0.3269 val 0.2853 IoU@0.5 0.3883 Dice@0.5 0.5594 (77s)
+06:16:58 [deeplabv3plus_r50 s42] ep 27/30 train 0.3254 val 0.2832 IoU@0.5 0.4178 Dice@0.5 0.5894 (77s)
+06:18:15 [deeplabv3plus_r50 s42] ep 28/30 train 0.3094 val 0.2847 IoU@0.5 0.4430 Dice@0.5 0.6140 (77s)
+06:19:32 [deeplabv3plus_r50 s42] ep 29/30 train 0.2972 val 0.3257 IoU@0.5 0.4525 Dice@0.5 0.6230 (77s)
+06:20:49 [deeplabv3plus_r50 s42] ep 30/30 train 0.2822 val 0.2997 IoU@0.5 0.4442 Dice@0.5 0.6151 (77s)
+06:21:13 [deeplabv3plus_r50 seed42] thr 0.63 | test IoU 0.4477 Dice 0.6185 P 0.5672 R 0.6801 | paper patches @0.5, authors' averaging: P 0.5348 R 0.6516 F1 0.5835
+06:21:16 [deeplabv3plus_r50 s43] data: {'windows': 5626, 'rust_windows': 1349, 'bg_kept': 855, 'bg_total': 4277, 'sample': 2204, 'pos_weight': 63.06163058262433, 'val_photos': 8}
+06:22:11 [deeplabv3plus_r50 s43] ep 01/30 (enc frozen) train 0.8775 val 0.4682 IoU@0.5 0.0401 Dice@0.5 0.0771 (55s)
+06:23:05 [deeplabv3plus_r50 s43] ep 02/30 (enc frozen) train 0.7438 val 0.4146 IoU@0.5 0.0890 Dice@0.5 0.1634 (54s)
+06:24:00 [deeplabv3plus_r50 s43] ep 03/30 (enc frozen) train 0.6951 val 0.3787 IoU@0.5 0.1728 Dice@0.5 0.2947 (55s)
+06:25:17 [deeplabv3plus_r50 s43] ep 04/30 train 0.6690 val 0.3730 IoU@0.5 0.1941 Dice@0.5 0.3251 (77s)
+06:26:34 [deeplabv3plus_r50 s43] ep 05/30 train 0.6402 val 0.3680 IoU@0.5 0.1863 Dice@0.5 0.3141 (76s)
+06:27:51 [deeplabv3plus_r50 s43] ep 06/30 train 0.6337 val 0.3380 IoU@0.5 0.2256 Dice@0.5 0.3682 (77s)
+06:29:08 [deeplabv3plus_r50 s43] ep 07/30 train 0.5884 val 0.3369 IoU@0.5 0.2626 Dice@0.5 0.4160 (76s)
+06:30:25 [deeplabv3plus_r50 s43] ep 08/30 train 0.5786 val 0.3227 IoU@0.5 0.3123 Dice@0.5 0.4759 (77s)
+06:31:42 [deeplabv3plus_r50 s43] ep 09/30 train 0.5576 val 0.3077 IoU@0.5 0.2896 Dice@0.5 0.4491 (77s)
+06:32:59 [deeplabv3plus_r50 s43] ep 10/30 train 0.5187 val 0.2840 IoU@0.5 0.3507 Dice@0.5 0.5192 (77s)
+06:34:17 [deeplabv3plus_r50 s43] ep 11/30 train 0.4795 val 0.3162 IoU@0.5 0.3351 Dice@0.5 0.5020 (77s)
+06:35:34 [deeplabv3plus_r50 s43] ep 12/30 train 0.4905 val 0.2878 IoU@0.5 0.3386 Dice@0.5 0.5059 (77s)
+06:36:51 [deeplabv3plus_r50 s43] ep 13/30 train 0.4423 val 0.2990 IoU@0.5 0.3776 Dice@0.5 0.5482 (77s)
+06:38:08 [deeplabv3plus_r50 s43] ep 14/30 train 0.4256 val 0.2962 IoU@0.5 0.3569 Dice@0.5 0.5260 (77s)
+06:39:25 [deeplabv3plus_r50 s43] ep 15/30 train 0.4339 val 0.3042 IoU@0.5 0.3822 Dice@0.5 0.5531 (77s)
+06:40:42 [deeplabv3plus_r50 s43] ep 16/30 train 0.4730 val 0.3069 IoU@0.5 0.3215 Dice@0.5 0.4865 (77s)
+06:41:59 [deeplabv3plus_r50 s43] ep 17/30 train 0.4607 val 0.3144 IoU@0.5 0.2454 Dice@0.5 0.3941 (77s)
+06:43:16 [deeplabv3plus_r50 s43] ep 18/30 train 0.4744 val 0.3088 IoU@0.5 0.3193 Dice@0.5 0.4840 (77s)
+06:44:34 [deeplabv3plus_r50 s43] ep 19/30 train 0.4438 val 0.3226 IoU@0.5 0.3525 Dice@0.5 0.5212 (77s)
+06:45:51 [deeplabv3plus_r50 s43] ep 20/30 train 0.4489 val 0.2943 IoU@0.5 0.2964 Dice@0.5 0.4572 (77s)
+06:47:08 [deeplabv3plus_r50 s43] ep 21/30 train 0.4319 val 0.2782 IoU@0.5 0.3783 Dice@0.5 0.5489 (77s)
+06:48:25 [deeplabv3plus_r50 s43] ep 22/30 train 0.3961 val 0.2901 IoU@0.5 0.3829 Dice@0.5 0.5538 (77s)
+06:49:42 [deeplabv3plus_r50 s43] ep 23/30 train 0.3717 val 0.3128 IoU@0.5 0.4048 Dice@0.5 0.5764 (76s)
+06:50:59 [deeplabv3plus_r50 s43] ep 24/30 train 0.3609 val 0.3104 IoU@0.5 0.3864 Dice@0.5 0.5574 (77s)
+06:52:16 [deeplabv3plus_r50 s43] ep 25/30 train 0.3524 val 0.2898 IoU@0.5 0.3846 Dice@0.5 0.5555 (77s)
+06:53:34 [deeplabv3plus_r50 s43] ep 26/30 train 0.3391 val 0.2970 IoU@0.5 0.4002 Dice@0.5 0.5717 (77s)
+06:54:51 [deeplabv3plus_r50 s43] ep 27/30 train 0.3147 val 0.3010 IoU@0.5 0.4076 Dice@0.5 0.5791 (77s)
+06:56:08 [deeplabv3plus_r50 s43] ep 28/30 train 0.3160 val 0.3300 IoU@0.5 0.3935 Dice@0.5 0.5648 (77s)
+06:57:25 [deeplabv3plus_r50 s43] ep 29/30 train 0.2930 val 0.3312 IoU@0.5 0.4053 Dice@0.5 0.5769 (77s)
+06:58:42 [deeplabv3plus_r50 s43] ep 30/30 train 0.2753 val 0.3276 IoU@0.5 0.4016 Dice@0.5 0.5730 (77s)
+06:59:04 [deeplabv3plus_r50 seed43] thr 0.96 | test IoU 0.4636 Dice 0.6335 P 0.6508 R 0.6171 | paper patches @0.5, authors' averaging: P 0.5109 R 0.7186 F1 0.5930
+06:59:07 [deeplabv3plus_r50 s44] data: {'windows': 5626, 'rust_windows': 1349, 'bg_kept': 855, 'bg_total': 4277, 'sample': 2204, 'pos_weight': 63.06163058262433, 'val_photos': 8}
+07:00:01 [deeplabv3plus_r50 s44] ep 01/30 (enc frozen) train 0.9303 val 0.5134 IoU@0.5 0.0310 Dice@0.5 0.0602 (53s)
+07:00:55 [deeplabv3plus_r50 s44] ep 02/30 (enc frozen) train 0.7872 val 0.4383 IoU@0.5 0.0815 Dice@0.5 0.1507 (54s)
+07:01:50 [deeplabv3plus_r50 s44] ep 03/30 (enc frozen) train 0.7324 val 0.4076 IoU@0.5 0.1573 Dice@0.5 0.2719 (54s)
+07:03:07 [deeplabv3plus_r50 s44] ep 04/30 train 0.6949 val 0.4004 IoU@0.5 0.1257 Dice@0.5 0.2233 (77s)
+07:04:24 [deeplabv3plus_r50 s44] ep 05/30 train 0.6733 val 0.3904 IoU@0.5 0.1577 Dice@0.5 0.2725 (76s)
+07:05:41 [deeplabv3plus_r50 s44] ep 06/30 train 0.6585 val 0.3713 IoU@0.5 0.2409 Dice@0.5 0.3883 (77s)
+07:06:58 [deeplabv3plus_r50 s44] ep 07/30 train 0.6232 val 0.3337 IoU@0.5 0.2606 Dice@0.5 0.4134 (76s)
+07:08:15 [deeplabv3plus_r50 s44] ep 08/30 train 0.5937 val 0.3144 IoU@0.5 0.2703 Dice@0.5 0.4256 (76s)
+07:09:32 [deeplabv3plus_r50 s44] ep 09/30 train 0.5650 val 0.3058 IoU@0.5 0.3208 Dice@0.5 0.4858 (77s)
+07:10:49 [deeplabv3plus_r50 s44] ep 10/30 train 0.5330 val 0.2896 IoU@0.5 0.3596 Dice@0.5 0.5290 (77s)
+07:12:06 [deeplabv3plus_r50 s44] ep 11/30 train 0.5043 val 0.2978 IoU@0.5 0.3509 Dice@0.5 0.5195 (77s)
+07:13:23 [deeplabv3plus_r50 s44] ep 12/30 train 0.4674 val 0.2841 IoU@0.5 0.3689 Dice@0.5 0.5389 (77s)
+07:14:40 [deeplabv3plus_r50 s44] ep 13/30 train 0.4529 val 0.2815 IoU@0.5 0.4020 Dice@0.5 0.5735 (76s)
+07:15:58 [deeplabv3plus_r50 s44] ep 14/30 train 0.4457 val 0.2807 IoU@0.5 0.3678 Dice@0.5 0.5378 (77s)
+07:17:15 [deeplabv3plus_r50 s44] ep 15/30 train 0.4317 val 0.2841 IoU@0.5 0.4145 Dice@0.5 0.5861 (77s)
+07:18:32 [deeplabv3plus_r50 s44] ep 16/30 train 0.4806 val 0.2889 IoU@0.5 0.3758 Dice@0.5 0.5463 (77s)
+07:19:49 [deeplabv3plus_r50 s44] ep 17/30 train 0.5165 val 0.2785 IoU@0.5 0.3024 Dice@0.5 0.4643 (77s)
+07:21:06 [deeplabv3plus_r50 s44] ep 18/30 train 0.4852 val 0.3122 IoU@0.5 0.3526 Dice@0.5 0.5214 (77s)
+07:22:23 [deeplabv3plus_r50 s44] ep 19/30 train 0.4544 val 0.3054 IoU@0.5 0.3829 Dice@0.5 0.5538 (77s)
+07:23:40 [deeplabv3plus_r50 s44] ep 20/30 train 0.4355 val 0.3657 IoU@0.5 0.3988 Dice@0.5 0.5702 (77s)
+07:24:57 [deeplabv3plus_r50 s44] ep 21/30 train 0.4238 val 0.3007 IoU@0.5 0.3987 Dice@0.5 0.5701 (77s)
+07:26:14 [deeplabv3plus_r50 s44] ep 22/30 train 0.4068 val 0.3062 IoU@0.5 0.4221 Dice@0.5 0.5936 (77s)
+07:27:31 [deeplabv3plus_r50 s44] ep 23/30 train 0.3757 val 0.2912 IoU@0.5 0.4249 Dice@0.5 0.5964 (76s)
+07:28:48 [deeplabv3plus_r50 s44] ep 24/30 train 0.3658 val 0.2848 IoU@0.5 0.4232 Dice@0.5 0.5947 (77s)
+07:30:06 [deeplabv3plus_r50 s44] ep 25/30 train 0.3569 val 0.3153 IoU@0.5 0.3835 Dice@0.5 0.5544 (77s)
+07:31:23 [deeplabv3plus_r50 s44] ep 26/30 train 0.3369 val 0.2967 IoU@0.5 0.3790 Dice@0.5 0.5497 (76s)
+07:32:40 [deeplabv3plus_r50 s44] ep 27/30 train 0.3114 val 0.2960 IoU@0.5 0.4103 Dice@0.5 0.5818 (77s)
+07:33:56 [deeplabv3plus_r50 s44] ep 28/30 train 0.2990 val 0.3368 IoU@0.5 0.4101 Dice@0.5 0.5817 (76s)
+07:35:14 [deeplabv3plus_r50 s44] ep 29/30 train 0.3000 val 0.3117 IoU@0.5 0.3908 Dice@0.5 0.5620 (77s)
+07:36:31 [deeplabv3plus_r50 s44] ep 30/30 train 0.2754 val 0.3339 IoU@0.5 0.4109 Dice@0.5 0.5825 (77s)
+07:36:52 [deeplabv3plus_r50 seed44] thr 0.88 | test IoU 0.4602 Dice 0.6304 P 0.6054 R 0.6575 | paper patches @0.5, authors' averaging: P 0.5107 R 0.7297 F1 0.5991
+07:36:52 # deeplabv3plus_r50: DeepLabV3+, ResNet-50 encoder (baseline)
+
+512px windows at 1× scale. Test: 10 photographs, every pixel scored once at native resolution. Threshold chosen per run on validation; metrics pooled over all test pixels. The paper patches column is F1 on the NWRD paper's test patches with the authors' averaging at 0.5.
+
+| Seed | Test IoU | Dice | Precision | Recall | IoU @0.5 | Val IoU | Threshold | Best epoch | Paper patches F1 | Train min/epoch |
+|---|---|---|---|---|---|---|---|---|---|---|
+| 42 | 0.4477 | 0.6185 | 0.5672 | 0.6801 | 0.4418 | 0.4539 | 0.63 | 29 | 0.5835 | 1.2 |
+| 43 | 0.4636 | 0.6335 | 0.6508 | 0.6171 | 0.4440 | 0.4360 | 0.96 | 27 | 0.5930 | 1.2 |
+| 44 | 0.4602 | 0.6304 | 0.6054 | 0.6575 | 0.4412 | 0.4458 | 0.88 | 23 | 0.5991 | 1.2 |
+| **mean ± sd** | 0.4572 ± 0.0084 | 0.6275 ± 0.0079 | 0.6078 ± 0.0419 | 0.6516 ± 0.0319 | 0.4423 ± 0.0015 | 0.4452 ± 0.0090 | 0.82 | – | 0.5919 ± 0.0079 | 1.2 |
+
+Side by side with the other models: comparison.md of the scale's results folder (python -m nwrd_public.compare results).
+

@@ -1,0 +1,112 @@
+15:05:56 nwrd_public 1.0.0 | unet | preset 128px | stages cut,train,eval,summary | python 3.13.16, torch 2.11.0+cu130, numpy 2.1.3, opencv 4.14.0, albumentations 2.0.8, segmentation-models-pytorch 0.5.0, efficientnet-pytorch 0.7.1, device Tesla T4
+15:06:22 data: /kaggle/input/datasets/bcap52/nwrd-wheat: all 200 files match the manifest
+15:07:00 windows: 77 photographs -> 22492 windows of 128px at 0.5x, 2230 with rust; sample 6282 (pos_weight 43.9), cut in 38s to /tmp/nwrd_public_windows/128px_x0.5
+15:07:09 [unet s42] data: {'windows': 22492, 'rust_windows': 2230, 'bg_kept': 4052, 'bg_total': 20262, 'sample': 6282, 'pos_weight': 43.88434346517814, 'val_photos': 8}
+15:08:23 [unet s42] ep 01/30 train 0.8249 val 0.2970 IoU@0.5 0.0345 Dice@0.5 0.0666 (65s)
+15:09:19 [unet s42] ep 02/30 train 0.7707 val 0.2467 IoU@0.5 0.0506 Dice@0.5 0.0962 (55s)
+15:10:17 [unet s42] ep 03/30 train 0.7469 val 0.2364 IoU@0.5 0.0673 Dice@0.5 0.1261 (57s)
+15:11:15 [unet s42] ep 04/30 train 0.7146 val 0.2174 IoU@0.5 0.1793 Dice@0.5 0.3040 (58s)
+15:12:14 [unet s42] ep 05/30 train 0.6952 val 0.2196 IoU@0.5 0.1032 Dice@0.5 0.1871 (58s)
+15:13:13 [unet s42] ep 06/30 train 0.7273 val 0.2113 IoU@0.5 0.1452 Dice@0.5 0.2536 (59s)
+15:14:12 [unet s42] ep 07/30 train 0.7139 val 0.2027 IoU@0.5 0.1423 Dice@0.5 0.2492 (59s)
+15:15:11 [unet s42] ep 08/30 train 0.7229 val 0.2081 IoU@0.5 0.2691 Dice@0.5 0.4240 (58s)
+15:16:10 [unet s42] ep 09/30 train 0.7264 val 0.1920 IoU@0.5 0.2425 Dice@0.5 0.3903 (59s)
+15:17:09 [unet s42] ep 10/30 train 0.6962 val 0.1984 IoU@0.5 0.2969 Dice@0.5 0.4579 (59s)
+15:18:09 [unet s42] ep 11/30 train 0.6588 val 0.1929 IoU@0.5 0.1091 Dice@0.5 0.1968 (59s)
+15:19:08 [unet s42] ep 12/30 train 0.6432 val 0.1844 IoU@0.5 0.1457 Dice@0.5 0.2543 (59s)
+15:20:07 [unet s42] ep 13/30 train 0.6262 val 0.1785 IoU@0.5 0.2288 Dice@0.5 0.3724 (59s)
+15:21:06 [unet s42] ep 14/30 train 0.6317 val 0.1683 IoU@0.5 0.2204 Dice@0.5 0.3612 (59s)
+15:22:05 [unet s42] ep 15/30 train 0.6222 val 0.1744 IoU@0.5 0.2357 Dice@0.5 0.3815 (59s)
+15:23:04 [unet s42] ep 16/30 train 0.7110 val 0.1901 IoU@0.5 0.2099 Dice@0.5 0.3469 (59s)
+15:24:03 [unet s42] ep 17/30 train 0.7015 val 0.1943 IoU@0.5 0.0961 Dice@0.5 0.1753 (59s)
+15:25:02 [unet s42] ep 18/30 train 0.6791 val 0.1972 IoU@0.5 0.3362 Dice@0.5 0.5032 (59s)
+15:26:02 [unet s42] ep 19/30 train 0.7035 val 0.1983 IoU@0.5 0.3449 Dice@0.5 0.5129 (59s)
+15:27:01 [unet s42] ep 20/30 train 0.6721 val 0.1969 IoU@0.5 0.0787 Dice@0.5 0.1458 (59s)
+15:28:00 [unet s42] ep 21/30 train 0.6594 val 0.1795 IoU@0.5 0.2070 Dice@0.5 0.3431 (59s)
+15:28:59 [unet s42] ep 22/30 train 0.6412 val 0.1908 IoU@0.5 0.3172 Dice@0.5 0.4816 (59s)
+15:29:58 [unet s42] ep 23/30 train 0.6277 val 0.1777 IoU@0.5 0.1541 Dice@0.5 0.2671 (59s)
+15:30:58 [unet s42] ep 24/30 train 0.6192 val 0.1830 IoU@0.5 0.2202 Dice@0.5 0.3610 (59s)
+15:31:57 [unet s42] ep 25/30 train 0.6343 val 0.1743 IoU@0.5 0.1677 Dice@0.5 0.2873 (59s)
+15:32:56 [unet s42] ep 26/30 train 0.6248 val 0.1737 IoU@0.5 0.3102 Dice@0.5 0.4735 (59s)
+15:33:55 [unet s42] ep 27/30 train 0.6001 val 0.1687 IoU@0.5 0.1482 Dice@0.5 0.2581 (59s)
+15:34:54 [unet s42] ep 28/30 train 0.6072 val 0.1690 IoU@0.5 0.2376 Dice@0.5 0.3839 (59s)
+15:35:53 [unet s42] ep 29/30 train 0.5703 val 0.1612 IoU@0.5 0.2772 Dice@0.5 0.4341 (59s)
+15:36:52 [unet s42] ep 30/30 train 0.5737 val 0.1698 IoU@0.5 0.3210 Dice@0.5 0.4860 (59s)
+15:37:22 [unet seed42] thr 0.72 | test IoU 0.3787 Dice 0.5494 P 0.4581 R 0.6861 | paper patches @0.5, authors' averaging: P 0.4388 R 0.6963 F1 0.5189
+15:37:28 [unet s43] data: {'windows': 22492, 'rust_windows': 2230, 'bg_kept': 4052, 'bg_total': 20262, 'sample': 6282, 'pos_weight': 43.88434346517814, 'val_photos': 8}
+15:38:26 [unet s43] ep 01/30 train 0.8268 val 0.3026 IoU@0.5 0.0258 Dice@0.5 0.0503 (58s)
+15:39:25 [unet s43] ep 02/30 train 0.7724 val 0.2451 IoU@0.5 0.0769 Dice@0.5 0.1428 (59s)
+15:40:24 [unet s43] ep 03/30 train 0.7282 val 0.2332 IoU@0.5 0.0738 Dice@0.5 0.1374 (58s)
+15:41:23 [unet s43] ep 04/30 train 0.7142 val 0.2193 IoU@0.5 0.1107 Dice@0.5 0.1994 (58s)
+15:42:22 [unet s43] ep 05/30 train 0.6983 val 0.2264 IoU@0.5 0.0870 Dice@0.5 0.1601 (58s)
+15:43:21 [unet s43] ep 06/30 train 0.7225 val 0.2114 IoU@0.5 0.2369 Dice@0.5 0.3831 (58s)
+15:44:20 [unet s43] ep 07/30 train 0.7276 val 0.2119 IoU@0.5 0.3057 Dice@0.5 0.4682 (58s)
+15:45:19 [unet s43] ep 08/30 train 0.7306 val 0.2195 IoU@0.5 0.2530 Dice@0.5 0.4038 (59s)
+15:46:18 [unet s43] ep 09/30 train 0.7041 val 0.1962 IoU@0.5 0.1637 Dice@0.5 0.2813 (58s)
+15:47:17 [unet s43] ep 10/30 train 0.6900 val 0.1901 IoU@0.5 0.1359 Dice@0.5 0.2393 (58s)
+15:48:16 [unet s43] ep 11/30 train 0.6658 val 0.1974 IoU@0.5 0.2670 Dice@0.5 0.4214 (59s)
+15:49:15 [unet s43] ep 12/30 train 0.6673 val 0.1810 IoU@0.5 0.1920 Dice@0.5 0.3221 (59s)
+15:50:14 [unet s43] ep 13/30 train 0.6467 val 0.1915 IoU@0.5 0.1129 Dice@0.5 0.2029 (59s)
+15:51:13 [unet s43] ep 14/30 train 0.6365 val 0.1800 IoU@0.5 0.1897 Dice@0.5 0.3190 (59s)
+15:52:12 [unet s43] ep 15/30 train 0.6174 val 0.1796 IoU@0.5 0.2291 Dice@0.5 0.3728 (59s)
+15:53:11 [unet s43] ep 16/30 train 0.6888 val 0.1859 IoU@0.5 0.2668 Dice@0.5 0.4212 (59s)
+15:54:10 [unet s43] ep 17/30 train 0.6968 val 0.1959 IoU@0.5 0.1028 Dice@0.5 0.1864 (59s)
+15:55:09 [unet s43] ep 18/30 train 0.6958 val 0.1911 IoU@0.5 0.3122 Dice@0.5 0.4758 (59s)
+15:56:09 [unet s43] ep 19/30 train 0.6628 val 0.1997 IoU@0.5 0.1342 Dice@0.5 0.2367 (59s)
+15:57:08 [unet s43] ep 20/30 train 0.6695 val 0.1801 IoU@0.5 0.3101 Dice@0.5 0.4734 (58s)
+15:58:07 [unet s43] ep 21/30 train 0.6453 val 0.1822 IoU@0.5 0.2002 Dice@0.5 0.3336 (59s)
+15:59:06 [unet s43] ep 22/30 train 0.6479 val 0.1740 IoU@0.5 0.1227 Dice@0.5 0.2185 (59s)
+16:00:05 [unet s43] ep 23/30 train 0.6467 val 0.1799 IoU@0.5 0.2386 Dice@0.5 0.3852 (58s)
+16:01:03 [unet s43] ep 24/30 train 0.6140 val 0.1870 IoU@0.5 0.1222 Dice@0.5 0.2177 (58s)
+16:02:02 [unet s43] ep 25/30 train 0.6407 val 0.1624 IoU@0.5 0.1840 Dice@0.5 0.3108 (59s)
+16:03:01 [unet s43] ep 26/30 train 0.6117 val 0.1547 IoU@0.5 0.2577 Dice@0.5 0.4098 (58s)
+16:04:00 [unet s43] ep 27/30 train 0.6133 val 0.1723 IoU@0.5 0.1460 Dice@0.5 0.2548 (59s)
+16:04:59 [unet s43] ep 28/30 train 0.5962 val 0.1623 IoU@0.5 0.3019 Dice@0.5 0.4638 (59s)
+16:05:58 [unet s43] ep 29/30 train 0.5670 val 0.1572 IoU@0.5 0.1760 Dice@0.5 0.2993 (59s)
+16:06:57 [unet s43] ep 30/30 train 0.5603 val 0.1686 IoU@0.5 0.3340 Dice@0.5 0.5007 (59s)
+16:07:26 [unet seed43] thr 0.96 | test IoU 0.4433 Dice 0.6143 P 0.5601 R 0.6801 | paper patches @0.5, authors' averaging: P 0.4096 R 0.8058 F1 0.5339
+16:07:32 [unet s44] data: {'windows': 22492, 'rust_windows': 2230, 'bg_kept': 4052, 'bg_total': 20262, 'sample': 6282, 'pos_weight': 43.88434346517814, 'val_photos': 8}
+16:08:30 [unet s44] ep 01/30 train 0.8205 val 0.2641 IoU@0.5 0.0511 Dice@0.5 0.0973 (58s)
+16:09:29 [unet s44] ep 02/30 train 0.7566 val 0.2298 IoU@0.5 0.1151 Dice@0.5 0.2064 (59s)
+16:10:28 [unet s44] ep 03/30 train 0.7357 val 0.2206 IoU@0.5 0.1294 Dice@0.5 0.2292 (58s)
+16:11:27 [unet s44] ep 04/30 train 0.7343 val 0.2151 IoU@0.5 0.1849 Dice@0.5 0.3121 (58s)
+16:12:26 [unet s44] ep 05/30 train 0.7078 val 0.2093 IoU@0.5 0.1464 Dice@0.5 0.2554 (58s)
+16:13:25 [unet s44] ep 06/30 train 0.7443 val 0.2216 IoU@0.5 0.2436 Dice@0.5 0.3918 (58s)
+16:14:24 [unet s44] ep 07/30 train 0.7343 val 0.2000 IoU@0.5 0.2713 Dice@0.5 0.4268 (58s)
+16:15:23 [unet s44] ep 08/30 train 0.7246 val 0.1963 IoU@0.5 0.1388 Dice@0.5 0.2438 (58s)
+16:16:22 [unet s44] ep 09/30 train 0.6987 val 0.1954 IoU@0.5 0.1346 Dice@0.5 0.2372 (58s)
+16:17:21 [unet s44] ep 10/30 train 0.7079 val 0.1816 IoU@0.5 0.3065 Dice@0.5 0.4692 (58s)
+16:18:20 [unet s44] ep 11/30 train 0.6846 val 0.1855 IoU@0.5 0.1465 Dice@0.5 0.2555 (58s)
+16:19:18 [unet s44] ep 12/30 train 0.6496 val 0.1840 IoU@0.5 0.2604 Dice@0.5 0.4132 (58s)
+16:20:17 [unet s44] ep 13/30 train 0.6374 val 0.1783 IoU@0.5 0.2501 Dice@0.5 0.4001 (59s)
+16:21:16 [unet s44] ep 14/30 train 0.6119 val 0.1719 IoU@0.5 0.2583 Dice@0.5 0.4105 (59s)
+16:22:15 [unet s44] ep 15/30 train 0.6274 val 0.1762 IoU@0.5 0.2648 Dice@0.5 0.4188 (58s)
+16:23:14 [unet s44] ep 16/30 train 0.7091 val 0.1828 IoU@0.5 0.2148 Dice@0.5 0.3536 (58s)
+16:24:13 [unet s44] ep 17/30 train 0.7241 val 0.1790 IoU@0.5 0.1366 Dice@0.5 0.2404 (58s)
+16:25:12 [unet s44] ep 18/30 train 0.6974 val 0.1729 IoU@0.5 0.2160 Dice@0.5 0.3553 (58s)
+16:26:11 [unet s44] ep 19/30 train 0.6815 val 0.1806 IoU@0.5 0.1215 Dice@0.5 0.2167 (58s)
+16:27:10 [unet s44] ep 20/30 train 0.6822 val 0.1904 IoU@0.5 0.1205 Dice@0.5 0.2150 (59s)
+16:28:09 [unet s44] ep 21/30 train 0.6631 val 0.1591 IoU@0.5 0.2034 Dice@0.5 0.3381 (59s)
+16:29:08 [unet s44] ep 22/30 train 0.6329 val 0.1852 IoU@0.5 0.1426 Dice@0.5 0.2495 (59s)
+16:30:07 [unet s44] ep 23/30 train 0.6289 val 0.1879 IoU@0.5 0.2391 Dice@0.5 0.3860 (59s)
+16:31:06 [unet s44] ep 24/30 train 0.6308 val 0.1996 IoU@0.5 0.0854 Dice@0.5 0.1574 (58s)
+16:32:05 [unet s44] ep 25/30 train 0.6244 val 0.1874 IoU@0.5 0.2222 Dice@0.5 0.3636 (59s)
+16:33:04 [unet s44] ep 26/30 train 0.6069 val 0.1710 IoU@0.5 0.2514 Dice@0.5 0.4018 (59s)
+16:34:03 [unet s44] ep 27/30 train 0.5912 val 0.1639 IoU@0.5 0.2126 Dice@0.5 0.3506 (58s)
+16:35:02 [unet s44] ep 28/30 train 0.5978 val 0.1677 IoU@0.5 0.2864 Dice@0.5 0.4453 (59s)
+16:36:01 [unet s44] ep 29/30 train 0.5889 val 0.1708 IoU@0.5 0.2541 Dice@0.5 0.4053 (59s)
+16:36:59 [unet s44] ep 30/30 train 0.5781 val 0.1686 IoU@0.5 0.2394 Dice@0.5 0.3863 (59s)
+16:37:27 [unet seed44] thr 0.95 | test IoU 0.3815 Dice 0.5522 P 0.4559 R 0.7001 | paper patches @0.5, authors' averaging: P 0.3321 R 0.8053 F1 0.4544
+16:37:27 # unet: UNet, 4 encoder / 4 decoder blocks, from scratch (NWRD paper baseline)
+
+128px windows at 0.5× scale. Test: 10 photographs, every pixel scored once at native resolution. Threshold chosen per run on validation; metrics pooled over all test pixels. The paper patches column is F1 on the NWRD paper's test patches with the authors' averaging at 0.5.
+
+| Seed | Test IoU | Dice | Precision | Recall | IoU @0.5 | Val IoU | Threshold | Best epoch | Paper patches F1 | Train min/epoch |
+|---|---|---|---|---|---|---|---|---|---|---|
+| 42 | 0.3787 | 0.5494 | 0.4581 | 0.6861 | 0.3589 | 0.3459 | 0.72 | 19 | 0.5189 | 1.0 |
+| 43 | 0.4433 | 0.6143 | 0.5601 | 0.6801 | 0.3722 | 0.3875 | 0.96 | 30 | 0.5339 | 1.0 |
+| 44 | 0.3815 | 0.5522 | 0.4559 | 0.7001 | 0.2966 | 0.3634 | 0.95 | 10 | 0.4544 | 1.0 |
+| **mean ± sd** | 0.4011 ± 0.0365 | 0.5720 ± 0.0367 | 0.4914 ± 0.0595 | 0.6888 ± 0.0103 | 0.3426 ± 0.0403 | 0.3656 ± 0.0209 | 0.88 | – | 0.5024 ± 0.0423 | 1.0 |
+
+Side by side with the other models: comparison.md of the scale's results folder (python -m nwrd_public.compare results).
+

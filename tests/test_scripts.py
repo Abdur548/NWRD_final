@@ -1,15 +1,17 @@
-"""The data fetcher's safe extraction and manifest, collecting a kernel's output, and the dataset
-study's mask placement search."""
+"""The data fetcher's safe extraction and manifest, collecting a kernel's output, the dataset
+study's mask placement search, and the patching script."""
 
+import csv
 import json
 import os
 import sys
 import zipfile
 
+import cv2
 import numpy as np
 import pytest
 
-from nwrd_public.dataset import load_manifest, verify_release
+from nwrd_public.dataset import load_manifest, open_release, verify_release
 
 from .conftest import ROOT
 
@@ -17,6 +19,7 @@ sys.path.insert(0, os.path.join(ROOT, 'scripts'))
 import collect_results  # noqa: E402
 import describe_data  # noqa: E402
 import fetch_data  # noqa: E402
+import patch_release  # noqa: E402
 
 LAYOUT = {'train/images': 1, 'train/masks': 1}
 
@@ -132,3 +135,50 @@ def test_placement_figure_shows_both_placements(tmp_path):
     describe_data.placement_figure(rgb, mask, [-1, -8], str(path), crops=2, half=10, zoom=2)
     with describe_data.Image.open(path) as im:
         assert im.size == (3 * 40 + 2 * 6, 2 * 40 + 6)  # 2 rows of 3 panels, 6 px gaps
+
+
+def _quiet(_msg):
+    pass
+
+
+def _index(path):
+    with open(path, encoding='utf-8') as f:
+        return list(csv.DictReader(f))
+
+
+@pytest.mark.parametrize('preset, size', [('512px', 512), ('128px', 128)])
+def test_patches_tile_every_photograph_once(synthetic_release, tmp_path, preset, size):
+    release = open_release(synthetic_release.root, synthetic_release.manifest, limit=2, log=_quiet)
+    if preset == '512px':  # the miniature photographs are smaller than a 512px patch
+        with pytest.raises(ValueError, match='never padded'):
+            patch_release.patch(release, str(tmp_path), preset, log=_quiet)
+        return
+    rows = _index(patch_release.patch(release, str(tmp_path), preset, log=_quiet))
+    assert {r['split'] for r in rows} == {'train', 'val', 'test'}
+    for pid in {r['photo'] for r in rows}:
+        mine = [r for r in rows if r['photo'] == pid]
+        h = max(int(r['y']) for r in mine) + size  # the last patch ends at the photograph's edge
+        w = max(int(r['x']) for r in mine) + size
+        owned = np.zeros((h, w), int)
+        for r in mine:
+            y, x = int(r['y']), int(r['x'])
+            y0, y1, x0, x1 = (int(r[k]) for k in ('own_y0', 'own_y1', 'own_x0', 'own_x1'))
+            assert y <= y0 < y1 <= y + size and x <= x0 < x1 <= x + size
+            owned[y0:y1, x0:x1] += 1
+            mask = cv2.imread(str(tmp_path / r['file'].replace('/images/', '/masks/')), 0)
+            assert mask.shape == (size, size) and int((mask > 127).sum()) == int(r['rust_px'])
+            assert os.path.exists(tmp_path / r['file'])
+        assert (owned == 1).all()  # stitched from the owned regions, no pixel counts twice
+
+
+def test_sample_keeps_every_rust_patch_and_only_cuts_training(synthetic_release, tmp_path):
+    release = open_release(synthetic_release.root, synthetic_release.manifest, limit=2, log=_quiet)
+    every = _index(
+        patch_release.patch(release, str(tmp_path / 'all'), '128px', ('train',), log=_quiet)
+    )
+    some = _index(
+        patch_release.patch(release, str(tmp_path / 's'), '128px', ('train',), True, log=_quiet)
+    )
+    rust = {r['file'] for r in every if int(r['rust_px'])}
+    assert rust <= {r['file'] for r in some} <= {r['file'] for r in every}
+    assert {r['split'] for r in some} == {'train'}
