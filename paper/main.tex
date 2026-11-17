@@ -1,0 +1,482 @@
+% Reference draft. Every model number comes from generated/numbers.tex through \val{key}, and
+% every results table from generated/tab_*.tex; scripts/build_paper.py writes both from
+% results/. Rebuild after new runs instead of editing numbers here. Dataset facts written out
+% in the text cite their source file in a comment beside them.
+\documentclass[11pt,a4paper]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage[margin=2.4cm]{geometry}
+\usepackage{amsmath}
+\usepackage{booktabs}
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage{microtype}
+\usepackage[numbers,sort&compress]{natbib}
+\usepackage[colorlinks=true,linkcolor=blue!50!black,citecolor=blue!50!black,urlcolor=blue!50!black]{hyperref}
+
+% Generated numbers: \val{key} prints the value, or the key in red when no result exists yet.
+\newcommand{\nwrdset}[2]{\expandafter\def\csname nwrd@#1\endcsname{#2}}
+\newcommand{\val}[1]{\ifcsname nwrd@#1\endcsname\csname nwrd@#1\endcsname\else\textcolor{red}{\textbf{[\detokenize{#1}]}}\fi}
+\newcommand{\pending}[1]{\textcolor{red}{\textbf{[Pending: #1]}}}
+\newcommand{\pendingtable}[1]{\fbox{\parbox{0.8\linewidth}{\centering\vspace{4pt}\textcolor{red}{\textbf{Pending: #1}}\vspace{4pt}}}}
+\newcommand{\note}[1]{\textcolor{blue!60!black}{\textit{[Note to authors: #1]}}}
+\newcommand{\figureorpending}[2]{\IfFileExists{figures/#1}{\includegraphics[width=#2]{figures/#1}}{\pendingtable{figure #1}}}
+\input{generated/numbers}
+
+\title{A pretrained DeepLabV3+ outperforms the published UNet with adaptive patching on the
+NWRD wheat stripe rust dataset: a leakage-free re-benchmark and architectural ablation}
+\author{[Authors]\\[2pt]\small [Affiliations]}
+\date{Reference draft, \today}
+
+\begin{document}
+\maketitle
+
+\begin{center}
+\fbox{\parbox{0.92\linewidth}{\small\textbf{How to read this draft.} Numbers in
+\textcolor{red}{\textbf{red}} are waiting for runs (the 128px scale and the ablation); blue notes
+are for the authors and must be removed before submission. Every other number is generated from
+the study's result files and is regenerated, not retyped, when results change.}}
+\end{center}
+
+\begin{abstract}
+Pixel-level segmentation of wheat stripe rust in field photographs is difficult: rust covers well
+under one percent of the pixels, and the only public dataset with pixel annotations, NWRD, holds
+100 photographs. Its authors proposed a UNet trained with adaptive patching with feedback (APF)
+and reported an F1 score of \val{paper.t3.f1} on their test patches. We re-examine this benchmark.
+An audit of the public release shows that it contains 90 distinct scenes rather than 100, that
+duplicated photographs sit on both sides of the published train/test and train/validation
+boundaries, that the two independent masks of a duplicated photograph agree only at an IoU of
+\val{data.twins.min}--\val{data.twins.max}, and that one validation mask is misregistered by
+8~pixels. Under a leakage-free protocol that scores every pixel of the 10 test photographs exactly
+once, we train the NWRD paper's UNet, an ImageNet-pretrained DeepLabV3+ with a ResNet-50 encoder,
+and CANet-B4, a context-aggregation network, with three seeds each. At 512-pixel windows,
+DeepLabV3+ reaches a test IoU of \val{512.dlr.iou.pm}, against \val{512.unet.iou.pm} for the UNet
+($\Delta$IoU \val{512.dlr-unet.diou}, 95\% CI \val{512.dlr-unet.ci} over test photographs) and
+\val{512.canet.iou.pm} for CANet-B4. On the paper's own 2,737 test patches it reaches F1
+\val{512.dlr.pp.f1} against the published \val{paper.t3.f1}, although, unlike the published model,
+it never trained on a duplicate of a test photograph. \pending{one sentence on the 128px scale and
+one on which architectural change the ablation identifies.}
+\end{abstract}
+
+\noindent\textbf{Keywords:} wheat stripe rust; semantic segmentation; DeepLabV3+; benchmark;
+data leakage; precision agriculture
+
+% =================================================================================================
+\section{Introduction}
+\label{sec:intro}
+
+Stripe (yellow) rust, caused by \emph{Puccinia striiformis} f.\,sp.\ \emph{tritici}, is among the
+most damaging diseases of wheat. Measuring how much of a leaf surface is infected, rather than only
+whether a plant is infected, requires pixel-level segmentation, and pixel-level annotation is
+expensive. The NWRD dataset of Anwar et al.~\cite{anwar2023nwrd,anwar2023zenodo} is, to our
+knowledge, the first public multi-leaf, field-condition segmentation dataset for wheat rust: 100
+high-resolution photographs with binary masks. With it, the authors proposed a training pipeline
+in which a plain UNet~\cite{ronneberger2015unet} is trained on patches selected by \emph{adaptive
+patching with feedback} (APF), which adds patches around the model's own false positives every few
+epochs, with a focal loss~\cite{lin2017focal}. They reported precision \val{paper.t3.precision},
+recall \val{paper.t3.recall} and F1 \val{paper.t3.f1} on all test patches, and F1 \val{paper.t4.f1} and IoU \val{paper.t4.iou} in a
+second setting that also outperformed an Octave-UNet~\cite{anwar2023nwrd}.
+
+Two questions follow for anyone building on this benchmark. First, does a standard, widely
+available segmentation architecture with an ImageNet-pretrained encoder do better than the
+published model on the same test photographs? Second, if it does, which architectural difference
+is responsible? Going from the paper's UNet to DeepLabV3+~\cite{chen2018deeplabv3plus} with a
+ResNet-50 encoder~\cite{he2016resnet} changes three things at once: the encoder, its pretraining on
+ImageNet~\cite{deng2009imagenet}, and the context module and decoder (atrous spatial pyramid pooling
+in place of the UNet's symmetric skip decoder).
+
+Answering either question requires a sound evaluation. We found that the public release contains
+repeated photographs across the published splits, so that the published test scores include a
+leak, and that the two masks of each repeated photograph disagree substantially, which bounds any
+model's attainable IoU.
+
+\paragraph{Contributions.}
+\begin{enumerate}
+  \item An audit of the public NWRD release: repeated photographs and their cross-split leakage,
+  the agreement between independent annotations of the same photograph, and a misregistered mask
+  (Section~\ref{sec:data}).
+  \item A leakage-free evaluation protocol on the paper's own test photographs that scores every
+  pixel exactly once, chooses decision thresholds on validation only, and quantifies uncertainty by
+  resampling test photographs (Section~\ref{sec:methods}).
+  \item A three-seed comparison of the paper's UNet, DeepLabV3+ R50 and CANet-B4 at two scales, and
+  against the published model on its own test patches (Section~\ref{sec:results}).
+  \item An ablation that changes one factor at a time between the UNet and DeepLabV3+ (pretraining,
+  context module, encoder), identifying which change accounts for the gain
+  (Section~\ref{sec:ablation}).
+\end{enumerate}
+
+\note{The study was pre-registered (2026-10-22) with CANet-B4 as the candidate model and UNet and
+DeepLabV3+ R50 as baselines; the DeepLabV3+-centred framing was chosen after the 512px results. Say
+so in the paper (Section~\ref{sec:stats} does), and report CANet-B4's pre-registered verdicts: a
+reviewer who learns of the pre-registration and does not find them will read the change of framing
+as selective reporting. DeepLabV3+ R50 is the standard implementation of
+segmentation-models-pytorch~\cite{iakubovskii2019smp}, so the contribution is the evaluation and
+the ablation, not a new architecture.}
+
+% =================================================================================================
+\section{Related work}
+\label{sec:related}
+
+\paragraph{Wheat rust datasets and the NWRD benchmark.} \note{Add the classification and detection
+datasets for wheat rust the target venue expects (image-level datasets, field and leaf-level
+collections), and position NWRD as the pixel-level one.} Anwar et al.~\cite{anwar2023nwrd} compared
+grid patching, adaptive patching and APF at strides 32 and 128, reporting that APF reaches a
+comparable F1 with far shorter training, and compared their UNet with Octave-UNet (F1 0.564 against
+0.529, IoU 0.438 against 0.316, one run each).
+
+\paragraph{Segmentation architectures.} UNet~\cite{ronneberger2015unet} pairs a contracting encoder
+with a symmetric decoder joined by skip connections at every resolution. DeepLabV3+
+\cite{chen2018deeplabv3plus} applies atrous spatial pyramid pooling (ASPP) to the deepest features
+of a pretrained backbone and fuses the result with one set of low-level features in a light decoder.
+EfficientNet~\cite{tan2019efficientnet} scales depth, width and resolution jointly and is a common
+alternative backbone.
+
+\paragraph{Class imbalance.} Rust pixels are rare. Common remedies are the focal
+loss~\cite{lin2017focal}, which the NWRD paper used, the Dice loss~\cite{milletari2016vnet} and a
+positively weighted binary cross-entropy; we use a fixed combination of the last two for every
+model (Section~\ref{sec:training}).
+
+% =================================================================================================
+\section{The public NWRD release}
+\label{sec:data}
+
+% Source for the numbers in this section: docs/dataset.md and results/dataset/ (summary.md,
+% photographs.json, duplicates.json), written by scripts/describe_data.py.
+
+\subsection{Contents}
+The release (Zenodo, doi:10.5281/zenodo.21672928, version 1.0, CC~BY~4.0~\cite{anwar2023zenodo})
+holds 100 JPEG photographs with 8-bit binary masks, in a training folder (90) and a test folder
+(10). The photographs come in 10 sizes, mostly $4608\times3456$ (Huawei PAR-LX1M, either
+orientation) and $6016\times4000$ (Nikon D3200); seven are cropped to unique sizes. Every
+photograph contains some rust, but rust covers only 0.57\% of all pixels (0.63\% of the test
+pixels). We verified every file against its MD5 checksum before every run.
+
+\subsection{Repeated photographs and annotation agreement}
+The release holds 90 distinct scenes, not 100. Nine pairs of files decode to identical pixels (same
+camera and capture second), and photograph 149 is photograph 99 cropped and re-encoded. Each copy
+carries its own mask, and the two masks of a pair agree only at IoU \val{data.twins.min} to
+\val{data.twins.max} (median \val{data.twins.median}, \val{data.twins.n} pairs;
+Table~\ref{tab:twins}): the same rust, annotated twice, differently. Under the paper's split, two
+test photographs (80 and 89, 16.9\% of the test pixels and 9.7\% of the test rust) and two
+validation photographs (87 and 149) have their twin in the training set. The published test scores
+therefore include a leak. We remove the four training twins (79, 86, 96 and 99) and keep both copies
+of the six pairs that lie entirely inside the training set.
+
+\begin{table}[t]
+\centering
+\caption{Repeated photographs in the public NWRD release and the IoU between their two masks.
+Pairs that cross the NWRD paper's splits come first.}
+\label{tab:twins}
+\small
+\input{generated/tab_twins}
+\end{table}
+
+The agreement between two annotations of one photograph is a useful reference for model scores: a
+model's IoU against one annotation cannot be expected to exceed, by much, the IoU between two
+annotations of the same scene.
+
+\subsection{A misregistered validation mask}
+The mask of photograph 101, one of the paper's nine validation photographs, is 19 pixels narrower
+and 21 pixels shorter than the photograph. Searching placements up to 24 pixels past the
+photograph's edges, the mask lines up with the rust when shifted 8 pixels left and 1 pixel up from
+the photograph's corner, partly outside the photograph, and not at the corner where the authors'
+loader placed it (Figure~\ref{fig:mask101}). The six other cropped photographs fit best within
+3~pixels of their own corner. Because the mask's right and bottom edges are unknown, we leave
+photograph 101 out of every split.
+
+\begin{figure}[t]
+\centering
+\figureorpending{mask_101.png}{0.85\linewidth}
+\caption{Photograph 101 around its three largest annotations (rows). Left: the photograph.
+Middle: the mask's outline placed at the photograph's top-left corner (cyan), as the authors' loader
+placed it, about 8 pixels right of the rust. Right: shifted 8 pixels left and 1 pixel up (magenta),
+where it follows the rust.}
+\label{fig:mask101}
+\end{figure}
+
+\subsection{The paper's split and patches, reproduced}
+From the authors' code\footnote{We read the code as text at commit \texttt{d07304b} (2023-06-17)
+and never ran it. The repository was compromised in October 2026: later commits add code that
+collects credentials when the folder is opened in an editor. Readers should not clone it.}, the
+test set is the release's test folder, and the validation set is nine training photographs drawn
+with NumPy seed~0 from the sorted file names (2, 30, 72, 87, 101, 118, 136, 149, 150), which we
+reproduce exactly. Photographs are halved with a Lanczos filter and cut into $128\times128$ patches
+on a grid from the origin. The test set is 2,737 such patches, 394 of them with rust; the
+validation and test patch counts recomputed from the release match the paper's Table~2 exactly.
+
+Our split is therefore the paper's test set (10 photographs), its validation set without 101
+(8 photographs), and its training set without the four twins (77 photographs).
+
+% =================================================================================================
+\section{Methods}
+\label{sec:methods}
+
+\subsection{Models}
+\label{sec:models}
+
+\begin{description}
+  \item[UNet (NWRD paper).] The architecture of the NWRD paper: four encoder and four decoder
+  blocks of two $3\times3$ convolutions with batch normalisation, 64 to 1024 channels, max-pooling
+  and transposed-convolution upsampling, trained from scratch.
+  \item[DeepLabV3+ R50.] DeepLabV3+~\cite{chen2018deeplabv3plus} with an ImageNet-pretrained
+  ResNet-50 encoder, as implemented in segmentation-models-pytorch 0.5.0~\cite{iakubovskii2019smp}
+  with its defaults (output stride 16, ASPP rates 12, 24 and 36, 256 decoder channels).
+  \item[CANet-B4.] A context-aggregation network on an ImageNet-pretrained
+  EfficientNet-B4~\cite{tan2019efficientnet}. Its 1/32-resolution features (reduced to 512
+  channels) feed a context aggregation module (CAM) of a serial dilated branch (dilations 2, 4 and
+  8) and three parallel branches that pool by 2, 4 and 8, concatenated and re-weighted by a
+  per-pixel, per-channel sigmoid gate. An asymmetric decoder fuses the upsampled context with the
+  encoder's 1/4-resolution features.
+\end{description}
+
+\note{CANet-B4 was designed in this project; if it draws on a published context-aggregation design,
+cite it here.}
+
+\subsection{Windows and scales}
+Photographs come in 10 sizes, so a fixed grid either pads (scoring black borders that never occur
+in a real photograph as easy background) or drops the edges. Along each side of length $L$ we
+instead place $\lceil L/P\rceil$ windows of size $P$ spread evenly from $0$ to $L-P$; neighbouring
+windows overlap by at most 46 pixels at 512px, and each overlap is split at its midpoint, so every
+pixel is owned by exactly one window and scored exactly once. Nothing is padded and no edge is
+dropped. We run two scales: \textbf{512px}, windows of $512\times512$ at native resolution, and
+\textbf{128px}, the paper's scale, windows of $128\times128$ on photographs halved with an
+anti-aliased Lanczos filter (masks halved by area).
+
+\subsection{Training}
+\label{sec:training}
+Every model is trained with the same protocol (Table~\ref{tab:training}). The training sample is
+every window with rust plus a fixed 20\% of the others, 2,204 windows at 512px and 6,282 at 128px.
+The loss is
+\begin{equation}
+\mathcal{L} = 0.7\,\mathcal{L}_{\mathrm{Dice}} + 0.3\,\mathcal{L}_{\mathrm{BCE}}(w_{+}),
+\end{equation}
+where the positive weight $w_{+}$ is the ratio of background to rust pixels in the training sample
+(63.1 at 512px, 43.9 at 128px).
+
+\begin{table}[t]
+\centering
+\caption{Training protocol, identical for every model (source: \texttt{docs/protocol.md}, \S4).}
+\label{tab:training}
+\small
+\begin{tabular}{ll}
+\toprule
+Setting & Value \\
+\midrule
+Optimiser & AdamW~\cite{loshchilov2019adamw}, learning rate $5\times10^{-5}$, weight decay $10^{-4}$ \\
+Schedule & Cosine annealing with warm restarts~\cite{loshchilov2017sgdr} ($T_0=5$, $T_{\mathrm{mult}}=2$), 30 epochs \\
+Batch, precision & 8; mixed precision; gradient clipping at norm 1.0 \\
+Encoder freezing & Pretrained encoders frozen for the first 3 epochs \\
+Augmentation & Flips, $90^\circ$ rotations, brightness and contrast, elastic deformation \\
+Model selection & Epoch with the highest pooled validation IoU at threshold 0.5 \\
+Threshold & Chosen per run on validation (IoU-maximising, 0.01--0.99), then frozen for test \\
+Seeds & 42, 43, 44 \\
+Hardware & One NVIDIA Tesla T4 per run (Kaggle) \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Evaluation}
+Each model predicts whole test photographs, window by window, and is scored at native resolution
+on every pixel once. IoU, Dice (equal to F1), precision and recall of the rust class are computed
+from confusion counts pooled over all test pixels,
+\begin{equation}
+\mathrm{IoU} = \frac{TP}{TP+FP+FN}, \qquad \mathrm{Dice} = \frac{2\,TP}{2\,TP+FP+FN}.
+\end{equation}
+To compare with the published model, the same predictions are also scored on the paper's 2,737
+test patches, in the paper's order and with its per-batch averaging of precision, recall and F1
+at threshold 0.5, both on all patches (the paper's Table~3) and on the patches with rust (closest
+to its Table~4).
+
+\subsection{Statistical analysis}
+\label{sec:stats}
+The 10 test photographs are the units of uncertainty: pixels of one photograph share plant, light
+and annotator. For each pair of models we report the seed-averaged difference in pooled test IoU
+with a 95\% interval from a paired bootstrap~\cite{efron1993bootstrap} that resamples whole test
+photographs (5,000 resamples, the same draws for both models and every seed), and a paired $t$-test
+over the three seeds, which captures training-run variance but has little power.
+
+The study was pre-registered on 2026-10-22, before any run, with CANet-B4 as the candidate: it
+\emph{improves on} a baseline if its mean test IoU is higher, the interval excludes zero and it is
+higher on at least two of three seeds; it \emph{is worse} if the interval lies below zero; the two
+are \emph{comparable} otherwise. We report those verdicts (Section~\ref{sec:main512}). The
+comparisons of DeepLabV3+ against the other models, and the ablation, were added after the 512px
+results and are exploratory; they use the same statistics.
+
+\subsection{Ablation}
+\label{sec:ablation-design}
+To attribute DeepLabV3+'s advantage, we train three variants at 512px, each differing from a
+trained model in one factor (Table~\ref{tab:ablation}): DeepLabV3+ R50 without ImageNet weights
+(pretraining); a UNet decoder on the same pretrained ResNet-50 encoder (context module: ASPP against
+the UNet decoder); and DeepLabV3+ with CANet-B4's EfficientNet-B4 encoder (encoder), which also
+compares CAM against ASPP on the same encoder. Training and evaluation are unchanged; encoders
+without pretraining are never frozen.
+
+\note{The ablation protocol must be written into \texttt{docs/protocol.md} before its runs. With
+three seeds, differences below about 0.03 IoU are within run-to-run variation (see
+Section~\ref{sec:discussion}).}
+
+% =================================================================================================
+\section{Results}
+\label{sec:results}
+
+\subsection{512px}
+\label{sec:main512}
+
+DeepLabV3+ R50 has the highest test IoU (Table~\ref{tab:main512}). It is higher than the paper's
+UNet by \val{512.dlr-unet.diou} IoU (95\% CI \val{512.dlr-unet.ci}, bootstrap $p$
+\val{512.dlr-unet.p}; higher on \val{512.dlr-unet.wins} seeds, seed-level $p$
+\val{512.dlr-unet.ttp}) and than CANet-B4 by \val{512.dlr-canet.diou} (95\% CI
+\val{512.dlr-canet.ci}). Under the pre-registered rule, CANet-B4 is worse than DeepLabV3+ R50 and
+comparable to the UNet ($\Delta$IoU \val{512.canet-unet.diou}, 95\% CI \val{512.canet-unet.ci};
+Table~\ref{tab:pairwise512}).
+
+\begin{table}[t]
+\centering
+\caption{Test results at 512px: the 10 test photographs, every pixel scored once, at each run's
+validation-selected threshold (mean $\pm$ sample standard deviation over seeds). ``IoU at 0.5'' is
+the IoU at a fixed threshold of 0.5.}
+\label{tab:main512}
+\small
+\resizebox{\linewidth}{!}{\input{generated/tab_main_512}}
+\end{table}
+
+\begin{table}[t]
+\centering
+\caption{Differences between models at 512px (first minus second). The interval and the first
+$p$-value resample test photographs; the second $p$-value is a paired $t$-test over seeds.}
+\label{tab:pairwise512}
+\small
+\resizebox{\linewidth}{!}{\input{generated/tab_pairwise_512}}
+\end{table}
+
+\subsection{Against the published model, on its own test patches}
+On the paper's 2,737 test patches, scored as the paper scores them, DeepLabV3+ R50 reaches F1
+\val{512.dlr.pp.f1} against the published \val{paper.t3.f1} (\val{512.dlr.pp.f1.vst3}), and on the
+patches with rust F1 \val{512.dlr.pp.f1rust} and IoU \val{512.dlr.pp.iourust} against the published
+\val{paper.t4.f1} and \val{paper.t4.iou} (Table~\ref{tab:paper512}). These differences are not
+paired tests: the published scores are single runs with no reported variance, come from a model
+trained with APF, a focal loss and a longer schedule, and include the leak of
+Section~\ref{sec:data}, which favours the published model. The paper's UNet architecture retrained
+under our protocol reaches F1 \val{512.unet.pp.f1} on all patches.
+
+\begin{table}[t]
+\centering
+\caption{The paper's 2,737 test patches (128px patches of the half-size test photographs), scored
+with the paper's per-batch averaging at threshold 0.5. Published rows are as reported by Anwar et
+al.~\cite{anwar2023nwrd}; our models' predictions at 512px are resized to half size by area.}
+\label{tab:paper512}
+\small
+\input{generated/tab_paper_512}
+\end{table}
+
+\subsection{Per photograph}
+% From generated/tab_photos_512: DeepLabV3+ R50 is highest on 105, 123, 29, 62, 63 and 67.
+DeepLabV3+ R50 has the highest IoU on six of the ten test photographs (Table~\ref{tab:photos512}).
+\note{Discuss the exceptions: photograph 80, where the UNet is highest (80 is one of the two test
+photographs whose twin the paper trained on), and 25, 77 and 89, where CANet-B4 is; and the low
+scores on the sparsest photograph, 77 (0.08\% rust).}
+
+\begin{table}[t]
+\centering
+\caption{Test IoU of each test photograph at 512px, mean over seeds.}
+\label{tab:photos512}
+\small
+\input{generated/tab_photos_512}
+\end{table}
+
+\begin{figure}[t]
+\centering
+\figureorpending{training_curves_512px.png}{0.85\linewidth}
+\caption{Training at 512px. Left: validation loss on windows; right: validation IoU on whole
+photographs at threshold 0.5. Lines are means over seeds, bands span the seeds' minimum and
+maximum.}
+\label{fig:curves512}
+\end{figure}
+
+\subsection{128px, the paper's scale}
+\label{sec:main128}
+\pending{128px results: Table~\ref{tab:main128}, the pairwise differences and the paper-patch
+comparison at the paper's own scale.}
+
+\begin{table}[t]
+\centering
+\caption{Test results at 128px (photographs halved, $128\times128$ windows).}
+\label{tab:main128}
+\small
+\resizebox{\linewidth}{!}{\input{generated/tab_main_128}}
+\end{table}
+
+\subsection{Ablation}
+\label{sec:ablation}
+\pending{the ablation runs. Report which single change accounts for most of DeepLabV3+'s advantage
+over the UNet, with each difference's interval (Table~\ref{tab:ablation}).}
+
+\begin{table}[t]
+\centering
+\caption{Ablation at 512px. Each variant differs from a trained model in one factor; differences
+are against DeepLabV3+ R50 with 95\% intervals over test photographs.}
+\label{tab:ablation}
+\small
+\resizebox{\linewidth}{!}{\input{generated/tab_ablation_512}}
+\end{table}
+
+% =================================================================================================
+\section{Discussion}
+\label{sec:discussion}
+
+\paragraph{Why DeepLabV3+ might win.} \pending{to be written from the ablation.} Plausible
+explanations, each tested by one variant, are ImageNet pretraining (77 training photographs are
+few for a from-scratch encoder), the wider receptive field of ASPP on sparse, elongated rust
+stripes, and the ResNet-50 encoder itself.
+
+\paragraph{Scores against annotation agreement.} The best test IoU at 512px,
+\val{512.dlr.iou}, is close to the median agreement between two annotations of the same photograph
+(\val{data.twins.median}). Absolute IoUs on NWRD should therefore be read against this agreement
+rather than against scores on datasets with denser or more consistent annotation.
+
+\paragraph{Run-to-run variation.} \note{A second, accidental run of DeepLabV3+ R50 at 512px with
+identical code and seeds (Kaggle version 3, in \texttt{runs\_kaggle/}, not in \texttt{results/})
+gave per-seed test IoUs differing from the reported run by up to about 0.03, most likely from
+non-deterministic GPU convolution algorithms (\texttt{cudnn.benchmark}). The DeepLabV3+-against-CANet
+verdict holds against it. Collect it into \texttt{results/} as a replicate before citing its
+numbers, and disclose it here.}
+
+\paragraph{Limitations.} APF and the paper's focal loss and schedule are not reproduced: we test the
+paper's architecture under our protocol, and its full method only through its published numbers.
+The test set is 10 photographs from two cameras, so intervals are wide. Three seeds give little
+power to the seed-level test. The ablation is exploratory and varies one factor at a time, so it
+does not measure interactions.
+
+% =================================================================================================
+\section{Conclusion}
+\label{sec:conclusion}
+On the public NWRD release, under a protocol free of the release's cross-split duplicates, an
+ImageNet-pretrained DeepLabV3+ with a ResNet-50 encoder segments stripe rust better than the NWRD
+paper's UNet retrained under the same protocol (test IoU \val{512.dlr.iou.pm} against
+\val{512.unet.iou.pm} at 512px), and better than the published UNet with APF on the paper's own test
+patches (F1 \val{512.dlr.pp.f1} against \val{paper.t3.f1}). \pending{128px and the ablation's
+answer.} The disagreement between independent annotations of the same photographs, at a median IoU
+of \val{data.twins.median}, suggests that further gains on this dataset need better annotation as
+much as better models.
+
+\section*{Data and code availability}
+The data are the public NWRD release (Zenodo, doi:10.5281/zenodo.21672928). \note{State where the
+code and the result files will be released.}
+
+\bibliographystyle{unsrtnat}
+\bibliography{references}
+
+\appendix
+\section{Where each number comes from}
+\label{app:trace}
+Every model number in this paper is generated by \texttt{scripts/build\_paper.py} from the study's
+result files: per-model summaries from \texttt{results/<scale>/comparison.json}; differences
+between models from \texttt{results/<scale>/pairwise.json} (the same photograph bootstrap as the
+pre-registered rule); per-photograph scores from each run's \texttt{test\_counts.npz}; the
+published scores from the NWRD paper's Tables~3 and~4; annotation agreement from
+\texttt{results/dataset/duplicates.json}. Dataset facts written in the text come from
+\texttt{docs/dataset.md} and \texttt{results/dataset/summary.md}.
+
+\end{document}

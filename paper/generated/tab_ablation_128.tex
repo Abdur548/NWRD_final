@@ -1,0 +1,12 @@
+\begin{tabular}{llllcc}
+\toprule
+Model & Encoder & Pretraining & Context module & Test IoU & $\Delta$IoU vs DeepLabV3+ R50 [95\% CI] \\
+\midrule
+DeepLabV3+ R50 & ResNet-50 & ImageNet & ASPP & 0.4098\,$\pm$\,0.0150 & reference \\
+CANet-B4 & EfficientNet-B4 & ImageNet & CAM & 0.4073\,$\pm$\,0.0127 & $-0.0024$ [$-0.0298$, $+0.0236$] \\
+UNet (NWRD paper) & plain convolutions & none & UNet decoder & 0.4011\,$\pm$\,0.0365 & $-0.0086$ [$-0.0322$, $+0.0225$] \\
+DeepLabV3+ R50, no pretraining & ResNet-50 & none & ASPP & \textcolor{red}{pending} & \textcolor{red}{pending} \\
+UNet R50 & ResNet-50 & ImageNet & UNet decoder & \textcolor{red}{pending} & \textcolor{red}{pending} \\
+DeepLabV3+ B4 & EfficientNet-B4 & ImageNet & ASPP & \textcolor{red}{pending} & \textcolor{red}{pending} \\
+\bottomrule
+\end{tabular}

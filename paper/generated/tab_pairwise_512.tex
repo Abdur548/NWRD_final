@@ -1,0 +1,9 @@
+\begin{tabular}{llccccc}
+\toprule
+Comparison & Isolates & $\Delta$IoU & 95\% CI & $p$ (photographs) & $p$ (seeds) & Higher on \\
+\midrule
+DeepLabV3+ R50 $-$ UNet (NWRD paper) & DeepLabV3+ against the NWRD paper architecture & $+0.0589$ & [$+0.0415$, $+0.0797$] & $<$0.001 & 0.037 & 3 of 3 \\
+DeepLabV3+ R50 $-$ CANet-B4 & DeepLabV3+ against the pre-registered candidate & $+0.0337$ & [$+0.0127$, $+0.0476$] & 0.002 & 0.010 & 3 of 3 \\
+CANet-B4 $-$ UNet (NWRD paper) & the pre-registered comparison & $+0.0252$ & [$-0.0006$, $+0.0612$] & 0.062 & 0.138 & 3 of 3 \\
+\bottomrule
+\end{tabular}

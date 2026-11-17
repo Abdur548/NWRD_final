@@ -1,0 +1,17 @@
+\begin{tabular}{lcccc}
+\toprule
+Model & Precision & Recall & F1 & IoU \\
+\midrule
+\multicolumn{5}{l}{\emph{All test patches, threshold 0.5, the authors' per-batch averaging}} \\
+UNet + APF, published (Table 3) & 0.506 & 0.624 & 0.557 & -- \\
+DeepLabV3+ R50 & 0.519 & 0.700 & 0.592 & -- \\
+CANet-B4 & 0.476 & 0.678 & 0.556 & -- \\
+UNet (NWRD paper) & 0.319 & 0.827 & 0.442 & -- \\
+\midrule
+\multicolumn{5}{l}{\emph{Test patches with rust (closest to Table 4), threshold 0.5}} \\
+UNet + APF, published (Table 4) & 0.593 & 0.552 & 0.564 & 0.438 \\
+DeepLabV3+ R50 & 0.631 & 0.732 & 0.677 & 0.512 \\
+CANet-B4 & 0.592 & 0.716 & 0.648 & 0.479 \\
+UNet (NWRD paper) & 0.475 & 0.834 & 0.605 & 0.434 \\
+\bottomrule
+\end{tabular}
