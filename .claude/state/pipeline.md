@@ -1,6 +1,6 @@
 # NWRD_public: pipeline, decisions and invariants
 
-**Updated:** 2026-10-23
+**Updated:** 2026-11-15
 
 Binary wheat-stripe-rust segmentation on the **public NWRD release** (Zenodo
 doi:10.5281/zenodo.21672928; 100 photographs, 10 sizes, rust 0.57% of pixels). CANet-B4 (ours)
@@ -19,7 +19,7 @@ leak in the paper's split, and rust 16× sparser than in the earlier study (`../
 ```
 Zenodo NWRD.zip ── scripts/fetch_data.py (MD5, safe extract) ──> data/raw/NWRD + data/manifest.json
 data/raw/NWRD ── scripts/describe_data.py ──> results/dataset/ ──> docs/dataset.md (by hand)
-nwrd_public/ + data/manifest.json ── scripts/build_notebooks.py ──> notebooks/<model>.ipynb (3)
+nwrd_public/ + data/manifest.json ── scripts/build_notebooks.py ──> notebooks/<model>.ipynb (6)
 scripts/run_on_kaggle.py --model M [--preset 128px] [--resume] [--budget-hours H] ──> Kaggle T4,
    dataset bcap52/nwrd-wheat; in the kernel: python -m nwrd_public.run
       open_release (find under /kaggle/input, MD5 every file, split) ──┬─> mismatch: stop (RuntimeError)
@@ -28,6 +28,8 @@ scripts/run_on_kaggle.py --model M [--preset 128px] [--resume] [--budget-hours H
 --status ──> runs_kaggle/<scale>/<model>/<account>_v<N>/ (ignored)
 scripts/collect_results.py <that folder> ──> results/<scale>/<model>/ ──> python -m nwrd_public.compare results
    ──> results/<scale>/comparison.{md,json}, figures/, results/summary.csv ──> docs/results.md (after runs)
+results/ ── scripts/build_paper.py ──> results/<scale>/pairwise.json, paper/generated/, paper/figures/
+   + paper/main.tex, references.bib (by hand) ──> --zip <path> (Overleaf "Upload project")
 ```
 
 ## Stages
@@ -37,12 +39,13 @@ scripts/collect_results.py <that folder> ──> results/<scale>/<model>/ ──
 | Protocol | Every setting; presets `512px` (window 512, scale 1) and `128px` (128, 0.5) | `nwrd_public/config.py` |
 | Release | Finds the release, MD5-checks it against the manifest, the D3 split (101 in no split), reads photos/masks | `nwrd_public/dataset.py` |
 | Windows | Fitted-stride grid, ownership spans, resizing, rust counts, training sample and its cut | `nwrd_public/windows.py` |
-| Models, metrics | Copied byte for byte from NWRD_final | `nwrd_public/models.py`, `metrics.py` |
+| Models, metrics | `metrics.py` byte for byte from NWRD_final; `models.py` from it plus `deeplabv3plus_r50_scratch` and `unet_r50` (ablation); an smp encoder is frozen only if it carries ImageNet weights | `nwrd_public/models.py`, `metrics.py` |
 | Training | NWRD_final's loop; per-epoch validation on whole photographs | `nwrd_public/train.py` |
 | Evaluation | Whole-photo prediction, native scoring, threshold on val, the paper's 2,737 patches | `nwrd_public/evaluate.py` |
 | Comparison | Side-by-side log, photograph bootstrap, verdict, paper numbers, speed, summary.csv | `nwrd_public/compare.py` |
 | Entry point | `cut → train → eval → summary`, resumable, exit 3 at the time budget | `nwrd_public/run.py` |
-| Scripts | fetch, describe, notebooks, Kaggle runner, collect | `scripts/` |
+| Scripts | fetch, describe, patch (the release cut to disk on the fitted grid, with an index of owned regions; not used by the kernels, which cut their own), notebooks, Kaggle runner, collect | `scripts/` |
+| Paper draft | Numbers (`\val{key}`), tables and figures of the LaTeX reference draft from `results/`; every model pair's photograph bootstrap (`pairwise.json`); the Overleaf zip. Missing results print red | `scripts/build_paper.py`, `paper/` |
 
 ## Invariants
 
@@ -51,6 +54,9 @@ scripts/collect_results.py <that folder> ──> results/<scale>/<model>/ ──
   every edit, or Kaggle silently runs old code.
 - Each notebook has exactly one `PRESET = '512px'`, `EXPECT_RESTORE = False` and
   `KAGGLE_TIME_BUDGET_HOURS = 11.0` line: `run_on_kaggle.py` rewrites them by string.
+- `paper/generated/` is written by `scripts/build_paper.py`, never by hand; `paper/main.tex`
+  takes model numbers only through `\val{key}` (`tests/test_paper.py` fails on an unknown key).
+  The ablation's model names are fixed in `build_paper.ARCH`; new models must use them.
 - Kernel titles (`NWRD public <model> <preset>`) must not change: Kaggle derives the slug from the
   title, and `--resume` / `--status` find kernels by slug.
 - No padding is ever scored and no edge is dropped: windows never extend past a photograph
@@ -67,7 +73,10 @@ scripts/collect_results.py <that folder> ──> results/<scale>/<model>/ ──
 - Training windows are cut deterministically from (photos, window, scale, ratio, seed); the cache
   marker `windows.json` refuses other settings. A resumed Kaggle session re-cuts identically.
 - Checkpoints load with `weights_only=True` and never enter git or `results/`.
-- The decision rule (`compare.verdict`, `docs/protocol.md` §5) was fixed before any run.
+- The decision rule (`compare.verdict`, `docs/protocol.md` §5) was fixed before any run. It
+  judges CANet-B4 against `config.COMPARED_MODELS` only (`compare.significance`); the
+  `config.ABLATION_MODELS` (512px, exploratory, §9) get pairwise intervals from
+  `build_paper.py`, never verdicts.
 - Every number in `docs/` traces to `results/`.
 - The compromised GitHub repository `dll-ncai/NUST-Wheat-Rust-Disease-NWRD` is never cloned or
   opened.
@@ -98,6 +107,24 @@ own corner), confirmed by eye on overlays across the photograph. The user chose 
 rather than re-register it: validation 8 photographs, 8.7% less validation rust. The first 512px
 kernels (v1, which validated on it) were stopped. `read_photo` now refuses any mask of another
 size.
+
+### The paper is a re-benchmark centred on DeepLabV3+ — 2026-11-15 (reaffirmed 2026-11-16)
+After the 512px results, the user chose to write the paper around DeepLabV3+ R50 beating the NWRD
+paper's UNet (+ APF, published numbers) and to add an ablation of what causes it. DeepLabV3+ R50
+is the stock smp model, so the contribution is the audit, the protocol and the ablation, not an
+architecture. CANet-B4's pre-registered verdicts stay in the paper and the change of framing is
+disclosed; the DeepLabV3+ comparisons and the ablation are labelled exploratory. The decision
+rule (`compare.verdict`) is unchanged.
+
+### Exploratory 512px ablation of DeepLabV3+ R50 — 2026-11-15
+`deeplabv3plus_r50_scratch` (pretraining), `unet_r50` (decoder; smp UNet on the ImageNet
+ResNet-50) and `deeplabv3plus_b4` (encoder; and CAM vs ASPP against CANet-B4), 3 seeds, the
+protocol unchanged (`docs/protocol.md` §9, written before the ablation ran). The user chose a
+Kaggle ablation ("B"); the three variants are Claude's pick, which the user did not object to.
+Rejected: a DeepLabV3+ configuration search (too many runs on 10 test photographs). The
+from-scratch encoder keeps the fine-tuning lr and schedule: it measures pretraining under this
+protocol. Same-seed reruns are not reproducible on the GPU (`cudnn.benchmark`), so differences
+under the run-to-run noise are not interpreted.
 
 ### Whole photographs are the scoring unit, also during training — 2026-10-22
 Per-epoch validation and final evaluation both predict whole photographs and score native

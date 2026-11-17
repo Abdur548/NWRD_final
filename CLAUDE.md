@@ -1,7 +1,9 @@
 # NWRD_public
 
-CANet-B4 (ours) against the NWRD paper's UNet and DeepLabV3+ R50 on the **public NWRD release**
-(Zenodo doi:10.5281/zenodo.21672928). It backs an official research paper and is reviewed by the
+CANet-B4, the NWRD paper's UNet and DeepLabV3+ R50 on the **public NWRD release** (Zenodo
+doi:10.5281/zenodo.21672928). **The paper is built around DeepLabV3+ R50** (user's decision
+2026-11-15, reaffirmed 2026-11-16): it beating the NWRD paper's UNet, and the ablation of why.
+CANet-B4 was the pre-registered candidate; its verdicts stay in the paper. It backs an official research paper and is reviewed by the
 supervisor: keep it at professional standards (tested, linted, no dead code, accurate docs).
 Plan: `../NWRD_public_PLAN.md` (approved 2026-10-22); build plan `../NWRD_public_BUILD_PLAN.md`.
 
@@ -24,7 +26,9 @@ From this folder, with `python` (C:\Python313; torch CPU, pytest, ruff, kaggle):
 
 - No local GPU: training happens only on Kaggle (`scripts/run_on_kaggle.py`). Don't push to
   Kaggle, and don't commit or push to git, without the user's go-ahead.
-- CANet-B4 is "ours" in every table. Report results honestly, even when it loses.
+- The paper centres on DeepLabV3+ R50 (`.claude/state/pipeline.md`, Decisions). The pre-registered
+  reports (`results/<scale>/comparison.md`, the decision rule) still label CANet-B4 "ours"; don't
+  rewrite them. Report results honestly, whichever model loses.
 - **Never clone or open `github.com/dll-ncai/NUST-Wheat-Rust-Disease-NWRD`**: it is compromised
   (`docs/dataset.md` §1). Data comes from Zenodo or `bcap52/nwrd-wheat`, MD5-checked.
 - The split is fixed (`nwrd_public/dataset.py`): the paper's validation (without photo 101, whose

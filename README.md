@@ -1,14 +1,23 @@
-# CANet-B4 against the NWRD paper's baselines on the public NWRD release
+# DeepLabV3+ R50 against the NWRD paper's UNet on the public NWRD release
 
 Pixel-level segmentation of wheat stripe rust in the photographs of the public NWRD release
 (Anwar and Shafait, Zenodo doi:10.5281/zenodo.21672928, CC BY 4.0). Three models are trained and
-scored under one protocol: **CANet-B4** (ours: CANet with an ImageNet-pretrained EfficientNet-B4
-encoder), the **UNet** architecture of the NWRD paper (Anwar et al., *The NWRD Dataset*, Sensors
-23(15):6942, 2023) and **DeepLabV3+ R50**. Each model is one generated Kaggle notebook; their
-results are logged side by side, with a decision rule fixed before any run.
+scored under one protocol: **DeepLabV3+ R50**, the model the paper is built around; the **UNet**
+architecture of the NWRD paper (Anwar et al., *The NWRD Dataset*, Sensors 23(15):6942, 2023); and
+**CANet-B4** (CANet with an ImageNet-pretrained EfficientNet-B4 encoder). CANet-B4 was the
+pre-registered candidate: the decision rule, fixed before any run, judges it against the two
+others, so the generated reports still label it "ours". Each model is one generated Kaggle
+notebook, and the results are logged side by side. An exploratory ablation at 512px, added after
+the 512px results (`docs/protocol.md` §9), changes one part of DeepLabV3+ R50 at a time to find
+what makes it better: `deeplabv3plus_r50_scratch`, `unet_r50` and `deeplabv3plus_b4`.
 
-**Status (2026-10-22):** the pipeline, notebooks and dataset study are built and tested; the
-Kaggle runs have not been made yet. Results will appear in `results/` and `docs/results.md`.
+**Status (2026-11-17):** 512px and 128px done for the three models (`results/512px/`,
+`results/128px/`). Two of the three ablation runs have finished on Kaggle and the third is queued;
+none is in `results/` yet. `paper/` holds a LaTeX reference draft built from `results/`.
+
+**New here?** [`docs/codebase.md`](docs/codebase.md) maps the repository: where each part lives,
+how the pieces connect, which files are generated, and how to trace a number in the paper to its
+source.
 
 ## What is different about this data
 
@@ -41,15 +50,18 @@ compromised in October 2026 and opening it in VS Code runs a credential stealer
 
 ```
 nwrd_public/   the pipeline: protocol (config), the release (dataset), fitted windows (windows),
-               models and metrics (copied unchanged from NWRD_final), training, evaluation,
+               models (NWRD_final's, plus the ablation's) and metrics, training, evaluation,
                side-by-side comparison, and the entry point (run)
-notebooks/     canet_b4.ipynb, unet.ipynb, deeplabv3plus_r50.ipynb: generated, identical but MODEL
-scripts/       fetch_data, describe_data, build_notebooks, run_on_kaggle, collect_results
+notebooks/     one per model (the three compared, the three of the ablation): generated,
+               identical but MODEL
+scripts/       fetch_data, describe_data, patch_release, build_notebooks, run_on_kaggle,
+               collect_results, build_paper
 data/          manifest.json (MD5 of the 200 files); raw/ holds the release (not in git)
 results/       dataset/ (the dataset study), nwrd_final/ (the earlier study's T4 speed and other
                figures reused here), and per scale the runs and their comparison, plus
                summary.csv (see results/README.md)
-docs/          dataset.md, protocol.md
+docs/          dataset.md, protocol.md, codebase.md (how to navigate this repository)
+paper/         the LaTeX reference draft (paper/README.md); generated/ and figures/ are built
 tests/         unit and end-to-end tests on a synthetic miniature release (CPU)
 ```
 
@@ -67,15 +79,16 @@ pip install -e ".[dev]" -c constraints.txt   # the exact versions last tested
 ```bash
 python scripts/fetch_data.py            # download from Zenodo, check, extract to data/raw/NWRD
 python scripts/describe_data.py         # the dataset study -> results/dataset/
+python scripts/patch_release.py         # every fitted-stride patch + index -> build/patches/512px/
 python -m pytest -m "not slow"          # fast tests; python -m pytest for all (minutes, CPU)
 
 # Train and score on a Kaggle T4, one (model, scale) per kernel:
-python scripts/run_on_kaggle.py --model canet_b4 --watch
+python scripts/run_on_kaggle.py --model deeplabv3plus_r50 --watch
 python scripts/run_on_kaggle.py --model unet --preset 128px --watch
-python scripts/run_on_kaggle.py --model canet_b4 --resume --watch     # after a time-budget stop
+python scripts/run_on_kaggle.py --model deeplabv3plus_r50 --resume --watch   # after a time-budget stop
 
 # Bring a finished kernel's runs into results/ and rebuild the side-by-side log:
-python scripts/collect_results.py runs_kaggle/512px/canet_b4/<account>_v<N>
+python scripts/collect_results.py runs_kaggle/512px/deeplabv3plus_r50/<account>_v<N>
 python -m nwrd_public.compare results   # every comparison and results/summary.csv
 ```
 
@@ -86,7 +99,8 @@ After any change in `nwrd_public/`, rebuild the notebooks: `python scripts/build
 ## Origin
 
 The models, metrics, training loop, Kaggle runner and decision rule come from `NWRD_final`, the
-same study on other photographs (100 Nikon photographs that are not this release). `models.py` and
-`metrics.py` are byte-for-byte copies; the rest is adapted to whole photographs of mixed sizes.
-`models.py` therefore also defines that study's `unet_tuned` control and `deeplabv3plus_b4`
-ablation; they are not run here, and the configuration rejects them.
+same study on other photographs (100 Nikon photographs that are not this release). `metrics.py`
+is a byte-for-byte copy and `models.py` one extended by the ablation's two new variants (an smp
+model's encoder is frozen only when it carries ImageNet weights); the rest is adapted to whole
+photographs of mixed sizes. `models.py` also defines that study's `unet_tuned` control, which is
+not run here: the configuration rejects it.
